@@ -1,0 +1,13 @@
+Aaron Bruner
+ECE-223
+Homework 0
+Friday, January 8 : 11:59PM
+
+1.
+    a. SSH into Apollo machines using IDE
+    b. Ubuntu 16.04.6
+    c. Ubuntu 5.4.0
+    d. Ubuntu 7.11.1
+    e. Linux x86_64
+    f. 64 bits
+2.
