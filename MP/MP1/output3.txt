@@ -1,0 +1,68 @@
+The list size is 10. Possible commands:
+INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+ENERGY
+PRINT
+STATS
+QUIT
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Removed: 1.000000
+Atom ID: 0
+     atomic # = 1
+     mass     = 1.000000e+00
+     position = (1.000000e+00, 1.000000e+00)
+     momenta = (1.000000e+00, 1.000000e+00)
+     force = (1.000000e+00, 1.000000e+00)
+     potential energy = 1.000000e+00
+
+Removed: 1.000000
+Atom ID: 1
+     atomic # = 1
+     mass     = 1.000000e+00
+     position = (1.000000e+00, 1.000000e+00)
+     momenta = (1.000000e+00, 1.000000e+00)
+     force = (1.000000e+00, 1.000000e+00)
+     potential energy = 1.000000e+00
+
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Number records: 8
+List has 8 records
+   0: Atom ID: 2 position = (1.000000e+00, 1.000000e+00)
+   1: Atom ID: 3 position = (1.000000e+00, 1.000000e+00)
+   2: Atom ID: 4 position = (1.000000e+00, 1.000000e+00)
+   3: Atom ID: 5 position = (1.000000e+00, 1.000000e+00)
+   4: Atom ID: 6 position = (1.000000e+00, 1.000000e+00)
+   5: Atom ID: 7 position = (1.000000e+00, 1.000000e+00)
+   6: Atom ID: 8 position = (1.000000e+00, 1.000000e+00)
+   7: Atom ID: 9 position = (1.000000e+00, 1.000000e+00)
+Removed: 1.000000
+Atom ID: 2
+     atomic # = 1
+     mass     = 1.000000e+00
+     position = (1.000000e+00, 1.000000e+00)
+     momenta = (1.000000e+00, 1.000000e+00)
+     force = (1.000000e+00, 1.000000e+00)
+     potential energy = 1.000000e+00
+
+Goodbye
