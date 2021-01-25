@@ -4,39 +4,110 @@
 //
 // EVERY function must have comments
 
-
+#include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
+#include <string.h>
 
 #include "atom_list.h"
 
 struct atom_list_t *atom_list_construct(int size)
 {
-    return NULL;
+    struct atom_list_t *atom_list_head;
+    atom_list_head = NULL;
+    atom_list_head = malloc(sizeof(struct atom_list_t));
+    if (atom_list_head == NULL) {
+        //fprintf(stderr, "Error allocating memory...");
+        exit(1);
+    }
+
+    atom_list_head->atom_ptr = malloc(size * sizeof(struct atom_t));
+    if (atom_list_head->atom_ptr == NULL) {
+        //fprintf(stderr, "Error allocating memory...");
+        exit(1);
+    }
+
+    for(int i = 0; i < size; i++) {
+        atom_list_head->atom_ptr[i] = NULL;
+    }
+
+    atom_list_head->atom_count = 0;
+    atom_list_head->atom_size = size;
+
+    return atom_list_head;
 }
 
 void atom_list_destruct(struct atom_list_t *ptr)
 {
+    int tempVar = ptr->atom_size;
+    for (int i = tempVar - 1; i >= 0; i--) // valgrind complains that 400 bytes in 1 blocks definitely lost
+        free(ptr->atom_ptr[i]);
+    free(ptr->atom_ptr); // All heap blocks freed
+    free(ptr);
 }
 
 int atom_list_number_entries(struct atom_list_t *list_ptr)
 {
-    return -1;
+    int list_size = -1;
+
+    list_size = list_ptr->atom_count;
+
+    return list_size;
 }
 
 int atom_list_add(struct atom_list_t *list_ptr, struct atom_t *rec_ptr)
 {
-    return -1;
+    int returnVal;
+
+    if (list_ptr->atom_count == list_ptr->atom_size-1)
+        returnVal = -1;
+    else {
+        list_ptr->atom_ptr[list_ptr->atom_count] = rec_ptr;
+        returnVal = 1;
+        list_ptr->atom_count += 1;
+    }
+
+    return returnVal;
 }
 
 struct atom_t *atom_list_access(struct atom_list_t *list_ptr, int index)
 {
-    return NULL;
+    struct atom_t * atom_t_ptr = NULL;
+
+    if (index >= list_ptr->atom_size)
+        atom_t_ptr = NULL;
+    else if (list_ptr->atom_ptr[index] != NULL)
+            atom_t_ptr = list_ptr->atom_ptr[index];
+
+    return atom_t_ptr;
 }
 
 struct atom_t *atom_list_remove(struct atom_list_t *list_ptr, int index)
 {
-    return NULL;
+    struct atom_t * returnVal = NULL;
+    int tempIndex = index;
+
+    if (list_ptr != NULL){ // If it's already empty then just ignore...
+            if (/*list_ptr->atom_ptr[index] == NULL || */index == 1) { // If the list has 1 atom
+                free(list_ptr->atom_ptr[index]);
+                returnVal = list_ptr->atom_ptr;
+            } else { //If it's not empty and has more than 1 entry...
+
+                free(list_ptr->atom_t[index]);
+
+                while (list_ptr->atom_size !>= tempIndex)
+
+                    free(list_ptr->atom_t[index]);
+                    struct atom_t * temp = malloc (sizeof(struct atom_t));
+                    memcpy(temp, list_ptr->atom_ptr[index+1], sizeof(struct atom_t));
+                    memcpy(list_ptr->atom_ptr[index], temp, sizeof(struct atom_t));
+
+                    free(temp);
+                    tempIndex++;
+                }
+            }
+    }
+
+    return returnVal;
 }
 
 
