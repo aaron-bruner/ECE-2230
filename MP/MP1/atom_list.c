@@ -83,33 +83,92 @@ struct atom_t *atom_list_access(struct atom_list_t *list_ptr, int index)
 
 struct atom_t *atom_list_remove(struct atom_list_t *list_ptr, int index)
 {
-    struct atom_t * returnVal = NULL;
-    int tempIndex = index;
 
-    if (list_ptr != NULL){ // If it's already empty then just ignore...
-            if (/*list_ptr->atom_ptr[index] == NULL || */index == 1) { // If the list has 1 atom
-                free(list_ptr->atom_ptr[index]);
-                returnVal = list_ptr->atom_ptr;
-            } else { //If it's not empty and has more than 1 entry...
+    struct atom_t * atom = atom_list_access(list_ptr, index);
 
-                free(list_ptr->atom_t[index]);
-
-                while (list_ptr->atom_size !>= tempIndex)
-
-                    free(list_ptr->atom_t[index]);
-                    struct atom_t * temp = malloc (sizeof(struct atom_t));
-                    memcpy(temp, list_ptr->atom_ptr[index+1], sizeof(struct atom_t));
-                    memcpy(list_ptr->atom_ptr[index], temp, sizeof(struct atom_t));
-
-                    free(temp);
-                    tempIndex++;
-                }
-            }
+    if (atom == NULL) {
+        atom = NULL;
     }
 
-    return returnVal;
+    for (int i = index; i < list_ptr->atom_count - 1; i++) {
+        list_ptr->atom_ptr[i] = list_ptr->atom_ptr[i+1];
+    }
+    --list_ptr->atom_count;
+
+    return atom;
+
 }
 
+/*//int * return_ptr;
+struct atom_t * return_ptr;
+
+if (list_ptr->atom_ptr == NULL) {
+    return_ptr = NULL;
+}
+
+else if (list_ptr->atom_count == 1 && index == 0) {
+    list_ptr->atom_ptr[index] = NULL;
+    return_ptr = list_ptr->atom_ptr;
+    list_ptr->atom_count -= 1;
+}
+else {
+    list_ptr->atom_count -= 1;
+    for (int i = index; i < list_ptr->atom_count; i++) {
+        list_ptr->atom_ptr[i] = list_ptr->atom_ptr[i+1];
+    }
+    return_ptr = list_ptr->atom_ptr;
+}
+
+return return_ptr;*/
+
+/*int * returnStructPtr;
+returnStructPtr = malloc(list_ptr->atom_size * sizeof(struct atom_t));
+if (returnStructPtr == NULL) {
+    //fprintf(stderr, "Error allocating memory...");
+    exit(1);
+}
+
+for(int i = 0; i < list_ptr->atom_size; i++) {
+    returnStructPtr[i] = NULL;
+}
+
+for (int i = 0; i < index; i++) {
+    memcpy(&returnStructPtr[i], list_ptr->atom_ptr[i], sizeof(struct atom_t));
+}
+for (int i = index+1; i < list_ptr->atom_count; i++) {
+    memcpy(&returnStructPtr[i-1], list_ptr->atom_ptr[i], sizeof(struct atom_t));
+}
+
+list_ptr->atom_count -= 1;
+
+for (int i = list_ptr->atom_count + 1; i < list_ptr->atom_size; i++){
+    returnStructPtr[i] = NULL;
+}
+
+for (int i = 0; i < list_ptr->atom_size - 1; i++) {
+    free(list_ptr->atom_ptr[i]);
+}*/
+
+/*if (list_ptr != NULL){ // If it's already empty then just ignore...
+        if (list_ptr->atom_ptr[index] == NULL || index == 1) { // If the list has 1 atom
+            free(list_ptr->atom_ptr[index]);
+            returnVal = list_ptr->atom_ptr;
+        } else { //If it's not empty and has more than 1 entry...
+
+            free(list_ptr->atom_ptr[index]);
+
+            while (list_ptr->atom_size !>= tempIndex)
+
+                free(list_ptr->atom_ptr[index]);
+                struct atom_t * temp = malloc (sizeof(struct atom_t));
+                memcpy(temp, list_ptr->atom_ptr[index+1], sizeof(struct atom_t));
+                memcpy(list_ptr->atom_ptr[index], temp, sizeof(struct atom_t));
+
+                free(temp);
+                tempIndex++;
+            }
+        }
+}*/
 
 void atom_list_advance_momenta(struct atom_list_t *list_ptr, float dt)
 {
