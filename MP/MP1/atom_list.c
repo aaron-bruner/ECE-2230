@@ -101,7 +101,7 @@ int atom_list_add(struct atom_list_t *list_ptr, struct atom_t *rec_ptr)
 {
     int returnVal;
 
-    if (list_ptr->atom_count == list_ptr->atom_size-1) // Checks to see if list is full
+    if (list_ptr->atom_count == list_ptr->atom_size) // Checks to see if list is full
         returnVal = -1;
     else {
         list_ptr->atom_ptr[list_ptr->atom_count] = rec_ptr; // If the list isn't empty then add the given atom and
