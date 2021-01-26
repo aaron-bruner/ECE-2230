@@ -1,0 +1,29 @@
+The list size is 5. Possible commands:
+INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+PRINT
+STATS
+QUIT
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 1
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 2
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 3
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 4
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 5
+Number records: 5
+List has 5 records
+   0: Atom ID: 0 position = (1.000000e+00, 1.000000e+00)
+   1: Atom ID: 1 position = (2.000000e+00, 2.000000e+00)
+   2: Atom ID: 2 position = (3.000000e+00, 3.000000e+00)
+   3: Atom ID: 3 position = (4.000000e+00, 4.000000e+00)
+   4: Atom ID: 4 position = (5.000000e+00, 5.000000e+00)
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Rejected: 6
+Goodbye

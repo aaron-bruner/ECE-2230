@@ -155,10 +155,12 @@ struct atom_t *atom_list_remove(struct atom_list_t *list_ptr, int index)
 
     if (atom == NULL) atom = NULL; // If list is empty then we can't remove anything
 
-    for (int i = index; i < list_ptr->atom_count - 1; i++) // Take whatever is to the right and set it to current spot
-        list_ptr->atom_ptr[i] = list_ptr->atom_ptr[i+1];
+    if (list_ptr->atom_ptr != NULL && list_ptr->atom_count != 0) {
+        for (int i = index; i < list_ptr->atom_count - 1; i++) // Take whatever is to the right and set it to current spot
+            list_ptr->atom_ptr[i] = list_ptr->atom_ptr[i+1];
 
-    --list_ptr->atom_count;
+        --list_ptr->atom_count;
+    }
 
     return atom;
 }
@@ -241,7 +243,7 @@ void atom_list_compute_forces(struct atom_list_t *list_ptr)
  */
 int atom_list_lookup_max_potential_energy(struct atom_list_t *list_ptr, float potential_energy)
 {
-    int found = 0;
+    int found = -1;
 
     if (list_ptr == NULL || list_ptr->atom_ptr == NULL){ // If the list is empty it's clearly not there
         found = -1;

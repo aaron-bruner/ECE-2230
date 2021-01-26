@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
 
             // arg1 is
             index = atom_list_lookup_max_potential_energy(my_list, arg1);
-
+            
             if (index == -1) {
                 printf("Did not remove atom with potential energy: %f\n", arg1);
             } else {

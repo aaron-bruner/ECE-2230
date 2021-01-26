@@ -48,3 +48,16 @@ INSERT
 5
 5
 5
+STATS
+PRINT
+INSERT
+6
+6
+6
+6
+6
+6
+6
+6
+6
+QUIT
