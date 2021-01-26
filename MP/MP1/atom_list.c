@@ -122,9 +122,9 @@ int atom_list_lookup_max_potential_energy(struct atom_list_t *list_ptr, float po
     }
 
     if (found != -1) {
-        for (int i = 0; i < list_ptr->atom_count; i++) {
-            if (list_ptr->atom_ptr[i]->potential_energy == potential_energy) {
-                found = i;
+        for (int index = 0; index < list_ptr->atom_count; index++) {
+            if (list_ptr->atom_ptr[index]->potential_energy == potential_energy) {
+                found = index;
                 break;
             }
         }
@@ -136,26 +136,12 @@ int atom_list_lookup_max_potential_energy(struct atom_list_t *list_ptr, float po
 int atom_list_determine_inside_box(struct atom_t *atom_ptr, float x_min, float x_max,
                                                             float y_min, float y_max)
 {
-    int returnValue = 1;
+    int returnValue = 0;
 
-    int xTrue, yTrue;
-    xTrue = yTrue = 0;
-
-    if (atom_ptr != NULL) {
-
-        if (atom_ptr->position[0] >= x_min)
-            if (atom_ptr->position[0] <= x_max)
-                xTrue = 1;
-
-        if (atom_ptr->position[1] >= y_min)
-            if (atom_ptr->position[1] <= y_max)
-                yTrue = 1;
-
-        //if (atom_ptr->position[0] >= x_min ? atom_ptr->position[0] <= x_max ? xTrue = 1 : xTrue = 0 : xTrue = 0);
-        //if (atom_ptr->position[1] >= y_min ? atom_ptr->position[1] <= y_max ? yTrue = 1 : yTrue = 0 : yTrue = 0);
-
-        if (xTrue == 1 && yTrue == 1) returnValue = 1;
-    }
+        if (atom_ptr->position[0] >= x_min && atom_ptr->position[0] <= x_max && atom_ptr->position[1] >= y_min &&
+                                                                                atom_ptr->position[1] <= y_max) {
+            returnValue = 1;
+        }
     return returnValue;
 }
 
@@ -163,28 +149,18 @@ struct atom_list_t *atom_list_form_migrate_list(struct atom_list_t *list_ptr, fl
                                                                               float y_min, float y_max)
 {
     int insideBoxCheck = 0;
-    int added_return = -2;
 
-    struct atom_t * rec_ptr = NULL;
     struct atom_list_t *my_list = atom_list_construct(list_ptr->atom_size);
-    my_list->atom_count = 0;
-    my_list->atom_size = list_ptr->atom_size;
 
-    for (int i = 0; i < list_ptr->atom_count; i++) {
-        insideBoxCheck = atom_list_determine_inside_box(list_ptr->atom_ptr[i], x_min, x_max, y_min, y_max);
-        if (insideBoxCheck != 1) {
-            added_return = atom_list_add(my_list, list_ptr->atom_ptr[i]);
-                if (added_return != 1) exit(1);
-            rec_ptr = atom_list_remove(list_ptr, i);
-            list_ptr->atom_count -= 1;
-            my_list->atom_count += 1;
+    for (int index = 0; index < list_ptr->atom_count; index++) {
+        insideBoxCheck = atom_list_determine_inside_box(list_ptr->atom_ptr[index], x_min, x_max, y_min, y_max);
+        if (insideBoxCheck == 0) {
+
+            atom_list_add(my_list, list_ptr->atom_ptr[index]);
+            atom_list_remove(list_ptr, index);
         }
         insideBoxCheck = 0;
     }
 
     return my_list;
 }
-
-
-
-
