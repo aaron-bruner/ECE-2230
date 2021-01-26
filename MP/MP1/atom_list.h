@@ -46,7 +46,7 @@ void atom_list_advance_position(struct atom_list_t *, float dt);
 void atom_list_compute_forces(struct atom_list_t *);
 
 int atom_list_lookup_max_potential_energy(struct atom_list_t *,
-        int potential_energy);
+        float potential_energy);
 int atom_list_determine_inside_box(struct atom_t *, float x_min, float x_max,
         float y_min, float y_max);
 struct atom_list_t *atom_list_form_migrate_list(struct atom_list_t *,

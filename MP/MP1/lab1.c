@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     if (list_size < 1) {
         printf("Invalid list size %d\n", list_size);
         exit(2);
-    } 
+    }
     printf("The list size is %d. Possible commands:\n", list_size);
     //printf("INSERT\nFIND potential_energy\nREMOVE potential_energy\nUPDATE dt\nMIGRATE\nENERGY\nPRINT\nSTATS\nQUIT\n");
     printf("INSERT\nFIND potential_energy\nREMOVE potential_energy\nUPDATE dt\nMIGRATE\nPRINT\nSTATS\nQUIT\n");
@@ -87,11 +87,11 @@ int main(int argc, char *argv[])
 
     // seed the RNG to yield deterministic results from drand48()
     srand48(seed);
-    
+
     // remember fgets includes newline \n unless line too long 
     while (fgets(line, MAXLINE, stdin) != NULL) {
         num_items = sscanf(line, "%s %f %s", command, &arg1, junk);
-        
+
 
         if (num_items == 1 && strcmp(command, "QUIT") == 0) {
             printf("Goodbye\n");
@@ -102,15 +102,15 @@ int main(int argc, char *argv[])
                 rec_ptr = atom_list_remove(my_list, i);
                 free(rec_ptr);
             }
-            
+
             atom_list_destruct(my_list);
             break;
         }
 
 
-        
+
         else if (num_items == 1 && strcmp(command, "INSERT") == 0) {
-            rec_ptr = NULL;   
+            rec_ptr = NULL;
             rec_ptr = (struct atom_t *) malloc(sizeof(struct atom_t));
             fill_atom_record(rec_ptr, atom_id);
             atom_id++;
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
             if (added_return == 1) {
                 printf("Inserted: %d\n", rec_ptr->atomic_num);
-            } 
+            }
             else if (added_return == -1) {
                 printf("Rejected: %d\n", rec_ptr->atomic_num);
                 free(rec_ptr);
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
 
         else if (num_items == 2 && strcmp(command, "FIND") == 0) {
             int index = -1;
-            rec_ptr = NULL;  
+            rec_ptr = NULL;
 
             //arg1 is potential_energy
             index = atom_list_lookup_max_potential_energy(my_list, arg1);
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
             rec_ptr = NULL;
         }
 
-        
+
         else if (num_items == 2 && strcmp(command, "UPDATE") == 0) {
             //arg1 is dt
             atom_list_compute_forces(my_list);
@@ -160,19 +160,20 @@ int main(int argc, char *argv[])
         else if (num_items == 1 && strcmp(command, "MIGRATE") == 0) {
             struct atom_list_t * migrate_ptr = NULL;
             float minX, maxX, minY, maxY = 0.0;
+            int num_in_list = 0;
 
             get_bounding_box(&minX, &maxX, &minY, &maxY);
             migrate_ptr = atom_list_form_migrate_list(my_list, minX, maxX, minY, maxY);
+            num_in_list = atom_list_number_entries(migrate_ptr);
 
-            if (migrate_ptr == NULL) {
+            if (num_in_list == 0) {
                 printf("Did not find atoms to migrate in : %e %e %e %e\n", minX, maxX, minY, maxY);
             } else {
                 /* print items in structure */
                 printf("Found atoms to migrate:\n");
-            
-                int num_in_list = atom_list_number_entries(migrate_ptr);
+
                 for (i=0; i < num_in_list; i++) {
-                     rec_ptr = atom_list_access(migrate_ptr, i);
+                    rec_ptr = atom_list_access(migrate_ptr, i);
                     if (rec_ptr != NULL) {
                         print_atom_rec_long(rec_ptr);
                     }
@@ -181,25 +182,25 @@ int main(int argc, char *argv[])
                         break;
                     }
                 }
-            
+
                 // remove list from back to front to advoid shifting
                 for (i = num_in_list-1; i>=0; i--) {
                     rec_ptr = atom_list_remove(migrate_ptr, i);
                     free(rec_ptr);
                 }
-                atom_list_destruct(migrate_ptr);
                 rec_ptr = NULL;
             }
+            atom_list_destruct(migrate_ptr);
         }
 
 
         else if (num_items == 2 && strcmp(command, "REMOVE") == 0) {
             int index = -1;
-            rec_ptr = NULL;   
+            rec_ptr = NULL;
 
             // arg1 is
             index = atom_list_lookup_max_potential_energy(my_list, arg1);
- 
+
             if (index == -1) {
                 printf("Did not remove atom with potential energy: %f\n", arg1);
             } else {
@@ -211,34 +212,34 @@ int main(int argc, char *argv[])
             }
             rec_ptr = NULL;
         }
-        
-        /*
-         else if (num_items == 1 && strcmp(command, "ENERGY") == 0) {
-            float energy = atom_list_compute_kinetic_energy(my_list);
-            printf("Kinetic Energy: %f\n", energy);
-        }
-        */
 
-        
+            /*
+             else if (num_items == 1 && strcmp(command, "ENERGY") == 0) {
+                float energy = atom_list_compute_kinetic_energy(my_list);
+                printf("Kinetic Energy: %f\n", energy);
+            }
+            */
+
+
         else if (num_items == 1 && strcmp(command, "STATS") == 0) {
             // get the number in list and order of the list
-            int num_in_list = 0;   
+            int num_in_list = 0;
             num_in_list = atom_list_number_entries(my_list);
             printf("Number records: %d\n", num_in_list);
         }
 
-        
+
         else if (num_items == 1 && strcmp(command, "PRINT") == 0) {
-            int num_in_list = 0;   
+            int num_in_list = 0;
             num_in_list = atom_list_number_entries(my_list);
-            
+
             if (num_in_list == 0) {
                 printf("List empty\n");
             } else {
                 printf("List has %d records\n", num_in_list);
                 for (i = 0; i < num_in_list; i++) {
                     printf("%4d: ", i);
-                    rec_ptr = NULL;    
+                    rec_ptr = NULL;
                     rec_ptr = atom_list_access(my_list, i);
                     print_atom_rec_short(rec_ptr);
                 }
@@ -253,7 +254,7 @@ int main(int argc, char *argv[])
 
 /* If a string ends with an end-of-line \n, remove it.
  */
-void chomp(char *str) 
+void chomp(char *str)
 {
     int lastchar = strlen(str) - 1;
     if (lastchar >= 0 && str[lastchar] == '\n') {
@@ -286,7 +287,7 @@ void fill_atom_record(struct atom_t *new, int atom_id)
     printf("Atomic Mass:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", &new->mass);
-    
+
     //handle multiple dimensions
     memset(new->position, 0, 3*sizeof(float));
     printf("Atom X Position:");
@@ -302,7 +303,7 @@ void fill_atom_record(struct atom_t *new, int atom_id)
         fgets(line, MAXLINE, stdin);
         sscanf(line, "%e", &new->position[2]);
     }
-    
+
     //handle multiple dimensions
     memset(new->momenta, 0, 3*sizeof(float));
     printf("Atom X Momenta:");
@@ -318,7 +319,7 @@ void fill_atom_record(struct atom_t *new, int atom_id)
         fgets(line, MAXLINE, stdin);
         sscanf(line, "%e", &new->momenta[2]);
     }
-    
+
     //handle multiple dimensions
     memset(new->force, 0, 3*sizeof(float));
     printf("Atom X Force:");
@@ -334,14 +335,14 @@ void fill_atom_record(struct atom_t *new, int atom_id)
         fgets(line, MAXLINE, stdin);
         sscanf(line, "%e", &new->force[2]);
     }
-    
-    
+
+
     printf("Potential Energy:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", &new->potential_energy);
-    
 
-    
+
+
 
     printf("\n");
 }
@@ -361,20 +362,20 @@ void fill_atom_record(struct atom_t *new, int atom_id)
 void get_bounding_box(float* minX, float* maxX, float* minY, float* maxY) {
 
     char line[MAXLINE];
-    
+
     printf("Min X:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", minX);
-    
+
     printf("Max X:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", maxX);
-    
+
 
     printf("Min Y:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", minY);
-    
+
     printf("Max Y:");
     fgets(line, MAXLINE, stdin);
     sscanf(line, "%e", maxY);

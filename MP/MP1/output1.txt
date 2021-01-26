@@ -4,7 +4,6 @@ FIND potential_energy
 REMOVE potential_energy
 UPDATE dt
 MIGRATE
-ENERGY
 PRINT
 STATS
 QUIT
