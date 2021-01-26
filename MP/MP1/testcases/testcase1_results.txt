@@ -1,0 +1,13 @@
+The list size is 2. Possible commands:
+INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+PRINT
+STATS
+QUIT
+Did not remove atom with potential energy: 0.000000
+Did not remove atom with potential energy: 1.000000
+Did not remove atom with potential energy: 2.000000
+Did not remove atom with potential energy: 3.000000

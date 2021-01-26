@@ -243,7 +243,7 @@ void atom_list_compute_forces(struct atom_list_t *list_ptr)
  */
 int atom_list_lookup_max_potential_energy(struct atom_list_t *list_ptr, float potential_energy)
 {
-    int found = -1;
+    int found;
 
     if (list_ptr == NULL || list_ptr->atom_ptr == NULL){ // If the list is empty it's clearly not there
         found = -1;
@@ -256,7 +256,8 @@ int atom_list_lookup_max_potential_energy(struct atom_list_t *list_ptr, float po
                 break;
             }
         }
-    }
+    } else
+        found = -1;
 
     return found;
 }

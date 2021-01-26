@@ -1,0 +1,11 @@
+The list size is 2. Possible commands:
+INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+PRINT
+STATS
+QUIT
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Inserted: 0
