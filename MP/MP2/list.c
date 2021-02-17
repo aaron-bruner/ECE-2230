@@ -169,35 +169,6 @@ void list_destruct(list_t *list_ptr)
 
     assert(list_ptr != NULL);
 
-    // Set up loop variables, one to lead and one to trail
-    list_node_t *A, *B;
-    // If list is empty, skip
-    if (list_ptr->head == NULL && list_ptr->tail == NULL){
-        assert(list_ptr->current_list_size == 0);
-    }
-        // If there is only 1 node
-    else if (list_ptr->current_list_size == 1){
-        free(list_ptr->head);
-    }
-        // Otherwise, there are multiple nodes
-    else{
-        // Initialize loop variables
-        A = list_ptr->head;
-        B = A->next;
-        // For each node, free the data then the node itself
-        while (B != NULL){
-            list_ptr->data_clean(A->data_ptr);
-            free(A);
-            A = B;
-            B = B->next;
-        }
-        list_ptr->data_clean(A->data_ptr);
-        free(A);
-    }
-    // Free the last node and the header block
-    free(list_ptr);
-
-    /*
     if ( list_ptr->current_list_size == 0 ) {
         free(list_ptr); // List is empty
     }
@@ -210,7 +181,7 @@ void list_destruct(list_t *list_ptr)
             free(list);
         }
         free(list_ptr);
-    } */
+    }
 
 }
 

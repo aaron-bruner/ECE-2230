@@ -151,19 +151,27 @@ void atom_list_stats(list_t * sorted, list_t * unsorted)
  */
 void atom_list_add(list_t * list_ptr, int max_list_size)
 {
-    atom_t *rec_ptr = (atom_t *)calloc(1, sizeof(atom_t));
+    atom_t *rec_ptr = (atom_t *)malloc(sizeof(atom_t));
     fill_atom_record(rec_ptr);
 
     int added_return;
 
+    if (list_order(list_ptr) == 0) {
+        added_return = 1;
+        list_insert(list_ptr, rec_ptr, max_list_size);
+    } else {
+        list_insert_sorted(list_ptr, rec_ptr);
+        added_return = 1;
+    }
+
     //if (list_size(list_ptr) >= max_list_size) added_return = -1;
 
-    if ( list_size(list_ptr) < max_list_size) {
+    /*if ( list_size(list_ptr) < max_list_size) {
         list_insert_sorted(list_ptr, rec_ptr);
         added_return = 1;
     } else {
         added_return = -1;
-    }
+    } */
 
     if (added_return == 1) {
         printf("Inserted: %d\n", rec_ptr->atomic_num);
@@ -222,9 +230,10 @@ void atom_list_remove_potential_energy(list_t * list_ptr, float e_pot)
     if (rec_ptr == NULL) {
         printf("Did not remove: %e\n", e_pot);
     } else {
-        list_remove(list_ptr, index);
+        rec_ptr = list_remove(list_ptr, index);
         printf("Removed: %e\n", e_pot);
         print_atom_rec_long(rec_ptr);
+        free(rec_ptr);
     }
     rec_ptr = NULL;
 }
@@ -232,6 +241,56 @@ void atom_list_remove_potential_energy(list_t * list_ptr, float e_pot)
 /* creates and displays the list of atoms to migrate */
 void atom_list_migrate(list_t* list_ptr)
 {
+    int i, count;
+    float minX, maxX, minY, maxY = 0.0;
+    list_t* migrate_list = atom_list_create();
+    data_t* rec_ptr = NULL;
+
+    get_bounding_box(&minX, &maxX, &minY, &maxY);
+
+    int insideBox = 0;
+
+    for (int index = 0; index < list_size(list_ptr); index++) {
+        rec_ptr = list_access(list_ptr, index);
+        insideBox = determine_inside_box(rec_ptr, minX, maxX, minY, maxY);
+        if (insideBox == 0) {
+            if (list_order(list_ptr) == 0) {
+                list_insert(migrate_list, rec_ptr, list_size(list_ptr));
+            } else {
+                list_insert_sorted(migrate_list, rec_ptr);
+            }
+            list_remove(list_ptr, index);
+        }
+        insideBox = 0;
+        rec_ptr = NULL;
+    }
+
+    count = list_size(migrate_list);
+
+    if (count == 0) {
+        printf("Did not find atoms to migrate in : %e %e %e %e\n", minX, maxX, minY, maxY);
+    } else {
+        /* print items in structure */
+        printf("Found atoms to migrate:\n");
+
+        for (i=0; i < count; i++) {
+            rec_ptr = list_access(migrate_list, i);
+            if (rec_ptr != NULL) {
+                print_atom_rec_long(rec_ptr);
+            }
+            else {
+                printf("Error in migrate list: NULL value\n");
+                break;
+            }
+        }
+
+    }
+    atom_list_cleanup(migrate_list);
+    rec_ptr = NULL;
+    migrate_list = NULL;
+
+
+    /*
     int i, count, temp;
     float minX, maxX, minY, maxY = 0.0;
     list_t* migrate_list = (list_t*)malloc(sizeof(list_t));
@@ -245,7 +304,8 @@ void atom_list_migrate(list_t* list_ptr)
         temp = determine_inside_box(rec_ptr, minX, maxX, minY, maxY);
         if (temp == 0) {
             list_insert_sorted(migrate_list, rec_ptr);
-            list_remove(list_ptr, j);
+            rec_ptr = list_remove(list_ptr, j);
+            free(rec_ptr);
         }
         temp = 0;
     }
@@ -267,11 +327,11 @@ void atom_list_migrate(list_t* list_ptr)
                 break;
             }
         }
-
+        free(rec_ptr);
     }
     atom_list_cleanup(migrate_list);
     rec_ptr = NULL;
-    migrate_list = NULL;
+    migrate_list = NULL;*/
 }
 
 /* simulates the computation in a single time-step for a MD simulation */
