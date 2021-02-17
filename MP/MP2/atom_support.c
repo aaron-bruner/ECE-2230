@@ -1,6 +1,6 @@
-/* atom_support.c         <<-- A template
- * Prof. Calhoun          <<-- many updates required
- * jonccal
+/* atom_support.c
+ * Aaron Bruner
+ * ajbrune
  * ECE 2230 Spring 2021
  * MP2
  *
@@ -164,15 +164,6 @@ void atom_list_add(list_t * list_ptr, int max_list_size)
         added_return = 1;
     }
 
-    //if (list_size(list_ptr) >= max_list_size) added_return = -1;
-
-    /*if ( list_size(list_ptr) < max_list_size) {
-        list_insert_sorted(list_ptr, rec_ptr);
-        added_return = 1;
-    } else {
-        added_return = -1;
-    } */
-
     if (added_return == 1) {
         printf("Inserted: %d\n", rec_ptr->atomic_num);
     } else if (added_return == -1) {
@@ -259,7 +250,7 @@ void atom_list_migrate(list_t* list_ptr)
             } else {
                 list_insert_sorted(migrate_list, rec_ptr);
             }
-            list_remove(list_ptr, index);
+            rec_ptr = list_remove(list_ptr, index);
         }
         insideBox = 0;
         rec_ptr = NULL;
@@ -288,50 +279,6 @@ void atom_list_migrate(list_t* list_ptr)
     atom_list_cleanup(migrate_list);
     rec_ptr = NULL;
     migrate_list = NULL;
-
-
-    /*
-    int i, count, temp;
-    float minX, maxX, minY, maxY = 0.0;
-    list_t* migrate_list = (list_t*)malloc(sizeof(list_t));
-    data_t* rec_ptr = NULL;
-
-    get_bounding_box(&minX, &maxX, &minY, &maxY);
-
-    for (int j = 0; j < list_size(list_ptr); j++) {
-        rec_ptr = list_access(list_ptr, j);
-
-        temp = determine_inside_box(rec_ptr, minX, maxX, minY, maxY);
-        if (temp == 0) {
-            list_insert_sorted(migrate_list, rec_ptr);
-            rec_ptr = list_remove(list_ptr, j);
-            free(rec_ptr);
-        }
-        temp = 0;
-    }
-    count = list_size(migrate_list);
-
-    if (count == 0) {
-        printf("Did not find atoms to migrate in : %e %e %e %e\n", minX, maxX, minY, maxY);
-    } else {
-        atom_list_print(migrate_list, "List");
-        printf("Found atoms to migrate:\n");
-
-        for (i=0; i < count; i++) {
-            rec_ptr = list_access(migrate_list, i);
-            if (rec_ptr != NULL) {
-                print_atom_rec_long(rec_ptr);
-            }
-            else {
-                printf("Error in migrate list: NULL value\n");
-                break;
-            }
-        }
-        free(rec_ptr);
-    }
-    atom_list_cleanup(migrate_list);
-    rec_ptr = NULL;
-    migrate_list = NULL;*/
 }
 
 /* simulates the computation in a single time-step for a MD simulation */

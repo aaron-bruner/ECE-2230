@@ -391,8 +391,6 @@ void list_reverse(list_t *list_ptr)
 {
     assert(list_order(list_ptr) != 0);
 
-    //if (list_ptr == NULL || list_ptr->current_list_size == 1 || (list_ptr->head == NULL && list_ptr->tail == NULL));
-
     if (list_ptr->head != list_ptr->tail && list_ptr->current_list_size > 1) {
 
         list_node_t *prevNode, *curNode = list_ptr->head;
