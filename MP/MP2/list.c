@@ -11,7 +11,7 @@
  * Assumptions: We must assume that the user operating the code understands how to properly run the program. Also
  *              we must assume that the user only provides valid input which will not break the lab2.c file.
  *
- * Bugs: None that I know of. (Other than inputting extraneously massive numbers which cause buffer overflow)
+ * Bugs: N/A
  *
  * The interface definition for the two-way linked list ADT is based on one 
  * defined by OPNET, Inc. http://www.opnet.com/
@@ -167,7 +167,40 @@ void list_destruct(list_t *list_ptr)
     /* the first line must validate the list */
     list_debug_validate(list_ptr);
 
-    if ( list_ptr->current_list_size == 0 ) free(list_ptr); // List is empty
+    assert(list_ptr != NULL);
+
+    // Set up loop variables, one to lead and one to trail
+    list_node_t *A, *B;
+    // If list is empty, skip
+    if (list_ptr->head == NULL && list_ptr->tail == NULL){
+        assert(list_ptr->current_list_size == 0);
+    }
+        // If there is only 1 node
+    else if (list_ptr->current_list_size == 1){
+        free(list_ptr->head);
+    }
+        // Otherwise, there are multiple nodes
+    else{
+        // Initialize loop variables
+        A = list_ptr->head;
+        B = A->next;
+        // For each node, free the data then the node itself
+        while (B != NULL){
+            list_ptr->data_clean(A->data_ptr);
+            free(A);
+            A = B;
+            B = B->next;
+        }
+        list_ptr->data_clean(A->data_ptr);
+        free(A);
+    }
+    // Free the last node and the header block
+    free(list_ptr);
+
+    /*
+    if ( list_ptr->current_list_size == 0 ) {
+        free(list_ptr); // List is empty
+    }
 
     else { // If the list is not empty then free everything from the last element back to the first
         for (int i = (list_ptr->current_list_size)-1; i >= 0; i--) {
@@ -177,7 +210,7 @@ void list_destruct(list_t *list_ptr)
             free(list);
         }
         free(list_ptr);
-    }
+    } */
 
 }
 
@@ -209,28 +242,29 @@ void list_insert(list_t *list_ptr, data_t *elem_ptr, int pos_index)
     assert(list_ptr != NULL);
 
     list_node_t *list = (list_node_t *)malloc(sizeof(list_node_t)); if (list == NULL) exit(1);
-    list->prev = NULL;
-    list->next = NULL;
     list->data_ptr = elem_ptr;
 
-    list_node_t *start = list_ptr->head;
-    list_node_t *end;
-
-    if (list_ptr->current_list_size == 0 || (list_ptr->head == NULL && list_ptr->tail == NULL)) { // Empty List
+    if (list_ptr->current_list_size == 0 /*|| (list_ptr->head == NULL && list_ptr->tail == NULL)*/) { // Empty List
+        list->prev = NULL;
+        list->next = NULL;
         list_ptr->head = list;
         list_ptr->tail = list;
     }
     else if (pos_index == 0 || pos_index == LISTPOS_HEAD) { // HEAD
-        list->next = list_ptr->head;
+        list->prev = NULL;
         list_ptr->head->prev = list;
+        list->next = list_ptr->head;
         list_ptr->head = list;
     }
     else if (pos_index >= list_ptr->current_list_size || pos_index == LISTPOS_TAIL) { // TAIL
-        list->prev = list_ptr->tail;
         list_ptr->tail->next = list;
+        list->prev = list_ptr->tail;
+        list->next = NULL;
         list_ptr->tail = list;
     }
     else {
+        list_node_t *start = list_ptr->head;
+        list_node_t *end;
         for (int i = 0; i < pos_index; i++) start = start->next; // Get to the pos_index position
 
         end = start->prev;
@@ -368,6 +402,7 @@ data_t * list_remove(list_t *list_ptr, int pos_index)
 
     }
     list_ptr->current_list_size -= 1; // Decrement the list size
+    temp->data_ptr = NULL;
     free(temp);
 
     list_debug_validate(list_ptr);

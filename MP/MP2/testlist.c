@@ -83,7 +83,7 @@ int main(void)
 
     // Uncomment this section to test list_elem_find 
     /**********************************************************************/
-   /* 
+    /*
     data_t template;
     int my_index = -999;
     template.atom_id = 44;
@@ -91,16 +91,16 @@ int main(void)
     printf("\nTest of list elem find\n");
     if (foundp != NULL)
         printf("looked for %d and found %d at index %d\n",
-            template.atom_id, foundp->task_id, my_index);
+            template.atom_id, foundp->atom_id, my_index);
     else
         printf("looked for %d and did not find \n", template.atom_id);
     foundp = NULL;
-    */
+
 
     list_destruct(Lptr);
  
 
-    return 0;
+    return 0; */
 }
 
 /*
