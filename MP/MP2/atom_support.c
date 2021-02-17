@@ -328,9 +328,10 @@ void atom_list_reverse(list_t * list_ptr)
  */
 void atom_list_add_tail(list_t * list_ptr)
 {
-    atom_t *rec_ptr = NULL;  // fix (collect input)
-    //TODO: add to tail
+    atom_t *rec_ptr = (atom_t *)calloc(1, sizeof(atom_t));
+    fill_atom_record(rec_ptr);
 
+    list_insert(list_ptr, rec_ptr, list_size(list_ptr));
     printf("Appended %d onto queue\n", rec_ptr->atomic_num);
 }
 
@@ -341,14 +342,15 @@ void atom_list_add_tail(list_t * list_ptr)
  */
 void atom_list_remove_head(list_t * list_ptr)
 {
-    atom_t *atom_ptr = NULL; // fix
+    atom_t *atom_ptr = NULL;
+    atom_ptr = list_remove(list_ptr, 0);
 
     if (atom_ptr != NULL)
         printf("Deleted head with atom id and atomic number: %d %d\n",
                atom_ptr->atom_id, atom_ptr->atomic_num);
     else
         printf("Queue empty, did not remove\n");
-    /* TODO */
+    atom_rec_cleanup(atom_ptr);
 }
 
 /* This function prints the atom at the head of the queue.
@@ -356,7 +358,8 @@ void atom_list_remove_head(list_t * list_ptr)
  */
 void atom_list_print_head(list_t * list_ptr)
 {
-    atom_t *rec_ptr = NULL; //fix
+    atom_t *rec_ptr = NULL;
+    rec_ptr = list_access(list_ptr, 0);
 
     if (rec_ptr == NULL) {
         printf("Queue is empty\n");
