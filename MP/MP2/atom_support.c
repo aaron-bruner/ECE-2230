@@ -172,7 +172,7 @@ void atom_list_add(list_t * list_ptr, int max_list_size)
     } else {
         printf("Error with return value! Fix your code.\n");
     }
-    atom_rec_cleanup(rec_ptr);
+    rec_ptr = NULL;
 }
 
 /* This function prints the first atom with the matching potential energy in
