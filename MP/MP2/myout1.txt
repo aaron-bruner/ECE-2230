@@ -1,0 +1,13 @@
+Should find 55 and found (55)
+
+Second test
+Position 0 should find 55 and found (55)
+Position 1 should find 44 and found (44)
+Position 2 should find 33 and found (33)
+
+Test of list print
+
+List size: 3
+Pos: 0 contains atom id: 55
+Pos: 1 contains atom id: 44
+Pos: 2 contains atom id: 33
