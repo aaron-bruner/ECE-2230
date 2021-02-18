@@ -1,0 +1,40 @@
+Lab2 list size is 10. Possible commands:
+List: INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+REVERSE
+PRINT
+Queue      : ADDTAIL; RMHEAD; PRINTHEAD; PRINTQ
+           : STATS; QUIT
+
+
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 19 onto queue
+Queue has 1 record.
+   0: Atom ID: 0 position = (6.000000e+01, 7.300000e+01)
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 53 onto queue
+Queue has 2 records
+   0: Atom ID: 0 position = (6.000000e+01, 7.300000e+01)
+   1: Atom ID: 1 position = (3.700000e+01, 9.000000e+01)
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 44 onto queue
+Queue has 3 records
+   0: Atom ID: 0 position = (6.000000e+01, 7.300000e+01)
+   1: Atom ID: 1 position = (3.700000e+01, 9.000000e+01)
+   2: Atom ID: 2 position = (5.500000e+01, 5.600000e+01)
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 65 onto queue
+Queue has 4 records
+   0: Atom ID: 0 position = (6.000000e+01, 7.300000e+01)
+   1: Atom ID: 1 position = (3.700000e+01, 9.000000e+01)
+   2: Atom ID: 2 position = (5.500000e+01, 5.600000e+01)
+   3: Atom ID: 3 position = (6.000000e+00, 8.900000e+01)
+Deleted head with atom id and atomic number: 0 19
+Deleted head with atom id and atomic number: 1 53
+Deleted head with atom id and atomic number: 2 44
+Deleted head with atom id and atomic number: 3 65
+Queue empty
+Goodbye

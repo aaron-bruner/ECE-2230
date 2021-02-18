@@ -1,0 +1,68 @@
+Lab2 list size is 10. Possible commands:
+List: INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+REVERSE
+PRINT
+Queue      : ADDTAIL; RMHEAD; PRINTHEAD; PRINTQ
+           : STATS; QUIT
+
+
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 78 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 49 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 5 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 93 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 88 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 96 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 72 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 55 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 13 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 89 onto queue
+Deleted head with atom id and atomic number: 0 78
+Deleted head with atom id and atomic number: 1 49
+Queue has 8 records
+   0: Atom ID: 2 position = (6.000000e+00, 2.000000e+01)
+   1: Atom ID: 3 position = (7.400000e+01, 2.800000e+01)
+   2: Atom ID: 4 position = (5.900000e+01, 2.100000e+01)
+   3: Atom ID: 5 position = (1.400000e+01, 2.000000e+00)
+   4: Atom ID: 6 position = (5.700000e+01, 6.700000e+01)
+   5: Atom ID: 7 position = (4.400000e+01, 4.000000e+01)
+   6: Atom ID: 8 position = (5.000000e+01, 4.800000e+01)
+   7: Atom ID: 9 position = (8.200000e+01, 3.800000e+01)
+Deleted head with atom id and atomic number: 2 5
+Deleted head with atom id and atomic number: 3 93
+Queue has 6 records
+   0: Atom ID: 4 position = (5.900000e+01, 2.100000e+01)
+   1: Atom ID: 5 position = (1.400000e+01, 2.000000e+00)
+   2: Atom ID: 6 position = (5.700000e+01, 6.700000e+01)
+   3: Atom ID: 7 position = (4.400000e+01, 4.000000e+01)
+   4: Atom ID: 8 position = (5.000000e+01, 4.800000e+01)
+   5: Atom ID: 9 position = (8.200000e+01, 3.800000e+01)
+Deleted head with atom id and atomic number: 4 88
+Deleted head with atom id and atomic number: 5 96
+Queue has 4 records
+   0: Atom ID: 6 position = (5.700000e+01, 6.700000e+01)
+   1: Atom ID: 7 position = (4.400000e+01, 4.000000e+01)
+   2: Atom ID: 8 position = (5.000000e+01, 4.800000e+01)
+   3: Atom ID: 9 position = (8.200000e+01, 3.800000e+01)
+Deleted head with atom id and atomic number: 6 72
+Deleted head with atom id and atomic number: 7 55
+Queue has 2 records
+   0: Atom ID: 8 position = (5.000000e+01, 4.800000e+01)
+   1: Atom ID: 9 position = (8.200000e+01, 3.800000e+01)
+Deleted head with atom id and atomic number: 8 13
+Deleted head with atom id and atomic number: 9 89
+Queue empty
+Goodbye

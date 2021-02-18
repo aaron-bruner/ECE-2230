@@ -1,0 +1,62 @@
+Lab2 list size is 10. Possible commands:
+List: INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+REVERSE
+PRINT
+Queue      : ADDTAIL; RMHEAD; PRINTHEAD; PRINTQ
+           : STATS; QUIT
+
+
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 70 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 82 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 38 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 86 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 58 onto queue
+Queue has 5 records
+   0: Atom ID: 0 position = (6.600000e+01, 6.400000e+01)
+   1: Atom ID: 1 position = (3.500000e+01, 7.100000e+01)
+   2: Atom ID: 2 position = (5.700000e+01, 1.000000e+01)
+   3: Atom ID: 3 position = (5.000000e+01, 4.700000e+01)
+   4: Atom ID: 4 position = (3.400000e+01, 4.600000e+01)
+Deleted head with atom id and atomic number: 0 70
+Queue has 4 records
+   0: Atom ID: 1 position = (3.500000e+01, 7.100000e+01)
+   1: Atom ID: 2 position = (5.700000e+01, 1.000000e+01)
+   2: Atom ID: 3 position = (5.000000e+01, 4.700000e+01)
+   3: Atom ID: 4 position = (3.400000e+01, 4.600000e+01)
+Found at head of queue:
+Atom ID: 1
+     atomic # = 82
+     mass     = 8.400000e+01
+     position = (3.500000e+01, 7.100000e+01)
+     momenta = (9.400000e+01, 5.400000e+01)
+     force = (3.700000e+01, 7.900000e+01)
+     potential energy = 1.200000e+01
+
+Deleted head with atom id and atomic number: 1 82
+Queue has 3 records
+   0: Atom ID: 2 position = (5.700000e+01, 1.000000e+01)
+   1: Atom ID: 3 position = (5.000000e+01, 4.700000e+01)
+   2: Atom ID: 4 position = (3.400000e+01, 4.600000e+01)
+Found at head of queue:
+Atom ID: 2
+     atomic # = 38
+     mass     = 2.100000e+01
+     position = (5.700000e+01, 1.000000e+01)
+     momenta = (8.000000e+00, 9.000000e+01)
+     force = (4.200000e+01, 3.100000e+01)
+     potential energy = 6.100000e+01
+
+Deleted head with atom id and atomic number: 2 38
+Deleted head with atom id and atomic number: 3 86
+Deleted head with atom id and atomic number: 4 58
+Queue is empty
+Goodbye

@@ -1,0 +1,42 @@
+Lab2 list size is 10. Possible commands:
+List: INSERT
+FIND potential_energy
+REMOVE potential_energy
+UPDATE dt
+MIGRATE
+REVERSE
+PRINT
+Queue      : ADDTAIL; RMHEAD; PRINTHEAD; PRINTQ
+           : STATS; QUIT
+
+
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 3 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 2 onto queue
+Atomic Number:Atomic Mass:Atom X Position:Atom Y Position:Atom X Momenta:Atom Y Momenta:Atom X Force:Atom Y Force:Potential Energy:
+Appended 1 onto queue
+Queue has 3 records
+   0: Atom ID: 0 position = (3.000000e+00, 3.000000e+00)
+   1: Atom ID: 1 position = (2.000000e+00, 2.000000e+00)
+   2: Atom ID: 2 position = (1.000000e+00, 1.000000e+00)
+Found at head of queue:
+Atom ID: 0
+     atomic # = 3
+     mass     = 3.000000e+00
+     position = (3.000000e+00, 3.000000e+00)
+     momenta = (3.000000e+00, 3.000000e+00)
+     force = (3.000000e+00, 3.000000e+00)
+     potential energy = 3.000000e+00
+
+Deleted head with atom id and atomic number: 0 3
+Queue has 2 records
+   0: Atom ID: 1 position = (2.000000e+00, 2.000000e+00)
+   1: Atom ID: 2 position = (1.000000e+00, 1.000000e+00)
+Deleted head with atom id and atomic number: 1 2
+Queue has 1 record.
+   0: Atom ID: 2 position = (1.000000e+00, 1.000000e+00)
+Deleted head with atom id and atomic number: 2 1
+Queue empty
+Queue empty, did not remove
+Goodbye
