@@ -55,4 +55,3 @@ design :
 
 clean :
 	rm -f *.o lab2 testlist core a.out 
-

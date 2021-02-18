@@ -4,11 +4,15 @@
  * ECE 2230 Spring 2021
  * MP2
  *
- * Propose: A template for MP2
+ * Propose: The purpose of MP 2 is to build an understanding of two-way linked lists. We based the idea of this
+ *          machine problem mostly on MP 1, which used a dynamic array. Now, we're referencing our new list
+ *          which should be more reusable for future assignments.
  *
- * Assumptions:
+ * Assumptions: We must assume that the user operating the code understands how to properly run the program. Also
+ *              we must assume that the user only provides valid input which will not break the lab2.c file.
  *
- * Bugs:
+ * Bugs: If you insert with value that are not digits then it continues to work as if they are digits. Instead, they
+ *       are represented as zero for whatever the value is.
  *
  * You can modify the interface for any of the atom_ functions if you like
  * But you must clearly document your changes.
@@ -151,15 +155,15 @@ void atom_list_stats(list_t * sorted, list_t * unsorted)
  */
 void atom_list_add(list_t * list_ptr, int max_list_size)
 {
-    atom_t *rec_ptr = (atom_t *)malloc(sizeof(atom_t));
-    fill_atom_record(rec_ptr);
+    atom_t *rec_ptr = (atom_t *)malloc(sizeof(atom_t)); // Create the new atom to be added
+    fill_atom_record(rec_ptr); // Get values from the user
 
-    int added_return;
+    int added_return = -1;
 
-    if (list_order(list_ptr) == 0) {
+    if (list_order(list_ptr) == 0) { // Unsorted List
         added_return = 1;
         list_insert(list_ptr, rec_ptr, max_list_size);
-    } else {
+    } else { // Sorted List
         list_insert_sorted(list_ptr, rec_ptr);
         added_return = 1;
     }
@@ -182,9 +186,9 @@ void atom_list_lookup_potential_energy(list_t * list_ptr, float e_pot)
     int index = -1;
     atom_t *rec_ptr = NULL;
 
-    for (int i = 0; i < list_size(list_ptr); i++) {
+    for (int i = 0; i < list_size(list_ptr); i++) { // Check from index 0 to list_size - 1
         rec_ptr = list_access(list_ptr, i);
-        if (rec_ptr->potential_energy == e_pot){
+        if (rec_ptr->potential_energy == e_pot){ // If the potential_energy for the atom matches e_pot then we break
             index = i;
             break;
         }
@@ -207,7 +211,7 @@ void atom_list_remove_potential_energy(list_t * list_ptr, float e_pot)
     int index = -1;
     atom_t *rec_ptr = NULL;
 
-    for (int i = 0; i < list_size(list_ptr); i++) {
+    for (int i = 0; i < list_size(list_ptr); i++) { // Find the index for our e_pot value
         rec_ptr = list_access(list_ptr, i);
         if (rec_ptr->potential_energy == e_pot){
             index = i;
@@ -221,7 +225,7 @@ void atom_list_remove_potential_energy(list_t * list_ptr, float e_pot)
     if (rec_ptr == NULL) {
         printf("Did not remove: %e\n", e_pot);
     } else {
-        rec_ptr = list_remove(list_ptr, index);
+        rec_ptr = list_remove(list_ptr, index); // Remove index value where e_pot shows up
         printf("Removed: %e\n", e_pot);
         print_atom_rec_long(rec_ptr);
         free(rec_ptr);
@@ -234,15 +238,15 @@ void atom_list_migrate(list_t* list_ptr)
 {
     int i, count;
     float minX, maxX, minY, maxY = 0.0;
-    list_t* migrate_list = atom_list_create();
+    list_t* migrate_list = atom_list_create(); // Allocate memory for our new migrate list
     data_t* rec_ptr = NULL;
 
-    get_bounding_box(&minX, &maxX, &minY, &maxY);
+    get_bounding_box(&minX, &maxX, &minY, &maxY); // Get bounds from user
 
-    int insideBox = 0;
+    int insideBox = 0; // This variable is used as a flag to check if determine_inside_box is true or false
 
-    for (int index = 0; index < list_size(list_ptr); index++) {
-        rec_ptr = list_access(list_ptr, index);
+    for (int index = 0; index < list_size(list_ptr); index++) { // This code was copied from MP1 and modified to work
+        rec_ptr = list_access(list_ptr, index);                 // with our new list ADT
         insideBox = determine_inside_box(rec_ptr, minX, maxX, minY, maxY);
         if (insideBox == 0) {
             if (list_order(list_ptr) == 0) {
@@ -256,7 +260,7 @@ void atom_list_migrate(list_t* list_ptr)
         rec_ptr = NULL;
     }
 
-    count = list_size(migrate_list);
+    count = list_size(migrate_list); // Find out how many atoms were transferred over to our migrate list
 
     if (count == 0) {
         printf("Did not find atoms to migrate in : %e %e %e %e\n", minX, maxX, minY, maxY);
@@ -286,9 +290,9 @@ void atom_list_update(list_t* list_ptr, float dt)
 {
     data_t *rec_ptr = NULL;
 
-    for (int i = 0; i < list_size(list_ptr); i++) {
+    for (int i = 0; i < list_size(list_ptr); i++) { // Code copied from MP1 and modified to work with our new list ADT
 
-        rec_ptr = list_access(list_ptr, i);
+        rec_ptr = list_access(list_ptr, i); // Iterating through our list from the head to the tail
 
         for (int j = 0; j < 2; j++) {
             rec_ptr->force[j] = drand48();//advance forces
@@ -298,6 +302,14 @@ void atom_list_update(list_t* list_ptr, float dt)
         rec_ptr->potential_energy = drand48();
     }
 }
+
+/* determines if the provided rec_ptr is within the boundaries provided to the function
+ *
+ * rec_ptr: pointer to an atom element
+ *
+ * x_min, x_max, y_min, y_max: boundaries
+ *
+ * return: TRUE/FALSE (inside box/outside box)*/
 int determine_inside_box(data_t* rec_ptr, float x_min,
                          float x_max, float y_min, float y_max)
 {
@@ -335,10 +347,10 @@ void atom_list_reverse(list_t * list_ptr)
  */
 void atom_list_add_tail(list_t * list_ptr)
 {
-    atom_t *rec_ptr = (atom_t *)calloc(1, sizeof(atom_t));
-    fill_atom_record(rec_ptr);
+    atom_t *rec_ptr = (atom_t *)calloc(1, sizeof(atom_t)); // allocate memory for node
+    fill_atom_record(rec_ptr); // collect input
 
-    list_insert(list_ptr, rec_ptr, list_size(list_ptr));
+    list_insert(list_ptr, rec_ptr, list_size(list_ptr)); // insert into non-sorted list
     printf("Appended %d onto queue\n", rec_ptr->atomic_num);
 }
 
@@ -350,14 +362,14 @@ void atom_list_add_tail(list_t * list_ptr)
 void atom_list_remove_head(list_t * list_ptr)
 {
     atom_t *atom_ptr = NULL;
-    atom_ptr = list_remove(list_ptr, 0);
+    atom_ptr = list_remove(list_ptr, 0); // remove the head node
 
     if (atom_ptr != NULL)
         printf("Deleted head with atom id and atomic number: %d %d\n",
                atom_ptr->atom_id, atom_ptr->atomic_num);
     else
         printf("Queue empty, did not remove\n");
-    atom_rec_cleanup(atom_ptr);
+    atom_rec_cleanup(atom_ptr); // Cleanup memory
 }
 
 /* This function prints the atom at the head of the queue.
@@ -365,8 +377,7 @@ void atom_list_remove_head(list_t * list_ptr)
  */
 void atom_list_print_head(list_t * list_ptr)
 {
-    atom_t *rec_ptr = NULL;
-    rec_ptr = list_access(list_ptr, 0);
+    atom_t *rec_ptr = list_access(list_ptr, 0); // Copy the head pointer (index 0)
 
     if (rec_ptr == NULL) {
         printf("Queue is empty\n");

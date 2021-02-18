@@ -11,7 +11,8 @@
  * Assumptions: We must assume that the user operating the code understands how to properly run the program. Also
  *              we must assume that the user only provides valid input which will not break the lab2.c file.
  *
- * Bugs: N/A
+ * Bugs: If you insert with value that are not digits then it continues to work as if they are digits. Instead, they
+ *       are represented as zero for whatever the value is.
  *
  * The interface definition for the two-way linked list ADT is based on one 
  * defined by OPNET, Inc. http://www.opnet.com/
@@ -386,6 +387,9 @@ data_t * list_remove(list_t *list_ptr, int pos_index)
  * that is sorted.
  *
  * list_ptr: pointer to list-of-interest.
+ *
+ * Algorithm based on this article: https://www.geeksforgeeks.org/c-program-for-reverse-a-linked-list/
+ *
  */
 void list_reverse(list_t *list_ptr)
 {
@@ -396,7 +400,7 @@ void list_reverse(list_t *list_ptr)
         list_node_t *prevNode, *curNode = list_ptr->head;
         list_ptr->tail = curNode;
 
-        while ( curNode != NULL ) {
+        while ( curNode != NULL ) { // Reverse algorithm
             prevNode = curNode->prev;
             curNode->prev = curNode->next;
             curNode->next = prevNode;
