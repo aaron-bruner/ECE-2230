@@ -18,7 +18,7 @@
 # CC is the compiler used to compile and link C programs
 CC     = gcc
 # CFLAGS are the compiler flags used when compiling C programs
-CFLAGS = -Wall -g -DVALIDATE
+CFLAGS = -Wall -g
 
 .PHONY : all
 all : lab3 geninput

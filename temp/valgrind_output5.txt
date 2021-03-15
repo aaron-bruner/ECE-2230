@@ -1,0 +1,15 @@
+==15450== Memcheck, a memory error detector
+==15450== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==15450== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==15450== Command: ./lab3 1
+==15450== Parent PID: 15440
+==15450== 
+==15450== 
+==15450== HEAP SUMMARY:
+==15450==     in use at exit: 0 bytes in 0 blocks
+==15450==   total heap usage: 190 allocs, 190 frees, 11,072 bytes allocated
+==15450== 
+==15450== All heap blocks were freed -- no leaks are possible
+==15450== 
+==15450== For counts of detected and suppressed errors, rerun with: -v
+==15450== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
