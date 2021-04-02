@@ -1,6 +1,5 @@
-Non-option argument best
-Seed: 0
-First-fit search policy starting at head without coalescing
+Seed: 19283
+Best-fit search policy starting at head without coalescing
 
 ----- Begin unit driver 0 -----
 string length=15
@@ -20,8 +19,8 @@ Free list after first allocation
 	Number of requested pages: 1
 	Heap status:  heap is in-use -- leaks are possible
 
-p=0x6050c0, size=0, end=0x6050c0, next=0x20be020 <-- dummy
-p=0x20be020, size=253, end=0x20beff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x10b5020 <-- dummy
+p=0x10b5020, size=253, end=0x10b5ff0, next=0x6050c0 
 
 Free list after first free
 unit driver 0 has returned all memory to free list
@@ -38,8 +37,8 @@ unit driver 0 has returned all memory to free list
 	Number of requested pages: 1
 	Heap status:  all memory is in the heap -- no leaks are possible
 
-p=0x6050c0, size=0, end=0x6050c0, next=0x20be000 <-- dummy
-p=0x20be000, size=1, end=0x20be010, next=0x20be020 
-p=0x20be020, size=253, end=0x20beff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x10b5000 <-- dummy
+p=0x10b5000, size=1, end=0x10b5010, next=0x10b5020 
+p=0x10b5020, size=253, end=0x10b5ff0, next=0x6050c0 
 
 ----- End unit driver 0 -----

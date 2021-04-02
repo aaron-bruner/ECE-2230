@@ -31,7 +31,7 @@
  * -u 2		 Test requests for four chunks of memory and then demonstrates the BEST_FIT option
  * -u 3		 Test allocating multiple blocks of memory that require several pages to fulfill
  * -u 4 	 Test creates a very disorganized free list by allocating and freeing over and over
- * -u 5		 Test attempts to create memory blocks that are not valid sizes
+ * -u 5		 Test attempts to demonstrate the ability to reuse already allocated memory that is in the free list
  * -u 6		 Tests the gaps in our list when coalescing is used
  */
 
@@ -387,45 +387,82 @@ int main(int argc, char **argv)
     else if (unit_driver == 5)
     {
         printf("\n----- Begin unit driver 5 -----\n");
+
         int unit_size = SIZEOF_CHUNK_T;
         int units_in_first_page = PAGESIZE/unit_size;
         assert(units_in_first_page * unit_size == PAGESIZE);
         printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
                units_in_first_page, unit_size);
 
-        int *p1, *p2;
-        int num_bytes_1, num_bytes_2;
+        int *p1, *p2, *p3, *p4, *p5, *p6;
+        int num_bytes_1, num_bytes_2, num_bytes_3, num_bytes_4, num_bytes_5, num_bytes_6;
 
-// allocate pointer of size -1
-        num_bytes_1 = (units_in_first_page - units_in_first_page + 1)*unit_size;
+        // allocate pointer of page size 1/4
+        num_bytes_1 = (units_in_first_page/4 - 1)*unit_size;
         p1 = (int *) Mem_alloc(num_bytes_1);
         printf("first: %d bytes (%d units) p=%p \n",
                num_bytes_1, num_bytes_1/unit_size, p1);
         Mem_print();
 
-// allocate pointer to page of size 99999999999999999 (idea is that it's invalid)
-        num_bytes_2 = (units_in_first_page)*unit_size;
+        // allocate pointer of page size 1/8
+        num_bytes_2 = (units_in_first_page/8 - 1)*unit_size;
         p2 = (int *) Mem_alloc(num_bytes_2);
         printf("second: %d bytes (%d units) p=%p \n",
                num_bytes_2, num_bytes_2/unit_size, p2);
         Mem_print();
 
-        if (p2 != NULL) {
-            printf("free p2 -> p=%p \n", p2);
-            Mem_free(p2);
-            Mem_print();
-        }
+        printf("first free: p1 -> p=%p \n", p1);
+        Mem_free(p1);
 
-        if (p1 != NULL) {
-            printf("free p1 -> p=%p \n", p1);
-            Mem_free(p1);
-            Mem_print();
-        }
+        printf("second free: p2 -> p=%p \n", p2);
+        Mem_free(p2);
+        Mem_print();
 
-        printf("unit driver 4 has returned all memory to free list\n");
+        // allocate pointer of page size
+        num_bytes_3 = (units_in_first_page - 1)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        printf("third: %d bytes (%d units) p=%p \n",
+               num_bytes_3, num_bytes_3/unit_size, p3);
+        Mem_print();
+
+        // allocate pointer of page size 1/5
+        num_bytes_4 = (units_in_first_page/5 - 1)*unit_size;
+        p4 = (int *) Mem_alloc(num_bytes_4);
+        printf("fourth: %d bytes (%d units) p=%p \n",
+               num_bytes_4, num_bytes_4/unit_size, p4);
+        Mem_print();
+
+        printf("third free: p3 -> p=%p \n", p3);
+        Mem_free(p3);
+        Mem_print();
+
+        // allocate pointer of page size 1/2
+        num_bytes_5 = (units_in_first_page/2 - 1)*unit_size;
+        p5 = (int *) Mem_alloc(num_bytes_5);
+        printf("fifth: %d bytes (%d units) p=%p \n",
+               num_bytes_5, num_bytes_5/unit_size, p5);
+        Mem_print();
+
+        printf("fourth free: p4 -> p=%p \n", p4);
+        Mem_free(p4);
+        Mem_print();
+
+        printf("fifth free: p5 -> p=%p \n", p5);
+        Mem_free(p5);
+        Mem_print();
+
+        // allocate pointer of page size 1/7
+        num_bytes_6 = (units_in_first_page/7)*unit_size;
+        p6 = (int *) Mem_alloc(num_bytes_6);
+        printf("sixth: %d bytes (%d units) p=%p \n",
+               num_bytes_6, num_bytes_6/unit_size, p6);
+        Mem_print();
+        Mem_free(p6);
+
+        printf("unit driver 5 has returned all memory to free list\n");
         Mem_print();
         Mem_stats();
-        printf("\n----- End unit test driver 4 -----\n");
+        printf("\n----- End unit test driver 5 -----\n");
     }
         // Check that coalescing works
     else if (unit_driver == 6)

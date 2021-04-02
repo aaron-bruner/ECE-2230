@@ -1,96 +1,95 @@
-Non-option argument first
-Seed: 0
+Seed: 19283
 First-fit search policy starting at head without coalescing
 
 ----- Begin unit driver 2 -----
 There are 256 units per page, and the size of chunk_t is 16 bytes
-first: 496 bytes (31 units) p=0x2490010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2490200 <-- dummy
-p=0x2490200, size=223, end=0x2490ff0, next=0x6050c0 
-second: 1520 bytes (95 units) p=0x2491010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-p=0x2490200, size=223, end=0x2490ff0, next=0x6050c0 
-third: 1008 bytes (63 units) p=0x2492010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-fourth: 1008 bytes (63 units) p=0x2493010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-first free of p2 (3/8): 0x2491010
-p=0x2490200, size=223, end=0x2490ff0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-second free of p4 (1/4): 0x2493010
-p=0x2490200, size=223, end=0x2490ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-first: 1008 bytes (63 units) p=0x2494010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2494400 
-p=0x2494400, size=191, end=0x2494ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-first free of 1/8 a page p=0x2490010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2490000 
-p=0x2490000, size=31, end=0x24901f0, next=0x2494400 
-p=0x2494400, size=191, end=0x2494ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-second free of a 1/4 page p=0x2494010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2494000 
-p=0x2494000, size=63, end=0x24943f0, next=0x2490000 
-p=0x2490000, size=31, end=0x24901f0, next=0x2494400 
-p=0x2494400, size=191, end=0x2494ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
-third free of a 1/4 page p=0x2493010 
-p=0x2490200, size=223, end=0x2490ff0, next=0x2492000 
-p=0x2492000, size=63, end=0x24923f0, next=0x2494000 
-p=0x2494000, size=63, end=0x24943f0, next=0x2490000 
-p=0x2490000, size=31, end=0x24901f0, next=0x2494400 
-p=0x2494400, size=191, end=0x2494ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
+first: 496 bytes (31 units) p=0x12c7010 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c7200 <-- dummy
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x6050c0 
+second: 1520 bytes (95 units) p=0x12c8010 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x6050c0 
+third: 1008 bytes (63 units) p=0x12c9010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+fourth: 1008 bytes (63 units) p=0x12ca010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+first free of p2 (3/8): 0x12c8010
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+second free of p4 (1/4): 0x12ca010
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+first: 1008 bytes (63 units) p=0x12cb010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12cb400 
+p=0x12cb400, size=191, end=0x12cbff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+first free of 1/8 a page p=0x12c7010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12c7000 
+p=0x12c7000, size=31, end=0x12c71f0, next=0x12cb400 
+p=0x12cb400, size=191, end=0x12cbff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+second free of a 1/4 page p=0x12cb010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12cb000 
+p=0x12cb000, size=63, end=0x12cb3f0, next=0x12c7000 
+p=0x12c7000, size=31, end=0x12c71f0, next=0x12cb400 
+p=0x12cb400, size=191, end=0x12cbff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
+third free of a 1/4 page p=0x12ca010 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12c9000 
+p=0x12c9000, size=63, end=0x12c93f0, next=0x12cb000 
+p=0x12cb000, size=63, end=0x12cb3f0, next=0x12c7000 
+p=0x12c7000, size=31, end=0x12c71f0, next=0x12cb400 
+p=0x12cb400, size=191, end=0x12cbff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
 unit driver 2 has returned all memory to free list
-p=0x2490200, size=223, end=0x2490ff0, next=0x2492000 
-p=0x2492000, size=63, end=0x24923f0, next=0x2494000 
-p=0x2494000, size=63, end=0x24943f0, next=0x2490000 
-p=0x2490000, size=31, end=0x24901f0, next=0x2494400 
-p=0x2494400, size=191, end=0x2494ff0, next=0x2493000 
-p=0x2493000, size=63, end=0x24933f0, next=0x2491000 
-p=0x2491000, size=95, end=0x24915f0, next=0x2493400 
-p=0x2493400, size=191, end=0x2493ff0, next=0x2492400 
-p=0x2492400, size=191, end=0x2492ff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x2491600 <-- dummy
-p=0x2491600, size=159, end=0x2491ff0, next=0x2490200 
+p=0x12c7200, size=223, end=0x12c7ff0, next=0x12c9000 
+p=0x12c9000, size=63, end=0x12c93f0, next=0x12cb000 
+p=0x12cb000, size=63, end=0x12cb3f0, next=0x12c7000 
+p=0x12c7000, size=31, end=0x12c71f0, next=0x12cb400 
+p=0x12cb400, size=191, end=0x12cbff0, next=0x12ca000 
+p=0x12ca000, size=63, end=0x12ca3f0, next=0x12c8000 
+p=0x12c8000, size=95, end=0x12c85f0, next=0x12ca400 
+p=0x12ca400, size=191, end=0x12caff0, next=0x12c9400 
+p=0x12c9400, size=191, end=0x12c9ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x12c8600 <-- dummy
+p=0x12c8600, size=159, end=0x12c8ff0, next=0x12c7200 
 
 		MP4 Heap Memory Statistics
 ----------------------------------------------------
