@@ -1,0 +1,41 @@
+Non-option argument worst
+Seed: 0
+First-fit search policy starting at head using coalescing
+
+----- Begin unit driver 5 -----
+There are 256 units per page, and the size of chunk_t is 16 bytes
+first: 16 bytes (1 units) p=0x985010 
+p=0x6050c0, size=0, end=0x6050c0, next=0x985020 <-- dummy
+p=0x985020, size=253, end=0x985ff0, next=0x6050c0 
+second: 4096 bytes (256 units) p=0x986010 
+p=0x6050c0, size=0, end=0x6050c0, next=0x985020 <-- dummy
+p=0x985020, size=253, end=0x985ff0, next=0x6050c0 
+free p2 -> p=0x986010 
+p=0x985020, size=253, end=0x985ff0, next=0x986000 
+p=0x986000, size=255, end=0x986ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x985020 <-- dummy
+free p1 -> p=0x985010 
+p=0x986000, size=255, end=0x986ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x985000 <-- dummy
+p=0x985000, size=1, end=0x985010, next=0x985020 
+p=0x985020, size=253, end=0x985ff0, next=0x986000 
+unit driver 4 has returned all memory to free list
+p=0x986000, size=255, end=0x986ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x985000 <-- dummy
+p=0x985000, size=1, end=0x985010, next=0x985020 
+p=0x985020, size=253, end=0x985ff0, next=0x986000 
+
+		MP4 Heap Memory Statistics
+----------------------------------------------------
+
+	Number of blocks in free list: 4
+	Min: 16
+	Max: 4080
+	Average: 2048
+	Total bytes in free list: 8192
+	Number of sbrk calls: 2
+	Number of requested pages: 2
+	Heap status:  all memory is in the heap -- no leaks are possible
+
+
+----- End unit test driver 4 -----

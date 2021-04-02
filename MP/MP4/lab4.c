@@ -4,7 +4,8 @@
  * ECE 2230 Spring 2021
  * MP4
  *
- * Purpose:
+ * Purpose: The purpose of lab4.c is to test our mem.c file and ensure that everything is working.
+ * In a way this could me though of as a validate function or a replication of valgrind.
  * --------
  *
  * This file contains drivers to test the mem.c package for dynamic memory
@@ -439,50 +440,50 @@ int main(int argc, char **argv)
         int *p1, *p2, *p3, *p4;
         int num_bytes_1, num_bytes_2, num_bytes_3, num_bytes_4;
 
-// allocate 1st pointer to a page of size 1/2
-        num_bytes_1 = (units_in_first_page / 2)*unit_size;
+// allocate 1st pointer to a page of size 1/5
+        num_bytes_1 = (units_in_first_page / 5)*unit_size;
         p1 = (int *) Mem_alloc(num_bytes_1);
         printf("first: %d bytes (%d units) p=%p \n",
                num_bytes_1, num_bytes_1/unit_size, p1);
         Mem_print();
 
-// allocate 2nd pointer to a page of size 1/3
-        num_bytes_2 = (units_in_first_page / 3)*unit_size;
+// allocate 2nd pointer to a page of size 1/6
+        num_bytes_2 = (units_in_first_page / 6)*unit_size;
         p2 = (int *) Mem_alloc(num_bytes_2);
         printf("second: %d bytes (%d units) p=%p \n",
                num_bytes_2, num_bytes_2/unit_size, p2);
         Mem_print();
 
-// allocate 3rd pointer to a page of size 1/4
-        num_bytes_3 = (units_in_first_page / 4)*unit_size;
+// allocate 3rd pointer to a page of size 1/15
+        num_bytes_3 = (units_in_first_page / 15)*unit_size;
         p3 = (int *) Mem_alloc(num_bytes_3);
         printf("third: %d bytes (%d units) p=%p \n",
                num_bytes_3, num_bytes_3/unit_size, p3);
         Mem_print();
 
-// allocate 4th pointer to a page of size 1/5
-        num_bytes_4 = (units_in_first_page / 5)*unit_size;
+// allocate 4th pointer to a page of size 1/16
+        num_bytes_4 = (units_in_first_page / 16)*unit_size;
         p4 = (int *) Mem_alloc(num_bytes_4);
         printf("fourth: %d bytes (%d units) p=%p \n",
                num_bytes_4, num_bytes_4/unit_size, p4);
         Mem_print();
 
 // return allocated memory back to free list
-        printf("\nFirst free of p3 (1/4) p=%p \n", p3);
+        printf("\nFirst free of p3 (1/15) p=%p \n", p3);
         Mem_free(p3);
         Mem_print();
 
-        printf("Third free of p4 (1/5) p=%p \n", p4);
+        printf("Third free of p4 (1/16) p=%p \n", p4);
         Mem_free(p4);
         Mem_print();
 
         printf("\n Memory is coalesced \n");
 
-        printf("Second free of p1 (1/2) p=%p \n", p1);
+        printf("Second free of p1 (1/5) p=%p \n", p1);
         Mem_free(p1);
         Mem_print();
 
-        printf("Third free of p2 (1/3) p=%p \n", p2);
+        printf("Third free of p2 (1/6) p=%p \n", p2);
         Mem_free(p2);
         Mem_print();
 

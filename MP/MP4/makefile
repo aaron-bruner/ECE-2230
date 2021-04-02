@@ -16,3 +16,6 @@ mem.o : mem.c mem.h
 clean :
 	rm -f mem.o lab4.o lab4
 
+.PHONY: test
+test :
+	./testcase.sh

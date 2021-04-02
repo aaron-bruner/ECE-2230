@@ -1,0 +1,75 @@
+Non-option argument worst
+Seed: 0
+First-fit search policy starting at head without coalescing
+
+----- Begin unit driver 1 -----
+There are 256 units per page, and the size of chunk_t is 16 bytes
+first: 496 bytes (31 units) p=0xd46010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd46200 <-- dummy
+p=0xd46200, size=223, end=0xd46ff0, next=0x6050c0 
+second: 2032 bytes (127 units) p=0xd47010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+p=0xd46200, size=223, end=0xd46ff0, next=0x6050c0 
+third: 1520 bytes (95 units) p=0xd48010 
+p=0xd46200, size=223, end=0xd46ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+unit driver 1: above Mem_print shows empty free list
+fourth: 1008 bytes (63 units) p=0xd49010 
+p=0xd46200, size=223, end=0xd46ff0, next=0xd49400 
+p=0xd49400, size=191, end=0xd49ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+first free of 1/8 a page p=0xd46010 
+p=0xd46200, size=223, end=0xd46ff0, next=0xd46000 
+p=0xd46000, size=31, end=0xd461f0, next=0xd49400 
+p=0xd49400, size=191, end=0xd49ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+second free of 3/8 a page p=0xd48010 
+p=0xd46200, size=223, end=0xd46ff0, next=0xd48000 
+p=0xd48000, size=95, end=0xd485f0, next=0xd46000 
+p=0xd46000, size=31, end=0xd461f0, next=0xd49400 
+p=0xd49400, size=191, end=0xd49ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+third free of 1/2 a page p=0xd47010 
+p=0xd46200, size=223, end=0xd46ff0, next=0xd47000 
+p=0xd47000, size=127, end=0xd477f0, next=0xd48000 
+p=0xd48000, size=95, end=0xd485f0, next=0xd46000 
+p=0xd46000, size=31, end=0xd461f0, next=0xd49400 
+p=0xd49400, size=191, end=0xd49ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+fourth free of 1/4 a page p=0xd49010
+unit driver 1 has returned all memory to free list
+p=0xd46200, size=223, end=0xd46ff0, next=0xd49000 
+p=0xd49000, size=63, end=0xd493f0, next=0xd47000 
+p=0xd47000, size=127, end=0xd477f0, next=0xd48000 
+p=0xd48000, size=95, end=0xd485f0, next=0xd46000 
+p=0xd46000, size=31, end=0xd461f0, next=0xd49400 
+p=0xd49400, size=191, end=0xd49ff0, next=0xd48600 
+p=0xd48600, size=159, end=0xd48ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xd47800 <-- dummy
+p=0xd47800, size=127, end=0xd47ff0, next=0xd46200 
+
+		MP4 Heap Memory Statistics
+----------------------------------------------------
+
+	Number of blocks in free list: 9
+	Min: 496
+	Max: 3568
+	Average: 1820
+	Total bytes in free list: 16384
+	Number of sbrk calls: 4
+	Number of requested pages: 4
+	Heap status:  all memory is in the heap -- no leaks are possible
+
+
+----- End unit test driver 1 -----

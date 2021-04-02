@@ -1,0 +1,62 @@
+Non-option argument first
+Seed: 0
+First-fit search policy starting at head without coalescing
+
+----- Begin unit driver 3 -----
+There are 256 units per page, and the size of chunk_t is 16 bytes
+first: 62592 bytes (3912 units) p=0xe3a010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe49490 <-- dummy
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+second: 11744 bytes (734 units) p=0xe4a010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe4cdf0 <-- dummy
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+second: 37024 bytes (2314 units) p=0xe4d010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe560b0 <-- dummy
+p=0xe560b0, size=244, end=0xe56ff0, next=0xe4cdf0 
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+first free of 15 pages plus 72 p=0xe3a010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe3a000 <-- dummy
+p=0xe3a000, size=3912, end=0xe49480, next=0xe560b0 
+p=0xe560b0, size=244, end=0xe56ff0, next=0xe4cdf0 
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+second free of 3 pages minus 34 p=0xe4a010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe4a000 <-- dummy
+p=0xe4a000, size=734, end=0xe4cde0, next=0xe3a000 
+p=0xe3a000, size=3912, end=0xe49480, next=0xe560b0 
+p=0xe560b0, size=244, end=0xe56ff0, next=0xe4cdf0 
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+third free of 9 pages plus 10 p=0xe4d010 
+p=0x6050c0, size=0, end=0x6050c0, next=0xe4d000 <-- dummy
+p=0xe4d000, size=2314, end=0xe560a0, next=0xe4a000 
+p=0xe4a000, size=734, end=0xe4cde0, next=0xe3a000 
+p=0xe3a000, size=3912, end=0xe49480, next=0xe560b0 
+p=0xe560b0, size=244, end=0xe56ff0, next=0xe4cdf0 
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+unit driver 3 has returned all memory to free list
+p=0x6050c0, size=0, end=0x6050c0, next=0xe4d000 <-- dummy
+p=0xe4d000, size=2314, end=0xe560a0, next=0xe4a000 
+p=0xe4a000, size=734, end=0xe4cde0, next=0xe3a000 
+p=0xe3a000, size=3912, end=0xe49480, next=0xe560b0 
+p=0xe560b0, size=244, end=0xe56ff0, next=0xe4cdf0 
+p=0xe4cdf0, size=32, end=0xe4cff0, next=0xe49490 
+p=0xe49490, size=182, end=0xe49ff0, next=0x6050c0 
+
+		MP4 Heap Memory Statistics
+----------------------------------------------------
+
+	Number of blocks in free list: 7
+	Min: 512
+	Max: 62592
+	Average: 16969
+	Total bytes in free list: 118784
+	Number of sbrk calls: 3
+	Number of requested pages: 29
+	Heap status:  all memory is in the heap -- no leaks are possible
+
+
+----- End unit test driver 3 -----

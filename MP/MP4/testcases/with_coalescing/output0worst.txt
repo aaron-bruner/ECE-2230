@@ -1,0 +1,45 @@
+Non-option argument worst
+Seed: 0
+First-fit search policy starting at head using coalescing
+
+----- Begin unit driver 0 -----
+string length=15
+:hello world 15c:
+
+Free list after first allocation
+
+		MP4 Heap Memory Statistics
+----------------------------------------------------
+
+	Number of blocks in free list: 2
+	Min: 4048
+	Max: 4048
+	Average: 2032
+	Total bytes in free list: 4064
+	Number of sbrk calls: 1
+	Number of requested pages: 1
+	Heap status:  heap is in-use -- leaks are possible
+
+p=0x6050c0, size=0, end=0x6050c0, next=0x13eb020 <-- dummy
+p=0x13eb020, size=253, end=0x13ebff0, next=0x6050c0 
+
+Free list after first free
+unit driver 0 has returned all memory to free list
+
+		MP4 Heap Memory Statistics
+----------------------------------------------------
+
+	Number of blocks in free list: 3
+	Min: 16
+	Max: 4048
+	Average: 1365
+	Total bytes in free list: 4096
+	Number of sbrk calls: 1
+	Number of requested pages: 1
+	Heap status:  all memory is in the heap -- no leaks are possible
+
+p=0x6050c0, size=0, end=0x6050c0, next=0x13eb000 <-- dummy
+p=0x13eb000, size=1, end=0x13eb010, next=0x13eb020 
+p=0x13eb020, size=253, end=0x13ebff0, next=0x6050c0 
+
+----- End unit driver 0 -----
