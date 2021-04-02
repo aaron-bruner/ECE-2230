@@ -30,7 +30,17 @@
  *           The student must update this driver to match the details of
  *           his or her design.
  *
- * -u ?      The student is REQUIRED to add additional drivers
+ * * -u 2		 Tests request for a whole page and one unit smaller and larger
+ *			 than a page.
+ * -u 3		 Tests requests for large chunks of memory that require several
+ *			 pages to fulfill.
+ * -u 4 	 Tests the ability of the free list to allocate and free
+ *			 memory at different times, mixing in calls to allocate and free
+ *			 to create a disorganized free list.
+ * -u 5		 Tests the shape of the free list when contigous blocks of memory
+ * 			 are allocated and then some block in the middle is freed.
+ * -u 6		 Tests the shape of the free list when coalescing is used to
+ *			 demonstrate that coalescing works in the correct situations.
  */
 
 #include <stdlib.h>
@@ -48,7 +58,7 @@ void getCommandLine(int, char**, int*, int*);
 int main(int argc, char **argv)
 {
     int unit_driver;  /* the unit test number to run */
-    int seed;         /* random number seed */
+    int seed = 4713;         /* random number seed */
     
     getCommandLine(argc, argv, &unit_driver, &seed);
     printf("Seed: %d\n", seed);
@@ -173,6 +183,242 @@ int main(int argc, char **argv)
         printf("\n----- End unit test driver 1 -----\n");
     }
 
+        // Request a whole page and a size one unit smaller and bigger than a page
+    else if (unit_driver == 2)
+    {
+        printf("\n----- Begin unit driver 2 -----\n");
+        int unit_size = SIZEOF_CHUNK_T;
+        int units_in_first_page = PAGESIZE/unit_size;
+        assert(units_in_first_page * unit_size == PAGESIZE);
+        printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
+               units_in_first_page, unit_size);
+        int *p1, *p2, *p3;
+        int num_bytes_1, num_bytes_2, num_bytes_3;
+
+        // allocate 1st pointer to an entire  page
+        num_bytes_1 = (units_in_first_page)*unit_size;
+        p1 = (int *) Mem_alloc(num_bytes_1);
+        printf("first: %d bytes (%d units) p=%p \n",
+               num_bytes_1, num_bytes_1/unit_size, p1);
+        Mem_print();
+        // allocate for 2nd pointer to 1 less than a page
+        num_bytes_2 = (units_in_first_page - 1)*unit_size;
+        p2 = (int *) Mem_alloc(num_bytes_2);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_2, num_bytes_2/unit_size, p2);
+        Mem_print();
+        // allocate for 3rd pointer to 1 more than a page
+        num_bytes_3 = (units_in_first_page + 1)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_3, num_bytes_3/unit_size, p3);
+        Mem_print();
+        // next put the memory back into the free list:
+        printf("first free of entire page p=%p \n", p1);
+        Mem_free(p1);
+        Mem_print();
+        printf("second free of 1 less than a page p=%p \n", p2);
+        Mem_free(p2);
+        Mem_print();
+        printf("third free of 1 more than a page p=%p \n", p3);
+        Mem_free(p3);
+        Mem_print();
+        printf("unit driver 2 has returned all memory to free list\n");
+        Mem_print();
+        Mem_stats();
+        printf("\n----- End unit test driver 2 -----\n");
+    }
+        // Request sizes that require several pages
+    else if (unit_driver == 3)
+    {
+        printf("\n----- Begin unit driver 3 -----\n");
+        int unit_size = SIZEOF_CHUNK_T;
+        int units_in_first_page = PAGESIZE/unit_size;
+        assert(units_in_first_page * unit_size == PAGESIZE);
+        printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
+               units_in_first_page, unit_size);
+        int *p1, *p2, *p3;
+        int num_bytes_1, num_bytes_2, num_bytes_3;
+        // allocate 1st pointer to over one page
+        num_bytes_1 = (units_in_first_page + 20)*unit_size;
+        p1 = (int *) Mem_alloc(num_bytes_1);
+        printf("first: %d bytes (%d units) p=%p \n",
+               num_bytes_1, num_bytes_1/unit_size, p1);
+        Mem_print();
+        // allocate for 2nd pointer to exactly 2 pages
+        num_bytes_2 = (2*units_in_first_page)*unit_size;
+        p2 = (int *) Mem_alloc(num_bytes_2);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_2, num_bytes_2/unit_size, p2);
+        Mem_print();
+        // allocate for 3rd pointer to over 5 pages
+        num_bytes_3 = (5*units_in_first_page + 1)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_3, num_bytes_3/unit_size, p3);
+        Mem_print();
+        // next put the memory back into the free list:
+        printf("first free of over a page p=%p \n", p1);
+        Mem_free(p1);
+        Mem_print();
+        printf("second free of exactly 2 pages p=%p \n", p2);
+        Mem_free(p2);
+        Mem_print();
+        printf("third free of more than 5 pages p=%p \n", p3);
+        Mem_free(p3);
+        Mem_print();
+        printf("unit driver 3 has returned all memory to free list\n");
+        Mem_print();
+        Mem_stats();
+        printf("\n----- End unit test driver 3 -----\n");
+    }
+        // Combines requests and frees throughout execution
+    else if (unit_driver == 4)
+    {
+        printf("\n----- Begin unit driver 4 -----\n");
+        int unit_size = SIZEOF_CHUNK_T;
+        int units_in_first_page = PAGESIZE/unit_size;
+        assert(units_in_first_page * unit_size == PAGESIZE);
+        printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
+               units_in_first_page, unit_size);
+        int *p1, *p2, *p3, *p4, *p5;
+        int num_bytes_1, num_bytes_2, num_bytes_3, num_bytes_4, num_bytes_5;
+        // allocate 1st pointer to 1/4 of a page
+        num_bytes_1 = (units_in_first_page/4)*unit_size;
+        p1 = (int *) Mem_alloc(num_bytes_1);
+        printf("first: %d bytes (%d units) p=%p \n",
+               num_bytes_1, num_bytes_1/unit_size, p1);
+        Mem_print();
+        // allocate for 2nd pointer to 1/8 of a page
+        num_bytes_2 = (units_in_first_page/8)*unit_size;
+        p2 = (int *) Mem_alloc(num_bytes_2);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_2, num_bytes_2/unit_size, p2);
+        Mem_print();
+        // Free first allocated memory
+        printf("first free of 1/4 of a page p=%p \n", p1);
+        Mem_free(p1);
+        Mem_print();
+        // allocate for 3rd pointer to 1/8 of a page
+        num_bytes_3 = (units_in_first_page/8)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_3, num_bytes_3/unit_size, p3);
+        Mem_print();
+        // allocate 4th pointer to half a page
+        num_bytes_4 = (units_in_first_page/2)*unit_size;
+        p4 = (int *) Mem_alloc(num_bytes_4);
+        printf("first: %d bytes (%d units) p=%p \n",
+               num_bytes_4, num_bytes_4/unit_size, p4);
+        Mem_print();
+        // Free third allocated memory
+        printf("third free of 1/8 of a page p=%p \n", p3);
+        Mem_free(p3);
+        Mem_print();
+        // Free second allocated memory
+        printf("second free of 1/8 of a page p=%p \n", p2);
+        Mem_free(p2);
+        Mem_print();
+        // allocate for 5th pointer to over 2 pages
+        num_bytes_5 = (2*units_in_first_page + 1)*unit_size;
+        p5 = (int *) Mem_alloc(num_bytes_5);
+        printf("second: %d bytes (%d units) p=%p \n",
+               num_bytes_5, num_bytes_5/unit_size, p5);
+        Mem_print();
+        // Free fifth allocated memory
+        printf("fifth free of over 2 pages p=%p \n", p5);
+        Mem_free(p5);
+        Mem_print();
+        // Free fourth allocated memory
+        printf("fourth free of 1/2 of a page p=%p \n", p4);
+        Mem_free(p4);
+        Mem_print();
+        printf("unit driver 4 has returned all memory to free list\n");
+        Mem_print();
+        Mem_stats();
+        printf("\n----- End unit test driver 4 -----\n");
+    }
+        // Free 2 blocks with a reserved hole in the middle
+    else if (unit_driver == 5)
+    {
+        printf("\n----- Begin unit driver 5 -----\n");
+        int unit_size = SIZEOF_CHUNK_T;
+        int units_in_first_page = PAGESIZE/unit_size;
+        assert(units_in_first_page * unit_size == PAGESIZE);
+        printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
+               units_in_first_page, unit_size);
+        int *p1, *p2, *p3;
+        int num_bytes_1, num_bytes_2, num_bytes_3;
+        // allocate 1st pointer to 1/8 of a page
+        num_bytes_1 = (units_in_first_page/8)*unit_size;
+        p1 = (int *) Mem_alloc(num_bytes_1);
+        // allocate for 2nd pointer to 1/6 of a page
+        num_bytes_2 = (units_in_first_page/6)*unit_size;
+        p2 = (int *) Mem_alloc(num_bytes_2);
+        // allocate for 3rd pointer to 1/8 of a page
+        num_bytes_3 = (units_in_first_page/8)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        Mem_print();
+        printf("\nHere is the free list with all memeory allocated\n");
+        // next put the memory back into the free list:
+        printf("first free of 1/8 of a page p=%p \n", p1);
+        Mem_free(p1);
+        printf("third free of 1/6 of a page p=%p \n", p3);
+        Mem_free(p3);
+        Mem_print();
+        printf("\nNotice the hole in free list where p2 has been allocated\n\n\n");
+        printf("second free of 1/8 of a page p=%p \n", p2);
+        Mem_free(p2);
+
+        printf("unit driver 5 has returned all memory to free list\n");
+        Mem_print();
+        Mem_stats();
+        printf("\n----- End unit test driver 5 -----\n");
+    }
+        // Check that coalescing works in a single page
+    else if (unit_driver == 6)
+    {
+        printf("\n----- Begin unit driver 6 -----\n");
+        int unit_size = SIZEOF_CHUNK_T;
+        int units_in_first_page = PAGESIZE/unit_size;
+        assert(units_in_first_page * unit_size == PAGESIZE);
+        printf("There are %d units per page, and the size of chunk_t is %d bytes\n",
+               units_in_first_page, unit_size);
+        int *p1, *p2, *p3;
+        int num_bytes_1, num_bytes_2, num_bytes_3;
+        // allocate 1st pointer to 1/8 of a page
+        num_bytes_1 = (units_in_first_page/8)*unit_size;
+        p1 = (int *) Mem_alloc(num_bytes_1);
+        // allocate for 2nd pointer to 1/6 of a page
+        num_bytes_2 = (units_in_first_page/6)*unit_size;
+        p2 = (int *) Mem_alloc(num_bytes_2);
+        // allocate for 3rd pointer to 1/8 of a page
+        num_bytes_3 = (units_in_first_page/8)*unit_size;
+        p3 = (int *) Mem_alloc(num_bytes_3);
+        Mem_print();
+        // next put the memory back into the free list:
+        printf("\n Free list before any memory is freed.\n");
+        Mem_stats();
+        printf("second free of middle of page p=%p \n", p2);
+        Mem_free(p2);
+        printf("\n Free list after middle block is freed.\n");
+        Mem_stats();
+        printf("third free of end of page p=%p \n", p3);
+        Mem_free(p3);
+        printf("\n Free list after end block is freed and coalesced.\n");
+        Mem_stats();
+        printf("first free of beginning of page p=%p \n", p1);
+        Mem_free(p1);
+
+        printf("unit driver 6 has returned all memory to free list\n");
+        Mem_print();
+        Mem_stats();
+        printf("\n----- End unit test driver 6 -----\n");
+    }
+    /*else if (unit_driver == 7)
+    {
+        test1();
+    } */
 
     // add your unit test drivers here to test for special cases such as
     //   -- request the number of bytes that matches a whole page, and a 
