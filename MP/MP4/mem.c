@@ -16,7 +16,6 @@
  *              valid input that will not deliberately break the lab4.c file.
  *
  * Bugs: None.
- *
  */
 
 #include <stdlib.h>
@@ -163,10 +162,18 @@ void Mem_free(void *return_ptr) {
  * Lastly, for WORST_FIT we will look for the largest amount of memory to fulfill our request. In all cases, if we don't
  * have enough memory we call morecore which asks the operating system nicely for more memory using magic.
  *
+ * Inputs:
+ *  int nbytes: An integer value containing the number of bytes we need in memory.
  *
+ *  Return: A pointer to the memory block that we allocated for the user (in size nbytes).
+ *
+ *  Structures Modified:
+ *      Our free memory pool has shrunk and the occupied memory has grown.
  *
  * A great guide on how to write this function can be found here:
  * https://danluu.com/malloc-tutorial/
+ * The guide above was based on the following tutorial which also seems pretty good:
+ * https://web.archive.org/web/20171014020821/http://www.inf.udec.cl/~leo/Malloc_tutorial.pdf
 */
 void *Mem_alloc(int nbytes) {
     assert(nbytes > 0); // Ensure nbytes is valid
@@ -218,6 +225,22 @@ void *Mem_alloc(int nbytes) {
     return (block + 1); // Point to next free block
 }
 
+/* The function findMem was designed to determine if we have a memory block that is available based on the user's
+ * criteria.
+ *
+ * Inputs:
+ *  chunk_t * start: A constant pointer to the start of our list
+ *  chunk_t * pos_ptr: A rover style pointer for us to manipulate and move around (our return value too)
+ *  long rmv_size: The size of memory we need to allocate
+ *  const long size: The size of our free memory
+ *
+ *  Return:
+ *      Even though the return value is void we will be looking at the pos_ptr in the caller function and using the final
+ *      value in logical checks. If the value is NULL then we were not able to find a memory block big enough, otherwise
+ *      we were.
+ *
+ * Structures Modified: N/A
+ */
 void findMem (chunk_t * start, chunk_t * pos_ptr, long rmv_size, const long size) {
     switch(SearchPolicy) { // We need to determine if we have a big enough block for the specified search policy
 
@@ -260,7 +283,13 @@ void findMem (chunk_t * start, chunk_t * pos_ptr, long rmv_size, const long size
     return;
 }
 
-/* prints stats about the current free list
+/* The function Mem_stats prints stats about the current free list.
+ *
+ * Inputs: N/A
+ *
+ * Returns: N/A
+ *
+ * Structures Modified: None
  *
  * -- number of items in the linked list including dummy item
  * -- min, max, and average size of each item (in bytes)
@@ -269,38 +298,26 @@ void findMem (chunk_t * start, chunk_t * pos_ptr, long rmv_size, const long size
  *
  * A message is printed if all the memory is in the free list
  */
-void Mem_stats(void)
-{
-    /* TODO calculate the latest stats and put them in the stats struct */
+void Mem_stats(void) {
+    chunk_t *ptr = Dummy.next;
+    int num = 1, min = ptr->size, max = ptr->size, tot = 0, flag = FALSE;
 
-    // Set all values according to the first node
-    chunk_t *search_pointer = Dummy.next;
-    stats.numItems = 1;
-    stats.min = search_pointer->size;
-    stats.max = search_pointer->size;
-    stats.totalBytes = 0;
-    // Iterate through all nodes and find values in units of chunks
-    while (search_pointer != &Dummy)
-    {
-        stats.numItems++;
-        if (search_pointer->size < stats.min)
-        {
-            stats.min = search_pointer->size;
-        }
-        else if (search_pointer->size > stats.max)
-        {
-            stats.max = search_pointer->size;
-        }
-        stats.totalBytes += (search_pointer->size + 1);
-        search_pointer = search_pointer->next;
+    if (ptr == &Dummy) {num = 1; flag = TRUE;}
+
+    while (ptr != &Dummy && flag == FALSE) {
+        num++;
+        min = ptr->size < min ? ptr->size : min;
+        max = ptr->size > max ? ptr->size : max;
+        tot += (ptr->size + 1);
+        ptr = ptr->next;
     }
-    // Convert from chunks to bytes
-    stats.min *= SIZEOF_CHUNK_T;
-    stats.max *= SIZEOF_CHUNK_T;
-    stats.totalBytes *= SIZEOF_CHUNK_T;
-    // Calculate average size
-    stats.average = stats.totalBytes / stats.numItems;
-    
+
+    stats.numItems = num;
+    stats.min = min * SIZEOF_CHUNK_T;
+    stats.max = max * SIZEOF_CHUNK_T;
+    stats.average = (tot * SIZEOF_CHUNK_T) / stats.numItems;
+    stats.totalBytes = tot * SIZEOF_CHUNK_T;
+
     /* ======= DO NOT MODIFY FROM HERE TO END OF Mem_stats() ======= */
     printf("\n\t\tMP4 Heap Memory Statistics\n"
             "----------------------------------------------------\n\n"
@@ -319,7 +336,13 @@ void Mem_stats(void)
             : "heap is in-use -- leaks are possible\n");
 }
 
-/* print table of memory in free list 
+/* The function Mem_print prints a table of memory in free list.
+ *
+ * Inputs: N/A
+ *
+ * Returns: N/A
+ *
+ * Structures Modified: N/A
  *
  * The print should include the dummy item in the list 
  */
