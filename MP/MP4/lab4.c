@@ -1,8 +1,8 @@
 /* lab4.c
- * Prof. Calhoun          <<-- updates required
- * jonccal
+ * Aaron Bruner
+ * ajbrune
  * ECE 2230 Spring 2021
- * MP3
+ * MP4
  *
  * Purpose:
  * --------
@@ -27,10 +27,7 @@
  * 
  * -u 0      Tests one allocation for 16 bytes
  * -u 1      Tests 4 allocations including a new page
- *           The student must update this driver to match the details of
- *           his or her design.
- *
- * * -u 2		 Tests request for a whole page and one unit smaller and larger
+ * -u 2		 Tests request for a whole page and one unit smaller and larger
  *			 than a page.
  * -u 3		 Tests requests for large chunks of memory that require several
  *			 pages to fulfill.
@@ -415,10 +412,6 @@ int main(int argc, char **argv)
         Mem_stats();
         printf("\n----- End unit test driver 6 -----\n");
     }
-    /*else if (unit_driver == 7)
-    {
-        test1();
-    } */
 
     // add your unit test drivers here to test for special cases such as
     //   -- request the number of bytes that matches a whole page, and a 
