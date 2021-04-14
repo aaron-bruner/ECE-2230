@@ -3,107 +3,83 @@ Worst-fit search policy starting at head without coalescing
 
 ----- Begin unit driver 5 -----
 There are 256 units per page, and the size of chunk_t is 16 bytes
-first: 1008 bytes (63 units) p=0x24cc010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cc400 <-- dummy
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-second: 496 bytes (31 units) p=0x24cd010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cd200 <-- dummy
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-first free: p1 -> p=0x24cc010 
-second free: p2 -> p=0x24cd010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cd000 <-- dummy
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-third: 4080 bytes (255 units) p=0x24ce010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cd000 <-- dummy
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-fourth: 800 bytes (50 units) p=0x24cf010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cf330 <-- dummy
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-third free: p3 -> p=0x24ce010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24ce000 <-- dummy
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-fifth: 2032 bytes (127 units) p=0x24d0010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24d0800 <-- dummy
-p=0x24d0800, size=127, end=0x24d0ff0, next=0x24ce000 
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-fourth free: p4 -> p=0x24cf010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24cf000 <-- dummy
-p=0x24cf000, size=50, end=0x24cf320, next=0x24d0800 
-p=0x24d0800, size=127, end=0x24d0ff0, next=0x24ce000 
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-fifth free: p5 -> p=0x24d0010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24d0000 <-- dummy
-p=0x24d0000, size=127, end=0x24d07f0, next=0x24cf000 
-p=0x24cf000, size=50, end=0x24cf320, next=0x24d0800 
-p=0x24d0800, size=127, end=0x24d0ff0, next=0x24ce000 
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
-sixth: 576 bytes (36 units) p=0x24d1010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x24d1250 <-- dummy
-p=0x24d1250, size=218, end=0x24d1ff0, next=0x24d0000 
-p=0x24d0000, size=127, end=0x24d07f0, next=0x24cf000 
-p=0x24cf000, size=50, end=0x24cf320, next=0x24d0800 
-p=0x24d0800, size=127, end=0x24d0ff0, next=0x24ce000 
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
+first: 1008 bytes (63 units) p=0x23b0010 
+p=0x23b0400, size=191, end=0x23b0ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0400 <-- dummy
+second: 496 bytes (31 units) p=0x23b0410 
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+first free: p1 -> p=0x23b0010 
+second free: p2 -> p=0x23b0410 
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0000 
+p=0x23b0000, size=63, end=0x23b03f0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+third: 4080 bytes (255 units) p=0x23b1010 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0000 
+p=0x23b0000, size=63, end=0x23b03f0, next=0x6050c0 
+fourth: 800 bytes (50 units) p=0x23b0010 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+third free: p3 -> p=0x23b1010 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1000 
+p=0x23b1000, size=255, end=0x23b1ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+fifth: 2032 bytes (127 units) p=0x23b1010 
+p=0x23b1800, size=127, end=0x23b1ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1800 
+fourth free: p4 -> p=0x23b0010 
+p=0x23b1800, size=127, end=0x23b1ff0, next=0x23b0000 
+p=0x23b0000, size=50, end=0x23b0320, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1800 
+fifth free: p5 -> p=0x23b1010 
+p=0x23b1800, size=127, end=0x23b1ff0, next=0x23b1000 
+p=0x23b1000, size=127, end=0x23b17f0, next=0x23b0000 
+p=0x23b0000, size=50, end=0x23b0320, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1800 
+sixth: 576 bytes (36 units) p=0x23b0010 
+p=0x23b0250, size=13, end=0x23b0320, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1800 
+p=0x23b1800, size=127, end=0x23b1ff0, next=0x23b1000 
+p=0x23b1000, size=127, end=0x23b17f0, next=0x23b0250 
 unit driver 5 has returned all memory to free list
-p=0x6050c0, size=0, end=0x6050c0, next=0x24d1000 <-- dummy
-p=0x24d1000, size=36, end=0x24d1240, next=0x24d1250 
-p=0x24d1250, size=218, end=0x24d1ff0, next=0x24d0000 
-p=0x24d0000, size=127, end=0x24d07f0, next=0x24cf000 
-p=0x24cf000, size=50, end=0x24cf320, next=0x24d0800 
-p=0x24d0800, size=127, end=0x24d0ff0, next=0x24ce000 
-p=0x24ce000, size=255, end=0x24ceff0, next=0x24cf330 
-p=0x24cf330, size=204, end=0x24cfff0, next=0x24cd000 
-p=0x24cd000, size=31, end=0x24cd1f0, next=0x24cc000 
-p=0x24cc000, size=63, end=0x24cc3f0, next=0x24cd200 
-p=0x24cd200, size=223, end=0x24cdff0, next=0x24cc400 
-p=0x24cc400, size=191, end=0x24ccff0, next=0x6050c0 
+p=0x23b0250, size=13, end=0x23b0320, next=0x23b0000 
+p=0x23b0000, size=36, end=0x23b0240, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x23b0600 <-- dummy
+p=0x23b0600, size=159, end=0x23b0ff0, next=0x23b0400 
+p=0x23b0400, size=31, end=0x23b05f0, next=0x23b0330 
+p=0x23b0330, size=12, end=0x23b03f0, next=0x23b1800 
+p=0x23b1800, size=127, end=0x23b1ff0, next=0x23b1000 
+p=0x23b1000, size=127, end=0x23b17f0, next=0x23b0250 
 
 		MP4 Heap Memory Statistics
 ----------------------------------------------------
 
-	Number of blocks in free list: 12
-	Min: 496
-	Max: 4080
-	Average: 2048
-	Total bytes in free list: 24576
-	Number of sbrk calls: 6
-	Number of requested pages: 6
+	Number of blocks in free list: 8
+	Min: 192
+	Max: 2544
+	Average: 1024
+	Total bytes in free list: 8192
+	Number of sbrk calls: 2
+	Number of requested pages: 2
 	Heap status:  all memory is in the heap -- no leaks are possible
 
 

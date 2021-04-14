@@ -19,8 +19,8 @@ Free list after first allocation
 	Number of requested pages: 1
 	Heap status:  heap is in-use -- leaks are possible
 
-p=0x6050c0, size=0, end=0x6050c0, next=0x1f5b020 <-- dummy
-p=0x1f5b020, size=253, end=0x1f5bff0, next=0x6050c0 
+p=0xb74020, size=253, end=0xb74ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xb74020 <-- dummy
 
 Free list after first free
 unit driver 0 has returned all memory to free list
@@ -37,8 +37,8 @@ unit driver 0 has returned all memory to free list
 	Number of requested pages: 1
 	Heap status:  all memory is in the heap -- no leaks are possible
 
-p=0x6050c0, size=0, end=0x6050c0, next=0x1f5b000 <-- dummy
-p=0x1f5b000, size=1, end=0x1f5b010, next=0x1f5b020 
-p=0x1f5b020, size=253, end=0x1f5bff0, next=0x6050c0 
+p=0xb74020, size=253, end=0xb74ff0, next=0xb74000 
+p=0xb74000, size=1, end=0xb74010, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0xb74020 <-- dummy
 
 ----- End unit driver 0 -----

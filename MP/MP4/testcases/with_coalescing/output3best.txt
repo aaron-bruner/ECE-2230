@@ -3,47 +3,47 @@ Best-fit search policy starting at head using coalescing
 
 ----- Begin unit driver 3 -----
 There are 256 units per page, and the size of chunk_t is 16 bytes
-first: 62592 bytes (3912 units) p=0x76f010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x77e490 <-- dummy
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-second: 11744 bytes (734 units) p=0x77f010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x781df0 <-- dummy
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-second: 37024 bytes (2314 units) p=0x782010 
-p=0x6050c0, size=0, end=0x6050c0, next=0x78b0b0 <-- dummy
-p=0x78b0b0, size=244, end=0x78bff0, next=0x781df0 
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-first free of 15 pages plus 72 p=0x76f010 
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x76f000 <-- dummy
-p=0x76f000, size=3912, end=0x77e480, next=0x78b0b0 
-p=0x78b0b0, size=244, end=0x78bff0, next=0x781df0 
-second free of 3 pages minus 34 p=0x77f010 
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x76f000 <-- dummy
-p=0x76f000, size=3912, end=0x77e480, next=0x77f000 
-p=0x77f000, size=734, end=0x781de0, next=0x78b0b0 
-p=0x78b0b0, size=244, end=0x78bff0, next=0x781df0 
-third free of 9 pages plus 10 p=0x782010 
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x76f000 <-- dummy
-p=0x76f000, size=3912, end=0x77e480, next=0x77f000 
-p=0x77f000, size=734, end=0x781de0, next=0x782000 
-p=0x782000, size=2314, end=0x78b0a0, next=0x78b0b0 
-p=0x78b0b0, size=244, end=0x78bff0, next=0x781df0 
+first: 62592 bytes (3912 units) p=0x1e03010 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e12490 <-- dummy
+second: 11744 bytes (734 units) p=0x1e13010 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e15df0 <-- dummy
+second: 37024 bytes (2314 units) p=0x1e16010 
+p=0x1e1f0b0, size=244, end=0x1e1fff0, next=0x1e15df0 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e1f0b0 <-- dummy
+first free of 15 pages plus 72 p=0x1e03010 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e03000 <-- dummy
+p=0x1e03000, size=3912, end=0x1e12480, next=0x1e1f0b0 
+p=0x1e1f0b0, size=244, end=0x1e1fff0, next=0x1e15df0 
+second free of 3 pages minus 34 p=0x1e13010 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e03000 <-- dummy
+p=0x1e03000, size=3912, end=0x1e12480, next=0x1e13000 
+p=0x1e13000, size=734, end=0x1e15de0, next=0x1e1f0b0 
+p=0x1e1f0b0, size=244, end=0x1e1fff0, next=0x1e15df0 
+third free of 9 pages plus 10 p=0x1e16010 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e03000 <-- dummy
+p=0x1e03000, size=3912, end=0x1e12480, next=0x1e13000 
+p=0x1e13000, size=734, end=0x1e15de0, next=0x1e16000 
+p=0x1e16000, size=2314, end=0x1e1f0a0, next=0x1e1f0b0 
+p=0x1e1f0b0, size=244, end=0x1e1fff0, next=0x1e15df0 
 unit driver 3 has returned all memory to free list
-p=0x781df0, size=32, end=0x781ff0, next=0x77e490 
-p=0x77e490, size=182, end=0x77eff0, next=0x6050c0 
-p=0x6050c0, size=0, end=0x6050c0, next=0x76f000 <-- dummy
-p=0x76f000, size=3912, end=0x77e480, next=0x77f000 
-p=0x77f000, size=734, end=0x781de0, next=0x782000 
-p=0x782000, size=2314, end=0x78b0a0, next=0x78b0b0 
-p=0x78b0b0, size=244, end=0x78bff0, next=0x781df0 
+p=0x1e15df0, size=32, end=0x1e15ff0, next=0x1e12490 
+p=0x1e12490, size=182, end=0x1e12ff0, next=0x6050c0 
+p=0x6050c0, size=0, end=0x6050c0, next=0x1e03000 <-- dummy
+p=0x1e03000, size=3912, end=0x1e12480, next=0x1e13000 
+p=0x1e13000, size=734, end=0x1e15de0, next=0x1e16000 
+p=0x1e16000, size=2314, end=0x1e1f0a0, next=0x1e1f0b0 
+p=0x1e1f0b0, size=244, end=0x1e1fff0, next=0x1e15df0 
 
 		MP4 Heap Memory Statistics
 ----------------------------------------------------
