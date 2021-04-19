@@ -1,4 +1,4 @@
-/* bst.c 
+/* bst.c
  * Aaron Bruner
  * ajbrune@clemson.edu
  * ECE 2230 Spring 2021
@@ -31,17 +31,16 @@ int bst_debug_validate_rec(bst_node_t *N, int min, int max, int *count);
 int rec_height(bst_node_t *N);
 int children(bst_node_t *N);
 void pretty_print(bst_t *T);
-
-/// ------------------------------- ///
-///     COME BACK AND FIX THIS      ///
-/// ------------------------------- ///
 // My helper functions
-void recursive_bst_destruct(bst_node_t *N); // FIXED
-int recursive_bst_int_path_len(bst_node_t *N, int level); // FIXED
-bst_node_t* bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int policy); // FIXED
-bst_node_t* rotate_right(bst_node_t* node);
-bst_node_t* rotate_left(bst_node_t* node);
-int find_balance(bst_node_t* node);
+void recursive_bst_destruct(bst_node_t *N);
+int recursive_bst_int_path_len(bst_node_t *N, int level);
+bst_node_t* bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int policy);
+int getBalance(bst_node_t * node);
+int getHeight(bst_node_t * node);
+bst_node_t* rightRotate(bst_node_t* N);
+bst_node_t* leftRotate(bst_node_t* N);
+void heightUpdate(bst_node_t * y);
+
 
 /* The function bst_access was designed to be able to find the tree element that matches key and return the data that is
  *     stored in this node in the tree.
@@ -89,10 +88,10 @@ bst_t *bst_construct(int tree_policy)
         exit(5);
     }
     bst_t * T = malloc(sizeof(bst_t)); // Allocate memory for the head
-        if (T == NULL){ // This should never happen
-            printf("\n\n[ERROR] Malloc Failed in bst_construct\n\n");
-            exit(5);
-        }
+    if (T == NULL){ // This should never happen
+        printf("\n\n[ERROR] Malloc Failed in bst_construct\n\n");
+        exit(5);
+    }
     T->root = NULL; // Set integers to 0 and pointers to NULL
     T->size = 0;
     T->num_recent_rotations = 0;
@@ -169,7 +168,7 @@ int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
     T->num_recent_rotations = NumRotations;
 
 #ifdef VALIDATE
-      bst_debug_validate(T);
+    bst_debug_validate(T);
 #endif
 
     return return_val;
@@ -224,6 +223,7 @@ int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
  *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
  */
 bst_node_t *bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int policy) {
+    // BST insertion
     if ( N == NULL ) {
         bst_node_t *NewN = malloc(sizeof(bst_node_t)); // Create a new node if one does not exist
         NewN->data_ptr = elem_ptr;
@@ -232,109 +232,134 @@ bst_node_t *bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int p
         NewN->left = NULL;
         NewN->right = NULL;
         return NewN; // Return pointer to new node since we didn't have to put it in the right place.
-    } else if (key > N->key) N->right = bst_insert_node(N->right, key, elem_ptr, policy);
-      else N->left = bst_insert_node(N->left, key, elem_ptr, policy); // We need to find out where our new node goes
+    }
+    else if (key > N->key)
+        N->right = bst_insert_node(N->right, key, elem_ptr, policy);
+    else
+        N->left = bst_insert_node(N->left, key, elem_ptr, policy); // We cannot have equal keys in BST
 
-    N->height = children(N);
+    N->height = 1 + MYMAX(getHeight(N->left), getHeight(N->right));
 
     if (policy == AVL) {
-        int balance = rec_height(N);
-        if (balance > 1 && key < N->left->key) return rotate_right(N); // Left-Left
-        if (balance < -1 && key > N->right->key) return rotate_left(N); // Right-Right
+        int balance = getBalance(N);
+        if (balance > 1 && key < N->left->key) return rightRotate(N); // Left-Left
+        if (balance < -1 && key > N->right->key) return leftRotate(N); // Right-Right
         if (balance > 1 && key > N->left->key) {// Left-Right
-            N->left = rotate_left(N->left);
-            return rotate_right(N);
+            N->left = leftRotate(N->left);
+            return rightRotate(N);
         }
         if (balance < -1 && key < N->right->key) { // Right-Left
-            N->right = rotate_right(N->right);
-            return rotate_left(N);
+            N->right = rightRotate(N->right);
+            return leftRotate(N);
         }
     }
     return N;
 }
 
-///--------------------------------------------///
-///             Needs to be changed            ///
-///--------------------------------------------///
-/* AVL right rotation function. Takes node, its right child, and that child's
- * right child, and rotates so that the right child is the root and node is its
- * left child.
+/* The function getBalance was designed to determine the balance of the specific node we're looking at.
  *
- * node - the node that violates the AVL property
+ * Inputs:
+ *  bst_node_t * N: The node in which we want to check both the left and right children
  *
- * Returns: a pointer to the root node after the rotation.
+ *  Return:
+ *      An integer value which is the difference between the height of the right subtree and left subtree.
+ *
+ * Structures Modified: N/A
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
  */
-bst_node_t* rotate_right(bst_node_t* A)
-{
-    NumRotations++;
-    // Rotate nodes (B is left child of A, becomes new root)
-    bst_node_t *B = A->left;
-    bst_node_t *temp = B->right;
-    B->right = A;
-    A->left = temp;
-    // Update height of A
-    int left_height, right_height;
-    if (A->left == NULL)
-        left_height = -1;
-    else
-        left_height = A->left->height;
-    if (A->right == NULL)
-        right_height = -1;
-    else
-        right_height = A->right->height;
-    A->height = 1 + MYMAX(left_height, right_height);
-    // Update height of B
-    if (B->left == NULL)
-        left_height = -1;
-    else
-        left_height = B->left->height;
-    if (B->right == NULL)
-        right_height = -1;
-    else
-        right_height = B->right->height;
-    B->height = 1 + MYMAX(left_height, right_height);
-    return B;
+int getBalance(bst_node_t * N) {
+    if ( N == NULL ) return 0;
+    return (getHeight(N->left) - getHeight(N->right));
 }
-/* AVL left rotation function. Takes node, its left child, and that child's
- * left child, and rotates so that the left child is the root and node is its
- * right child.
+
+/* The function getHeight was designed to determine the height at the specific node. We already store
+ * this value in N->height so all we need to do is return it.
  *
- * node - the node that violates the AVL property
+ * Inputs:
+ *  bst_node_t * N: The node in which we want to return the height
  *
- * Returns: a pointer to the root node after the rotation.
+ *  Return:
+ *      An integer value which is the height at that node
+ *
+ * Structures Modified: N/A
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
  */
-bst_node_t* rotate_left(bst_node_t* A)
-{
-    NumRotations++;
-    // Rotate nodes (B is right child of A, becomes new root)
-    bst_node_t *B = A->right;
-    bst_node_t *temp = B->left;
-    B->left = A;
-    A->right = temp;
-    // Update height of A
-    int left_height, right_height;
-    if (A->left == NULL)
-        left_height = -1;
-    else
-        left_height = A->left->height;
-    if (A->right == NULL)
-        right_height = -1;
-    else
-        right_height = A->right->height;
-    A->height = 1 + MYMAX(left_height, right_height);
-    // Update height of B
-    if (B->left == NULL)
-        left_height = -1;
-    else
-        left_height = B->left->height;
-    if (B->right == NULL)
-        right_height = -1;
-    else
-        right_height = B->right->height;
-    B->height = 1 + MYMAX(left_height, right_height);
-    return B;
+int getHeight(bst_node_t * N) {
+    if ( N == NULL ) return -1;
+    return N->height;
 }
-///-------------------------------------------------///
+
+/* The function rightRotate was designed to right rotate a subtree rooted at y.
+ *
+ * Inputs:
+ *  bst_node_t * y: The node where we're rotating
+ *
+ *  Return:
+ *      A pointer to the new root node after we finish rotating
+ *
+ * Structures Modified:
+ *  bst_node_t * A: The function will undergo a right rotation which will rearrange the position of nodes.
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+ */
+bst_node_t* rightRotate(bst_node_t* y) {
+    NumRotations++;
+    // Rotate nodes (B is left child of y, becomes new root)
+    bst_node_t *x = y->left;
+    bst_node_t *temp = x->right;
+    x->right = y;
+    y->left = temp;
+    heightUpdate(x);
+    heightUpdate(y);
+    return x;
+}
+/* The function leftRotate was designed to left rotate a subtree rooted at y.
+ *
+ * Inputs:
+ *  bst_node_t * y: The node where we're rotating
+ *
+ *  Return:
+ *      A pointer to the new root node after we finish rotating
+ *
+ * Structures Modified:
+ *  bst_node_t * A: The function will undergo a left rotation which will rearrange the position of nodes.
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+ */
+bst_node_t* leftRotate(bst_node_t* y) {
+    NumRotations++;
+    // Rotate nodes (x is right child of y, becomes new root)
+    bst_node_t *x = y->right;
+    bst_node_t *temp = x->left;
+    x->left = y;
+    y->right = temp;
+    heightUpdate(y);
+    heightUpdate(x);
+    return x;
+}
+
+/* The function heightUpdate was designed to ensure the height of our tree was correct during the rotation process.
+ *
+ * Inputs:
+ *  bst_node_t * N: The node we need to update the height of.
+ *
+ *  Return: N/A
+ *
+ * Structures Modified:
+ *  bst_node_t * N: The height variable in the structure will be updated.
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+ */
+void heightUpdate (bst_node_t * N) {
+    int left, right;
+
+    left = N->left == NULL ? -1 : N->left->height;
+    right = N->right == NULL ? -1 : N->right->height;
+
+    N->height = 1 + MYMAX(left, right);
+}
 
 /* The function bst_remove was designed to remove the item in the tree with the matching key.
  *
@@ -355,14 +380,14 @@ data_t bst_remove(bst_t *T, bst_key_t key)
     CompCalls = 0;
     NumRotations = 0;
     if (T->policy == AVL)
-	    dp = NULL; /*TODO: AVL remove */
+        dp = NULL; /*TODO: AVL remove */
     else
-	    dp = NULL; /*TODO: BST remove */
+        dp = NULL; /*TODO: BST remove */
 
     /*TODO: update tree stats*/
 
 #ifdef VALIDATE
-        bst_debug_validate(T);
+    bst_debug_validate(T);
 #endif
     return dp;
 }
@@ -401,9 +426,6 @@ int bst_key_comps(bst_t *T)
     return T->num_recent_key_comparisons;
 }
 
-///-----------------------------------------------------///
-///             COME BACK AND LOOK AT THIS              ///
-///-----------------------------------------------------///
 /* The function bst_int_path_len was designed to determine the computed internal path length of the tree T.
  *
  * Inputs:
@@ -421,7 +443,6 @@ int bst_int_path_len(bst_t *T)
 {
     if (T == NULL) return 0;
 
-    //return 1 + (bst_int_path_len(T->left) + bst_int_path_len(T->right));
     return recursive_bst_int_path_len(T->root, 0);
 }
 
@@ -444,8 +465,8 @@ int recursive_bst_int_path_len(bst_node_t *N, int level) {
     if (N == NULL) return 0; // Base case for recursion & safety :)
 
     return recursive_bst_int_path_len(N->left, level+1) + // Find the path length of the left subtree
-            recursive_bst_int_path_len(N->right, level+1) + // Find the path length of the right subtree
-             level;
+           recursive_bst_int_path_len(N->right, level+1) + // Find the path length of the right subtree
+           level;
 }
 
 /* The function bst_rotations was designed to determine the number of rotations from the last remove.
@@ -479,7 +500,7 @@ void bst_debug_print_tree(bst_t *T)
     ugly_print(T->root, 0, T->policy);//XTRA
     printf("\n");
     if (T->size < 64)
-	pretty_print(T);
+        pretty_print(T);
 }
 
 /* The function ugly_print was designed to print the binary tree in a manner which is ugly. lol...
@@ -499,11 +520,11 @@ void ugly_print(bst_node_t *N, int level, int policy)
     if (N == NULL) return;
     ugly_print(N->right, level+1, policy);
     if (policy == AVL) {
-	    for (i = 0; i<level; i++) printf("       ");
-	        printf("%5d-%d\n", N->key, N->height);
+        for (i = 0; i<level; i++) printf("       ");
+        printf("%5d-%d\n", N->key, N->height);
     } else {
-	    for (i = 0; i<level; i++) printf("     ");
-	        printf("%5d\n", N->key);
+        for (i = 0; i<level; i++) printf("     ");
+        printf("%5d\n", N->key);
     }
     ugly_print(N->left, level+1, policy);
 }
@@ -526,7 +547,7 @@ void bst_debug_validate(bst_t *T)
     assert(bst_debug_validate_rec(T->root, INT_MIN, INT_MAX, &size) == TRUE);
     assert(size == T->size);
     if (T->policy == AVL)
-	    rec_height(T->root);
+        rec_height(T->root);
 }
 
 /* The function bst_debug_validate_rec was designed to validate a tree based on node position.
@@ -551,7 +572,7 @@ int bst_debug_validate_rec(bst_node_t *N, int min, int max, int *count)
     assert(N->data_ptr != NULL);
     *count += 1;
     return bst_debug_validate_rec(N->left, min, N->key, count) &&
-        bst_debug_validate_rec(N->right, N->key, max, count);
+           bst_debug_validate_rec(N->right, N->key, max, count);
 }
 
 /* The function rec_height was designed to verify the AVL tree properties.
@@ -566,7 +587,7 @@ int bst_debug_validate_rec(bst_node_t *N, int min, int max, int *count)
 int rec_height(bst_node_t *N)
 {
     if (N == NULL)
-	    return 0;
+        return 0;
     int lh = rec_height(N->left);
     int rh = rec_height(N->right);
     int lean = lh - rh;
@@ -602,9 +623,9 @@ int children(bst_node_t *N)
 void pretty_print(bst_t *T)
 {
     typedef struct queue_tag {
-	    bst_node_t *N;
-	    int level;
-	    int list_sum;
+        bst_node_t *N;
+        int level;
+        int list_sum;
     } queue_t;
 
     queue_t Q[T->size];
@@ -621,61 +642,61 @@ void pretty_print(bst_t *T)
     q_tail++;
     for (i = 0; i < T->size; i++)
     {
-	assert(q_head < T->size);
-	N = Q[q_head].N;
-	if (Q[q_head].level > current_level) {
-	    printf("\n");
-	    current_level++;
-	    col_cnt = 0;
-	}
-	int left_ch = children(N->left);
-	int my_pos = 1 + left_ch + Q[q_head].list_sum;
-	int left_child_pos = my_pos;
-	if (N->left != NULL)
-	    left_child_pos = 1 + Q[q_head].list_sum + children(N->left->left);
-	int right_child_pos = my_pos;
-	if (N->right != NULL)
-	    right_child_pos = my_pos + 1 + children(N->right->left);
-	for (j = col_cnt + 1; j <= right_child_pos; j++)
-	{
-	    if (j == my_pos)
-		if (left_child_pos < my_pos)
-		    if (N->key < 10)
-			printf("--%d", N->key);
-		    else if (N->key < 100)
-			printf("-%d", N->key);
-		    else
-			printf("%d", N->key);
-		else
-		    printf("%3d", N->key);
-	    else if (j == left_child_pos)
-		//printf("  |");
-		printf("  /");
-	    else if (j > left_child_pos && j < my_pos)
-		printf("---");
-	    else if (j > my_pos && j < right_child_pos)
-		printf("---");
-	    else if (j == right_child_pos)
-		//printf("--|");
-		printf("-\\ ");
-	    else
-		printf("   ");
-	}
-	col_cnt = right_child_pos;
+        assert(q_head < T->size);
+        N = Q[q_head].N;
+        if (Q[q_head].level > current_level) {
+            printf("\n");
+            current_level++;
+            col_cnt = 0;
+        }
+        int left_ch = children(N->left);
+        int my_pos = 1 + left_ch + Q[q_head].list_sum;
+        int left_child_pos = my_pos;
+        if (N->left != NULL)
+            left_child_pos = 1 + Q[q_head].list_sum + children(N->left->left);
+        int right_child_pos = my_pos;
+        if (N->right != NULL)
+            right_child_pos = my_pos + 1 + children(N->right->left);
+        for (j = col_cnt + 1; j <= right_child_pos; j++)
+        {
+            if (j == my_pos)
+                if (left_child_pos < my_pos)
+                    if (N->key < 10)
+                        printf("--%d", N->key);
+                    else if (N->key < 100)
+                        printf("-%d", N->key);
+                    else
+                        printf("%d", N->key);
+                else
+                    printf("%3d", N->key);
+            else if (j == left_child_pos)
+                //printf("  |");
+                printf("  /");
+            else if (j > left_child_pos && j < my_pos)
+                printf("---");
+            else if (j > my_pos && j < right_child_pos)
+                printf("---");
+            else if (j == right_child_pos)
+                //printf("--|");
+                printf("-\\ ");
+            else
+                printf("   ");
+        }
+        col_cnt = right_child_pos;
 
-	if (N->left != NULL) {
-	    Q[q_tail].N = N->left;
-	    Q[q_tail].level = Q[q_head].level + 1;
-	    Q[q_tail].list_sum = Q[q_head].list_sum;
-	    q_tail++;
-	}
-	if (N->right != NULL) {
-	    Q[q_tail].N = N->right;
-	    Q[q_tail].level = Q[q_head].level + 1;
-	    Q[q_tail].list_sum = Q[q_head].list_sum + left_ch + 1;
-	    q_tail++;
-	}
-	q_head++;
+        if (N->left != NULL) {
+            Q[q_tail].N = N->left;
+            Q[q_tail].level = Q[q_head].level + 1;
+            Q[q_tail].list_sum = Q[q_head].list_sum;
+            q_tail++;
+        }
+        if (N->right != NULL) {
+            Q[q_tail].N = N->right;
+            Q[q_tail].level = Q[q_head].level + 1;
+            Q[q_tail].list_sum = Q[q_head].list_sum + left_ch + 1;
+            q_tail++;
+        }
+        q_head++;
     }
     printf("\n");
 }

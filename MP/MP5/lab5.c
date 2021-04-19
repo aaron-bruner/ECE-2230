@@ -1,19 +1,19 @@
-/* lab5.c 
+/* lab5.c
  * Lab5: Binary Search Trees
  * ECE 2230, Spring 2021
  *
  * This file contains drivers to test the BST package.
  *
- * The unit driver builds a custom tree and removes selected keys 
+ * The unit driver builds a custom tree and removes selected keys
  *   -u 1:  run the unit driver with a custom tree
  *
  * There are three drivers to build a tree using bst_insert and then access
  * keys in the tree using bst_access.  Use
  *   -o run the driver with an optimal tree
  *   -r run the driver with a randomly generated tree
- *   -p run the driver with a poor order for inserting keys 
+ *   -p run the driver with a poor order for inserting keys
  *   -w to set the number of levels in the initial tree
- *   -t to set the number of access trials 
+ *   -t to set the number of access trials
  *
  * Another test driver tests random inserts and deletes.  This driver builds
  * an initial tree that is random, and then performs insertions and deletions
@@ -72,44 +72,44 @@ int main(int argc, char **argv)
     /* ----- build custom tree and remove nodes ----- */
     if (UnitNumber == 0)                        /* enabled with -u flag */
     {
-	// example test to remove leaves, 12 and 20, then internal nodes
-	// 8, 24, 40 with one child, then 16, 48 with two children
-	const int ins[] = {32,16,8,24,4,12,20,28,48,40,56,44,42,46};
-	const int del[] = {12,20,8,24,40,16,48}; 
+        // example test to remove leaves, 12 and 20, then internal nodes
+        // 8, 24, 40 with one child, then 16, 48 with two children
+        const int ins[] = {32,16,8,24,4,12,20,28,48,40,56,44,42,46};
+        const int del[] = {12,20,8,24,40,16,48};
         unitDriver(ins, sizeof ins / sizeof(int),
-		   del, sizeof del / sizeof(int));
+                   del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 1)
     {
-	// example tests: (48) is missing its right-left child and
-	//                (16) is missing its left-right child
-	const int ins1[] = {32,16,48,8,24,40,56,4,20,28,36,44,60};
-	const int del1[] = {16,48,32}; 
+        // example tests: (48) is missing its right-left child and
+        //                (16) is missing its left-right child
+        const int ins1[] = {32,16,48,8,24,40,56,4,20,28,36,44,60};
+        const int del1[] = {16,48,32};
         unitDriver(ins1, sizeof ins1 / sizeof(int),
-		   del1, sizeof del1 / sizeof(int));
+                   del1, sizeof del1 / sizeof(int));
 
-	// example tests: (16) is missing its right-left child and 
-	//                (48) is missing its left-right child
-	const int ins1b[] = {32,16,48,8,24,40,56,4,12,28,36,52,60};
-	const int del1b[] = {16,48,32}; 
+        // example tests: (16) is missing its right-left child and
+        //                (48) is missing its left-right child
+        const int ins1b[] = {32,16,48,8,24,40,56,4,12,28,36,52,60};
+        const int del1b[] = {16,48,32};
         unitDriver(ins1b, sizeof ins1b / sizeof(int),
-		   del1b, sizeof del1b / sizeof(int));
+                   del1b, sizeof del1b / sizeof(int));
     }
     if (UnitNumber == 2)
     {
-	// example deletion with many children
-	const int ins[] = {200,100,50,150,25,75,125,175,65,85,135,80,130,140,78,82};
-	const int del[] = {100,85,125}; 
+        // example deletion with many children
+        const int ins[] = {200,100,50,150,25,75,125,175,65,85,135,80,130,140,78,82};
+        const int del[] = {100,85,125};
         unitDriver(ins, sizeof ins / sizeof(int),
-		   del, sizeof del / sizeof(int));
+                   del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 3)
     {
-	// check replace for duplicate key
-	const int ins[] = {10, 10};
-	const int del[] = {10}; 
+        // check replace for duplicate key
+        const int ins[] = {10, 10};
+        const int del[] = {10};
         unitDriver(ins, sizeof ins / sizeof(int),
-		   del, sizeof del / sizeof(int));
+                   del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 4)
     {
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-/* driver to test deletion of keys from custom tree.  
+/* driver to test deletion of keys from custom tree.
  *
  * ins_keys - array with the list of keys to insert into the tree
  * num_inserts - number of keys to insert
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
  * num_deletes - number of keys to delete
  */
 void unitDriver(const int ins_keys[], const int num_inserts,
-	        const int del_keys[], const int num_deletes)
+                const int del_keys[], const int num_deletes)
 {
     int i;
     int *ip;
@@ -191,22 +191,22 @@ void unitDriver(const int ins_keys[], const int num_inserts,
     printf("Inserting %d items into tree\n", num_inserts);
     for (i = 0; i < num_inserts; i++) {
         ip = (int *) malloc(sizeof(int));
-        *ip = ins_keys[i]; 
+        *ip = ins_keys[i];
         bst_insert(del_tree, ins_keys[i], ip);
     }
-    
+
     printf("Created tree for testing removes\n");
     bst_debug_print_tree(del_tree);
-    
+
     printf("Removing %d items from tree\n", num_deletes);
     for (i = 0; i < num_deletes; i++) {
         printf(" -- Test (%d) about to remove key %d\n", i, del_keys[i]);
         dp = bst_remove(del_tree, del_keys[i]);
         bst_debug_print_tree(del_tree);
-	if (dp != NULL)
-	    assert(*(int *)dp == del_keys[i]);
-	else
-	    printf("\n\nFAILED to find the key in the tree ######\n");
+        if (dp != NULL)
+            assert(*(int *)dp == del_keys[i]);
+        else
+            printf("\n\nFAILED to find the key in the tree ######\n");
         free(dp);
     }
     /* remove and free all items from tree */
@@ -239,7 +239,7 @@ void accessDriver(int test_type)
 
     range_num_ints = pow(2, Levels);
 
-    /* build tree.  Key range is twice size of tree and each key 
+    /* build tree.  Key range is twice size of tree and each key
      * is either even or odd.
      */
     test_tree = bst_construct(SearchPolicy);
@@ -289,15 +289,15 @@ void accessDriver(int test_type)
         ipl = bst_int_path_len(test_tree);
         epl = ipl + 2 * size;
         printf("  After access exercise, time=%g, tree size=%d\n",
-                1000*((double)(end-start))/CLOCKS_PER_SEC, size);
+               1000*((double)(end-start))/CLOCKS_PER_SEC, size);
         if (suc_trials > 0)
-            printf("    Expect successful search=%g, measured=%g, trials=%d\n", 
-                    (2.0*ipl+size)/size,
-                    (double) suc_search/suc_trials, suc_trials);
+            printf("    Expect successful search=%g, measured=%g, trials=%d\n",
+                   (2.0*ipl+size)/size,
+                   (double) suc_search/suc_trials, suc_trials);
         if (unsuc_trials > 0)
-            printf("    Expect unsuccessful search=%g, measured=%g, trials=%d\n", 
-                    2.0*epl/(size+1),
-                    (double) unsuc_search/unsuc_trials, unsuc_trials);
+            printf("    Expect unsuccessful search=%g, measured=%g, trials=%d\n",
+                   2.0*epl/(size+1),
+                   (double) unsuc_search/unsuc_trials, unsuc_trials);
     }
 
     bst_debug_validate(test_tree);
@@ -336,10 +336,10 @@ void equilibriumDriver(void)
     ipl = bst_int_path_len(test_tree);
     epl = ipl + 2 * size;
     printf("  Initial random tree size=%d\n", size);
-    printf("  Expect successful search for initial tree=%g\n", 
-            (2.0*ipl+size)/size);
-    printf("  Expect unsuccessful search for initial tree=%g\n", 
-            2.0*epl/(size+1));
+    printf("  Expect successful search for initial tree=%g\n",
+           (2.0*ipl+size)/size);
+    printf("  Expect unsuccessful search for initial tree=%g\n",
+           2.0*epl/(size+1));
     if (Verbose)
         bst_debug_print_tree(test_tree);
 
@@ -364,8 +364,8 @@ void equilibriumDriver(void)
                 suc_trials++;
                 if (Verbose) printf(" replaced\n");
             }
-	    //if (Verbose && SearchPolicy == AVL)
-		//printf("  rotations %d\n", bst_rotations(test_tree));
+            //if (Verbose && SearchPolicy == AVL)
+            //printf("  rotations %d\n", bst_rotations(test_tree));
         } else {
             dp = bst_remove(test_tree, key);
             if (dp == NULL) {
@@ -380,8 +380,8 @@ void equilibriumDriver(void)
                 assert(*(int *)dp == -key);
                 free(dp);
             }
-	    //if (Verbose && SearchPolicy == AVL)
-		//printf("  rotations %d\n", bst_rotations(test_tree));
+            //if (Verbose && SearchPolicy == AVL)
+            //printf("  rotations %d\n", bst_rotations(test_tree));
         }
         /* this prints the tree after each trial */
         if (Verbose)
@@ -397,11 +397,11 @@ void equilibriumDriver(void)
     //        keys_removed, size, bst_size(test_tree));
     assert(size == bst_size(test_tree));
     printf("  After exercise, time=%g, new tree size=%d\n",
-            1000*((double)(end-start))/CLOCKS_PER_SEC, size);
-    printf("  successful searches during exercise=%g, trials=%d\n", 
-            (double) suc_search/suc_trials, suc_trials);
-    printf("  unsuccessful searches during exercise=%g, trials=%d\n", 
-            (double) unsuc_search/unsuc_trials, unsuc_trials);
+           1000*((double)(end-start))/CLOCKS_PER_SEC, size);
+    printf("  successful searches during exercise=%g, trials=%d\n",
+           (double) suc_search/suc_trials, suc_trials);
+    printf("  unsuccessful searches during exercise=%g, trials=%d\n",
+           (double) unsuc_search/unsuc_trials, unsuc_trials);
 
     printf("  Validating tree...");
     bst_debug_validate(test_tree);
@@ -426,13 +426,13 @@ void equilibriumDriver(void)
     ipl = bst_int_path_len(test_tree);
     epl = ipl + 2 * size;
     printf("  After access experiment, time=%g, tree size=%d\n",
-            1000*((double)(end-start))/CLOCKS_PER_SEC, size);
-    printf("  Expect successful search=%g, measured=%g, trials=%d\n", 
-            (2.0*ipl+size)/size,
-            (double) suc_search/suc_trials, suc_trials);
-    printf("  Expect unsuccessful search=%g, measured=%g, trials=%d\n", 
-            2.0*epl/(size+1),
-            (double) unsuc_search/unsuc_trials, unsuc_trials);
+           1000*((double)(end-start))/CLOCKS_PER_SEC, size);
+    printf("  Expect successful search=%g, measured=%g, trials=%d\n",
+           (2.0*ipl+size)/size,
+           (double) suc_search/suc_trials, suc_trials);
+    printf("  Expect unsuccessful search=%g, measured=%g, trials=%d\n",
+           2.0*epl/(size+1),
+           (double) unsuc_search/unsuc_trials, unsuc_trials);
 
     /* remove and free all items from tree */
     bst_destruct(test_tree);
@@ -455,10 +455,10 @@ void build_one_node(bst_t *T, int key)
     //	printf("  rotations %d\n", bst_rotations(T));
 }
 
-/* build a complete tree with the lowest level full.  The tree has 
- * 2^(levels)-1 nodes and is perfectly balanced.  The key range is twice the 
+/* build a complete tree with the lowest level full.  The tree has
+ * 2^(levels)-1 nodes and is perfectly balanced.  The key range is twice the
  * size of the tree and only the even keys are inserted in the tree.
- * 
+ *
  * T - tree to insert into
  * levels - number of levels in the tree
  */
@@ -469,7 +469,7 @@ void build_optimal(bst_t *T, int levels)
     for (i = 0; i<levels; i++) {
         start = n/pow(2, i + 1); inc = 2 * start;
         for (j = start; j < n; j += inc) {
-	    build_one_node(T, j);
+            build_one_node(T, j);
         }
     }
 }
@@ -492,14 +492,14 @@ void build_random(bst_t *T, int nodes)
         key = (int) (drand48() * (nodes - i)) + i;
         assert(i <= key && key < nodes);
         temp = narray[i]; narray[i] = narray[key]; narray[key] = temp;
-	build_one_node(T, narray[i]+1);
+        build_one_node(T, narray[i]+1);
     }
     free(narray);
 }
 
 /* build a tree with 2^(levels)-1 nodes.  The nodes are numbered 2 to 2n and are
- * inserted in a poor order.  Only the even keys are inserted.  
- * 
+ * inserted in a poor order.  Only the even keys are inserted.
+ *
  * The number of sets is sets
  * The size of a set is set_size
  *
@@ -516,40 +516,40 @@ void build_poor(bst_t *T, int levels)
     for (i = 0; i<levels/2; i++) {
         start = n/pow(2, i + 1); inc = 2 * start;
         for (j = start; j < n; j += inc) {
-	    build_one_node(T, j);
+            build_one_node(T, j);
         }
     }
     int sets = pow(2, levels/2);
     int set_size = pow(2, levels - levels/2);
     for (i = 0; i < sets; i++) {
-	low = i*set_size + 1; high = (i+1)*set_size - 1;
-	int type = (int) 4*drand48();
-	// randomly select type of insertion pattern
-	if (type == 0) {  // ascending
-	    for (j = low; j <= high; j++) {
-		build_one_node(T, j);
-	    }
-	} else if (type == 1) {  // decending
-	    for (j = high; j >= low; j--) {
-		build_one_node(T, j);
-	    }
-	} else if (type == 2) {  // zig-zag, low first
-	    for (j = 0; j < (set_size-1)/2; j++) {
-		build_one_node(T, low + j);
-		build_one_node(T, high - j);
-	    }
-	    if (j*2 != set_size-1) {
-		build_one_node(T, low + j);
-	    }
-	} else {  // zig-zag, high first
-	    for (j = 0; j < (set_size-1)/2; j++) {
-		build_one_node(T, high - j);
-		build_one_node(T, low + j);
-	    }
-	    if (j*2 != set_size-1) {
-		build_one_node(T, low + j);
-	    }
-	}
+        low = i*set_size + 1; high = (i+1)*set_size - 1;
+        int type = (int) 4*drand48();
+        // randomly select type of insertion pattern
+        if (type == 0) {  // ascending
+            for (j = low; j <= high; j++) {
+                build_one_node(T, j);
+            }
+        } else if (type == 1) {  // decending
+            for (j = high; j >= low; j--) {
+                build_one_node(T, j);
+            }
+        } else if (type == 2) {  // zig-zag, low first
+            for (j = 0; j < (set_size-1)/2; j++) {
+                build_one_node(T, low + j);
+                build_one_node(T, high - j);
+            }
+            if (j*2 != set_size-1) {
+                build_one_node(T, low + j);
+            }
+        } else {  // zig-zag, high first
+            for (j = 0; j < (set_size-1)/2; j++) {
+                build_one_node(T, high - j);
+                build_one_node(T, low + j);
+            }
+            if (j*2 != set_size-1) {
+                build_one_node(T, low + j);
+            }
+        }
     }
 }
 
@@ -565,8 +565,8 @@ void build_poor(bst_t *T, int levels)
 void getCommandLine(int argc, char **argv)
 {
     /* optopt--if an unknown option character is found
-     * optind--index of next element in argv 
-     * optarg--argument for option that requires argument 
+     * optind--index of next element in argv
+     * optarg--argument for option that requires argument
      * "x:" colon after x means argument required
      */
     int c;
@@ -582,15 +582,15 @@ void getCommandLine(int argc, char **argv)
             case 'o': OptimalTest = TRUE;          break;
             case 'r': RandomTest = TRUE;           break;
             case 'p': PoorTest = TRUE;             break;
-            //case 'q': WorstTest = TRUE;            break;
+                //case 'q': WorstTest = TRUE;            break;
             case 'u': UnitNumber = atoi(optarg);   break;
             case 'f':
                 if (strcmp(optarg, "bst") == 0)
                     SearchPolicy = BST;
                 else if (strcmp(optarg, "avl") == 0)
                     SearchPolicy = AVL;
-                //else if (strcmp(optarg, "23t") == 0)
-                //    SearchPolicy = TWOTHREET;
+                    //else if (strcmp(optarg, "23t") == 0)
+                    //    SearchPolicy = TWOTHREET;
                 else {
                     fprintf(stderr, "invalid search policy: %s\n", optarg);
                     exit(1);

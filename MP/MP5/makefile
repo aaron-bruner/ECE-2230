@@ -7,7 +7,7 @@
 #
 #
 CC = gcc
-CPPFLAGS = -DVALIDATE
+# CPPFLAGS = -DVALIDATE
 CFLAGS = -g -Wall
 LDLIBS = -lm  
 
