@@ -1,10 +1,16 @@
 /* bst.c 
- * TODO NAME
- * TODO email
+ * Aaron Bruner
+ * ajbrune@clemson.edu
  * ECE 2230 Spring 2021
  * MP 5
  *
- * Implementation of tree interface for basic binary tree
+ * Purpose: Implementation of tree interface for basic binary tree
+ *
+ * Assumptions: We make the assumption that the user who is running our application is knowledgeable as to how the
+ *              program operates and what command line inputs are considered valid. Also we must assume that the
+ *              user provides valid input that will not deliberately break the lab5.c file.
+ *
+ * Bugs: None.
  */
 #include <stdlib.h>
 #include <stdio.h>
@@ -26,65 +32,140 @@ int rec_height(bst_node_t *N);
 int children(bst_node_t *N);
 void pretty_print(bst_t *T);
 
+/// ------------------------------- ///
+///     COME BACK AND FIX THIS      ///
+/// ------------------------------- ///
+// My helper functions
+void recursive_bst_destruct(bst_node_t *N); // FIXED
+int recursive_bst_int_path_len(bst_node_t *N, int level); // FIXED
+bst_node_t* insert_node(bst_node_t *node, bst_key_t key, data_t elem_ptr, int policy);
+bst_node_t* rotate_right(bst_node_t* node);
+bst_node_t* rotate_left(bst_node_t* node);
+int find_balance(bst_node_t* node);
 
-/* Finds the tree element with the matching key and returns the data that is
- * stored in this node in the tree.
+/* The function bst_access was designed to be able to find the tree element that matches key and return the data that is
+ *     stored in this node in the tree.
  *
- * T - tree to search in key - key to find inside T
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to search.
+ *  bst_key_t key: The key to find inside of T
  *
- * RETURNS pointer to the data stored in the found node or NULL if no match is
- * found
+ *  Return:
+ *      A pointer to the data stored in the found node or NULL if no match is found.
+ *
+ * Structures Modified: N/A
  */
 data_t bst_access(bst_t *T, bst_key_t key)
 {
     CompCalls = 0;
-    /* TODO complete */
-    return NULL;
+    bst_node_t *node = T->root; // Start our search at the root
+
+    while (node != NULL && node->key != key) { // Search until the final child's leaf is NULL
+        //if (key == node->key) return node->data_ptr; // Found the node with the matching key
+        node = key > node->key ? node->right : node->left; // Check if we need to go left or right
+        CompCalls += 2;
+        T->num_recent_key_comparisons = CompCalls;
+    }
+    return node->key == NULL ? NULL : node->data_ptr;
 }
 
-/* Creates the header block for the tree with the provided management policy,
- * and initializes it with default 'blank' data.
+/* The function bst_construct was designed to create the header block for the tree with the provided management policy,
+ * and initialize it with default 'blank' data.
  *
- * tree_policy - tree management policy to use either AVL or BST.
+ * Inputs:
+ *  int tree_policy: Tree management policy to use either AVL or BST.
  *
- * RETURNS pointer to the newly created tree
+ *  Return:
+ *      A pointer to the newly created tree.
+ *
+ * Structures Modified:
+ *  bst_t * T: This newly created structure will have all of our information initialized to either 0 or NULL; not
+ *             including the tree_policy that the user requested.
  */
 bst_t *bst_construct(int tree_policy)
 {
-    /* TODO complete */
-    return NULL;
+    if (tree_policy != AVL || tree_policy != BST) { // This should never happen
+        printf("\n\n[ERROR] tree_policy passed into bst_construct is not valid. Must be AVL or BST...\n\n");
+        exit(5);
+    }
+    bst_t * T = malloc(sizeof(bst_t)); // Allocate memory for the head
+        if (T == NULL){ // This should never happen
+            printf("\n\n[ERROR] Malloc Failed in bst_construct\n\n");
+            exit(5);
+        }
+    T->root = NULL; // Set integers to 0 and pointers to NULL
+    T->size = 0;
+    T->num_recent_rotations = 0;
+    T->policy = tree_policy;
+    T->num_recent_key_comparisons = 0;
+
+    return T; // Pointer to new tree
 }
 
-
-/* Free all items stored in the tree including the memory block with the data
- * and the bst_node_t structure.  Also frees the header block.
+/* The function bst_destruct was designed to free all items stored in the tree including the memory block with the data
+ * and the bst_node_t structure. Also frees the header block.
  *
- * T - tree to destroy
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to destroy.
+ *
+ *  Return: N/A
+ *
+ * Structures Modified:
+ *  bst_t * T: All information in the structure will be removed and the memory will be free'd.
+ *
+ *  This function uses the recursive_bst_destruct which makes removing the nodes more simple.
+ *
+ *  We could have used an iterative method but then we would have had to traverse the tree to determine the number
+ *  of children and then traverse again to free them. This way we're only having to traverse once.
  */
 void bst_destruct(bst_t *T)
 {
-    /* TODO complete */
+    recursive_bst_destruct(T->root);
+    free(T);
+    T = NULL;
 }
 
-/* Insert data_t into the tree with the associated key. Insertion MUST
- * follow the tree's property (i.e., AVL or BST)
+/* The function recursive_bst_destruct was designed to free all items stored in the tree and their data.
  *
- * T - tree to insert into
- * key - search key to determine if key is in the tree
- * elem_ptr - data to be stored at tree node indicated by key
+ * Inputs:
+ *  bst_node_t * N: A pointer to a node in which we're wanting to remove.
  *
- * RETURNS 0 if key is found and element is replaced, and 1 if key is not found
- * and element is inserted
+ *  Return: N/A
+ *
+ * Structures Modified:
+ *  bst_node_t * N: All information in the structure will be removed and the memory will be free'd.
+ */
+void recursive_bst_destruct(bst_node_t * N) {
+    if (N != NULL) {
+        recursive_bst_destruct(N->left); // Keep moving down the left subtree until we get to the lowest child
+        recursive_bst_destruct(N->right); // Keep moving down the right subtree until we get to the lowest child
+        free(N->data_ptr);
+        free(N);
+    }
+}
+
+/* The function bst_insert was designed to insert data_t into the tree with the associated key. Insertion MUST follow
+ * the tree's property (i.e., AVL or BST)
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to insert our new node into.
+ *  bst_key_t key: Search key to determine if key is in the tree.
+ *  data_t elem_ptr - Data to be stored at tree node indicated by key
+ *
+ *  Return:
+ *   0 if key is found and element is replaced
+ *   1 if key is not found and element is inserted
+ *
+ * Structures Modified:
+ *  bst_t * T: We will be inserting the elem_ptr into our list T.
  */
 int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 {
     CompCalls = 0;
     NumRotations = 0;
-    if (T->policy == AVL) {
-	    return -1;
-    }
-    /* TODO: add code to insert key into tree for BST and AVL */
-    /*TODO: add code to update the tree stats */
+
+    
+
 #ifdef VALIDATE
         bst_debug_validate(T);
 #endif
@@ -113,17 +194,18 @@ int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
     return replace;
 }
 
-/* DO NOT NEED TO IMPLEMENT FOR REGULAR ASSIGNMENT. ONLY FOR EXTRA ASSIGNMENT.
+/* The function bst_remove was designed to remove the item in the tree with the matching key.
  *
- * Removes the item in the tree with the matching key.
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to remove the specified key from.
+ *  bst_key_t key: The search key for particular node in the tree 'T'
  *
- * T - pointer to tree
- * key - search key for particular node in the tree 'T'
+ *  Return:
+ *      The pointer to the data memory block and free the bst_node_t memory block.  If the key is not found in the
+ *      tree, return NULL. If the tree's policy is AVL, then ensure all nodes have the AVL property.
  *
- * RETURNS the pointer to the data memory block and free the bst_node_t memory
- * block.  If the key is not found in the tree, return NULL.  If the tree's
- * policy is AVL, then ensure all nodes have the AVL property.
- *
+ * Structures Modified:
+ *  bst_t * T: A node that matches key is being removed from the tree, assuming it exists.
  */
 data_t bst_remove(bst_t *T, bst_key_t key)
 {
@@ -143,33 +225,113 @@ data_t bst_remove(bst_t *T, bst_key_t key)
     return dp;
 }
 
-
-/* RETURNS the number of keys in the tree */
+/* The function bst_size was designed to determine the number of keys in the tree.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to check.
+ *
+ *  Return:
+ *      An integer value which is the number of keys in the tree.
+ *
+ * Structures Modified: N/A
+ */
 int bst_size(bst_t *T)
 {
-    return -1; /*TODO */
+    if (T == NULL) return 0;
+
+    return T->size;
 }
 
-/* RETURNS the number of key comparisons  */
+/* The function bst_key_comps was designed to determine the number of key comparisons.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to check.
+ *
+ *  Return:
+ *      An integer value which is the number of key comparisons.
+ *
+ * Structures Modified: N/A
+ */
 int bst_key_comps(bst_t *T)
 {
-    return -1; /*TODO */
+    if (T == NULL) return 0;
+
+    return T->num_recent_key_comparisons;
 }
 
-/* RETURNS the computed internal path length of the tree T */
+///-----------------------------------------------------///
+///             COME BACK AND LOOK AT THIS              ///
+///-----------------------------------------------------///
+/* The function bst_int_path_len was designed to determine the computed internal path length of the tree T.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to check.
+ *
+ *  Return:
+ *      An integer value which is the computed internal path length of the tree T.
+ *
+ * Structures Modified: N/A
+ *
+ * Note: This function uses a recursive call to the function recursive_bst_int_path_len which will actually calculate
+ *       the internal path length.
+ */
 int bst_int_path_len(bst_t *T)
 {
-    return -1; /*TODO */
+    if (T == NULL) return 0;
+
+    return 1 + (bst_int_path_len(T->left) + bst_int_path_len(T->right));
+    //return recursive_bst_int_path_len(T->root, 0);
 }
 
-/* RETURNS the number of rotations from the last remove*/
+/* The function recursive_bst_int_path_len was designed to calculate the internal path length of our provided tree.
+ *
+ * Inputs:
+ *  bst_node_t * N: A pointer to the node in which we want to check both the left and right root
+ *  int level: An integer value for what level we are currently at. Every time we go down the left or right we increase
+ *             the level count.
+ *
+ *  Return:
+ *      The return value is the sum of all of the recursive calls. We are determining the internal length of our tree.
+ *
+ * Structures Modified: N/A
+ *
+ * Code was designed based on this algorithm:
+ * https://www.geeksforgeeks.org/write-a-c-program-to-calculate-size-of-a-tree/
+ */
+/* int recursive_bst_int_path_len(bst_node_t *N, int level) {
+    if (N == NULL) return 0; // Base case for recursion & safety :)
+
+    return recursive_bst_int_path_len(N->left, level+1) + // Find the path length of the left subtree
+            recursive_bst_int_path_len(N->right, level+1) + // Find the path length of the right subtree
+             level;
+} */
+
+/* The function bst_rotations was designed to determine the number of rotations from the last remove.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to check.
+ *
+ *  Return:
+ *      An integer value which is the number of rotations from the last remove.
+ *
+ * Structures Modified: N/A
+ */
 int bst_rotations(bst_t *T)
 {
-    return -1; /*TODO */
+    if (T == NULL) return 0;
+
+    return T->num-recent_rotations;
 }
 
-
-/* prints the tree T */
+/* The function bst_debug_print_tree was designed to print the tree T.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to print.
+ *
+ *  Return: N/A
+ *
+ * Structures Modified: N/A
+ */
 void bst_debug_print_tree(bst_t *T)
 {
     ugly_print(T->root, 0, T->policy);//XTRA
@@ -178,11 +340,16 @@ void bst_debug_print_tree(bst_t *T)
 	pretty_print(T);
 }
 
-/* basic print function for a binary tree
+/* The function ugly_print was designed to print the binary tree in a manner which is ugly. lol...
  *
- * N - node of tree to print
- * level - level in which the node resides
- * policy - BST or AVL
+ * Inputs:
+ *  bst_node_t * N: A node of the tree in which we're going to print.
+ *  int level: The level in which the node resides
+ *  int policy: A value of either BST or AVL
+ *
+ *  Return: N/A
+ *
+ * Structures Modified: N/A
  */
 void ugly_print(bst_node_t *N, int level, int policy)
 {
@@ -199,8 +366,18 @@ void ugly_print(bst_node_t *N, int level, int policy)
     ugly_print(N->left, level+1, policy);
 }
 
-
-/* Basic validation function for tree T */
+/* The function bst_debug_validate was designed to validate our tree T.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to check.
+ *
+ *  Return: N/A
+ *
+ * Structures Modified: N/A
+ *
+ * Note: Asserts ensure everything is working properly. If the function returns without ending the program we know that
+ *       the tree validated.
+ */
 void bst_debug_validate(bst_t *T)
 {
     int size = 0;
@@ -210,12 +387,18 @@ void bst_debug_validate(bst_t *T)
 	    rec_height(T->root);
 }
 
-
-/* A tree validation function based on node position
+/* The function bst_debug_validate_rec was designed to validate a tree based on node position.
  *
- * N - node to validate tree
- * min - temp min for it's left subtree min
- * max - temp max for it's right subtree max
+ * Inputs:
+ *  bst_node_t * N: A pointer to the node in the tree in which we're going to validate.
+ *  int min: Temp min for it's left subtree min
+ *  int max: Temp max for it's right subtree max
+ *  int * count: A running count which increases everytime the recursive call is made
+ *
+ *  Return:
+ *      An integer value used to ensure validity.
+ *
+ * Structures Modified: N/A
  */
 int bst_debug_validate_rec(bst_node_t *N, int min, int max, int *count)
 {
@@ -229,7 +412,15 @@ int bst_debug_validate_rec(bst_node_t *N, int min, int max, int *count)
         bst_debug_validate_rec(N->right, N->key, max, count);
 }
 
-/* Verifies AVL tree properties */
+/* The function rec_height was designed to verify the AVL tree properties.
+ *
+ * Inputs:
+ *  bst_node_t * T: A pointer to the node we are wanting to check.
+ *
+ *  Return: The height of our AVL tree based on the AVL tree property.
+ *
+ * Structures Modified: N/A
+ */
 int rec_height(bst_node_t *N)
 {
     if (N == NULL)
@@ -239,23 +430,33 @@ int rec_height(bst_node_t *N)
     int lean = lh - rh;
     assert(lean == 0 || lean == 1 || lean == -1);
     return 1 + MYMAX(lh, rh);
-
 }
 
-
-
-
-
-/* Recursive function to count children */
+/* The function children was designed to recursively count the number of children in the provided tree.
+ *
+ * Inputs:
+ *  bst_node_t * T: A pointer to the node we are wanting to check for children.
+ *
+ *  Return:
+ *      An integer value which is the number of children after all recursive calls have returned.
+ *
+ * Structures Modified: N/A
+ */
 int children(bst_node_t *N)
 {
     if (N == NULL) return 0;
     return 1 + children(N->left) + children(N->right);
 }
 
-
-
-/* Prints the tree to the terminal in ASCII art*/
+/* The function pretty_print was designed to print out the tree to the terminal in ASCII art.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to print.
+ *
+ *  Return: N/A
+ *
+ * Structures Modified: N/A
+ */
 void pretty_print(bst_t *T)
 {
     typedef struct queue_tag {
