@@ -57,7 +57,7 @@ bst_t *bst_construct(int tree_policy)
 
 
 /* Free all items stored in the tree including the memory block with the data
- * and the bst_node_t structure.  Also frees the header block.  
+ * and the bst_node_t structure.  Also frees the header block.
  *
  * T - tree to destroy
  */
@@ -106,7 +106,7 @@ int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 {
     int replace = 0;
-    
+
     /* TODO: insert into AVL tree. Rember to check balance and rebalance if
      * necessary */
 
@@ -116,12 +116,12 @@ int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 /* DO NOT NEED TO IMPLEMENT FOR REGULAR ASSIGNMENT. ONLY FOR EXTRA ASSIGNMENT.
  *
  * Removes the item in the tree with the matching key.
- * 
+ *
  * T - pointer to tree
  * key - search key for particular node in the tree 'T'
  *
  * RETURNS the pointer to the data memory block and free the bst_node_t memory
- * block.  If the key is not found in the tree, return NULL.  If the tree's 
+ * block.  If the key is not found in the tree, return NULL.  If the tree's
  * policy is AVL, then ensure all nodes have the AVL property.
  *
  */
@@ -178,7 +178,7 @@ void bst_debug_print_tree(bst_t *T)
 	pretty_print(T);
 }
 
-/* basic print function for a binary tree 
+/* basic print function for a binary tree
  *
  * N - node of tree to print
  * level - level in which the node resides
@@ -238,7 +238,7 @@ int rec_height(bst_node_t *N)
     int rh = rec_height(N->right);
     int lean = lh - rh;
     assert(lean == 0 || lean == 1 || lean == -1);
-    return 1 + MYMAX(lh, rh); 
+    return 1 + MYMAX(lh, rh);
 
 }
 

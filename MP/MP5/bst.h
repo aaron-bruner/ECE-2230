@@ -1,10 +1,16 @@
 /* bst.h 
- * TODO NAME
- * TODO email
+ * Aaron Bruner
+ * ajbrune@g.clemson.edu
  * ECE 2230 Spring 2021
  * MP 5
  *
- * Interface and tree definition for basic binary tree
+ * Purpose: Provides structure for interface and tree definition for basic binary tree.
+ *
+ * Assumptions: All pointers entered into the bst_node_t structure are either valid or NULL. Also, the structure needs
+ *              to be full when it's allocated. Meaning, all elements of the structure need to have a value, even if
+ *              it's 0 or NULL.
+ *
+ * Bugs: N/A
  */
 
 enum balanceoptions {BST, AVL};
