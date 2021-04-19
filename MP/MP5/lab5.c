@@ -72,34 +72,26 @@ int main(int argc, char **argv)
     /* ----- build custom tree and remove nodes ----- */
     if (UnitNumber == 0)                        /* enabled with -u flag */
     {
-        // example test to remove leaves, 12 and 20, then internal nodes
-        // 8, 24, 40 with one child, then 16, 48 with two children
-        const int ins[] = {32,16,8,24,4,12,20,28,48,40,56,44,42,46};
-        const int del[] = {12,20,8,24,40,16,48};
+        // Testing combination of LR and LL rotation
+        const int ins[] = {63,9,19,27,18,108,99,81};
+        const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 1)
     {
-        // example tests: (48) is missing its right-left child and
-        //                (16) is missing its left-right child
-        const int ins1[] = {32,16,48,8,24,40,56,4,20,28,36,44,60};
-        const int del1[] = {16,48,32};
+        // Tests repeated inputs
+        const int ins1[] = {1,2,3,6};
+        const int del1[] = {};
         unitDriver(ins1, sizeof ins1 / sizeof(int),
                    del1, sizeof del1 / sizeof(int));
 
-        // example tests: (16) is missing its right-left child and
-        //                (48) is missing its left-right child
-        const int ins1b[] = {32,16,48,8,24,40,56,4,12,28,36,52,60};
-        const int del1b[] = {16,48,32};
-        unitDriver(ins1b, sizeof ins1b / sizeof(int),
-                   del1b, sizeof del1b / sizeof(int));
     }
     if (UnitNumber == 2)
     {
-        // example deletion with many children
-        const int ins[] = {200,100,50,150,25,75,125,175,65,85,135,80,130,140,78,82};
-        const int del[] = {100,85,125};
+        //
+        const int ins[] = {1,2,3,4,5,6,7,16,15};
+        const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
@@ -107,47 +99,15 @@ int main(int argc, char **argv)
     {
         // check replace for duplicate key
         const int ins[] = {10, 10};
-        const int del[] = {10};
+        const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 4)
     {
-        // check worst case insertion and deletion
-        const int ins[] = {1, 2, 3, 4, 5, 6, 7, 8};
-        const int del[] = {7, 5, 8, 1};
-        unitDriver(ins, sizeof ins / sizeof(int),
-                   del, sizeof del / sizeof(int));
-    }
-    if (UnitNumber == 5)
-    {
-        // check insertion and deletion of extreme values
-        const int ins[] = {0, -18921, 38238, 39825074, -84928};
-        const int del[] = {-18921, 38238, 0, -84928, 39825074};
-        unitDriver(ins, sizeof ins / sizeof(int),
-                   del, sizeof del / sizeof(int));
-    }
-    if (UnitNumber == 6)
-    {
-        // check repeated inserions and deletions
-        const int ins[] = {10, 10, 25, 42, 2, 3, 3, 2, 42, 25, 16, 25, 25};
-        const int del[] = {10, 2, 2, 2, 42, 25, 25, 25, 10, 3, 3};
-        unitDriver(ins, sizeof ins / sizeof(int),
-                   del, sizeof del / sizeof(int));
-    }
-    if (UnitNumber == 7)
-    {
-        // check root deletions
-        const int ins[] = {10, 7, 8, 12, 14, 16, 4};
-        const int del[] = {10, 12, 14, 16, 7, 8, 4};
-        unitDriver(ins, sizeof ins / sizeof(int),
-                   del, sizeof del / sizeof(int));
-    }
-    if (UnitNumber == 8)
-    {
-        // Remove leaves
-        const int ins[] = {10, 5, 15, 3, 7, 13, 18};
-        const int del[] = {3, 7, 13, 18, 5, 15, 10};
+        // Demonstrates the Right-Right Rotation
+        const int ins[] = {3,2,1};
+        const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }

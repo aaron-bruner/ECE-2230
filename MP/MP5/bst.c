@@ -39,7 +39,7 @@ int getBalance(bst_node_t * node);
 int getHeight(bst_node_t * node);
 bst_node_t* rightRotate(bst_node_t* N);
 bst_node_t* leftRotate(bst_node_t* N);
-void heightUpdate(bst_node_t * y);
+void heightUpdate(bst_node_t * x, bst_node_t * y);
 
 
 /* The function bst_access was designed to be able to find the tree element that matches key and return the data that is
@@ -311,8 +311,7 @@ bst_node_t* rightRotate(bst_node_t* y) {
     bst_node_t *temp = x->right;
     x->right = y;
     y->left = temp;
-    heightUpdate(x);
-    heightUpdate(y);
+    heightUpdate(x, y);
     return x;
 }
 /* The function leftRotate was designed to left rotate a subtree rooted at y.
@@ -335,8 +334,7 @@ bst_node_t* leftRotate(bst_node_t* y) {
     bst_node_t *temp = x->left;
     x->left = y;
     y->right = temp;
-    heightUpdate(y);
-    heightUpdate(x);
+    heightUpdate(x, y);
     return x;
 }
 
@@ -352,13 +350,18 @@ bst_node_t* leftRotate(bst_node_t* y) {
  *
  *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
  */
-void heightUpdate (bst_node_t * N) {
+void heightUpdate (bst_node_t * x,bst_node_t * y) {
     int left, right;
 
-    left = N->left == NULL ? -1 : N->left->height;
-    right = N->right == NULL ? -1 : N->right->height;
+    left = y->left == NULL ? -1 : y->left->height;
+    right = y->right == NULL ? -1 : y->right->height;
 
-    N->height = 1 + MYMAX(left, right);
+    y->height = 1 + MYMAX(left, right);
+
+    left = x->left == NULL ? -1 : x->left->height;
+    right = x->right == NULL ? -1 : x->right->height;
+
+    x->height = 1 + MYMAX(left, right);
 }
 
 /* The function bst_remove was designed to remove the item in the tree with the matching key.
