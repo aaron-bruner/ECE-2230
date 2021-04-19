@@ -38,7 +38,7 @@ void pretty_print(bst_t *T);
 // My helper functions
 void recursive_bst_destruct(bst_node_t *N); // FIXED
 int recursive_bst_int_path_len(bst_node_t *N, int level); // FIXED
-bst_node_t* insert_node(bst_node_t *node, bst_key_t key, data_t elem_ptr, int policy);
+bst_node_t* bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int policy); // FIXED
 bst_node_t* rotate_right(bst_node_t* node);
 bst_node_t* rotate_left(bst_node_t* node);
 int find_balance(bst_node_t* node);
@@ -58,15 +58,15 @@ int find_balance(bst_node_t* node);
 data_t bst_access(bst_t *T, bst_key_t key)
 {
     CompCalls = 0;
-    bst_node_t *node = T->root; // Start our search at the root
+    bst_node_t *N = T->root; // Start our search at the root
 
-    while (node != NULL && node->key != key) { // Search until the final child's leaf is NULL
+    while (N != NULL && N->key != key) { // Search until the final child's leaf is NULL
         //if (key == node->key) return node->data_ptr; // Found the node with the matching key
-        node = key > node->key ? node->right : node->left; // Check if we need to go left or right
+        N = key > N->key ? N->right : N->left; // Check if we need to go left or right
         CompCalls += 2;
         T->num_recent_key_comparisons = CompCalls;
     }
-    return node->key == NULL ? NULL : node->data_ptr;
+    return N == NULL ? NULL : N->data_ptr;
 }
 
 /* The function bst_construct was designed to create the header block for the tree with the provided management policy,
@@ -84,7 +84,7 @@ data_t bst_access(bst_t *T, bst_key_t key)
  */
 bst_t *bst_construct(int tree_policy)
 {
-    if (tree_policy != AVL || tree_policy != BST) { // This should never happen
+    if (tree_policy != AVL && tree_policy != BST) { // This should never happen
         printf("\n\n[ERROR] tree_policy passed into bst_construct is not valid. Must be AVL or BST...\n\n");
         exit(5);
     }
@@ -161,38 +161,180 @@ void recursive_bst_destruct(bst_node_t * N) {
  */
 int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 {
+    assert(elem_ptr != NULL);
     CompCalls = 0;
     NumRotations = 0;
-
-    
+    int return_val = bst_avl_insert(T, key, elem_ptr);
+    assert (return_val != -1);
+    T->num_recent_rotations = NumRotations;
 
 #ifdef VALIDATE
-        bst_debug_validate(T);
+      bst_debug_validate(T);
 #endif
-    return -1;
+
+    return return_val;
 }
 
-
-/* Insert data_t into the tree with the associated key. Insertion MUST
- * follow the tree's property AVL. This function should be called from
- * bst_insert for AVL tree's inserts.
+/* The function bst_avl_insert was designed to be the gateway function for AVL insertions. We will be inserting data_t
+ * into the tree with the associated key. Insertion MUST follow the tree's property AVL. This function should be called
+ * from bst_insert for AVL tree's inserts.
  *
- * T - tree to insert into
- * key - search key to determine if key is in the tree
- * elem_ptr - data to be stored at tree node indicated by key
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to add our data to.
+ *  bst_key_t key: The search key for particular node in the tree 'T'
+ *  data_t elem_ptr: A pointer to the data to be stored at tree node indicated by key
  *
- * RETURNS 0 if key is found and element is replaced, and 1 if key is not found
- * and element is inserted
+ *  Return:
+ *   0 if key is found and the element is replaced
+ *   1 if key is not found and element is inserted
+ *
+ * Structures Modified:
+ *  bst_t * T: A node that matches key is being inserted to the tree.
  */
 int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 {
-    int replace = 0;
-
-    /* TODO: insert into AVL tree. Rember to check balance and rebalance if
-     * necessary */
-
-    return replace;
+    int temp = -1;
+    bst_node_t *N = bst_access(T, key);
+    if (N != NULL) {
+        temp = 0; // Found the node with matching key
+        free(N->data_ptr);
+        N->data_ptr = elem_ptr;
+    } else {
+        temp = 1; // Unable to find so we had to insert
+        T->root = bst_insert_node(T->root, key, elem_ptr, T->policy);
+        T->size++;
+    }
+    return temp;
 }
+
+/* The function bst_insert_node was designed to insert an item in a specific tree. If the tree already has a node with
+ * a matching key we will replace it.
+ *
+ * Inputs:
+ *  bst_t * T: A pointer to the tree we are wanting to remove the specified key from.
+ *  bst_key_t key: The search key for particular node in the tree 'T'
+ *
+ *  Return:
+ *      The pointer to the data memory block and free the bst_node_t memory block.  If the key is not found in the
+ *      tree, return NULL. If the tree's policy is AVL, then ensure all nodes have the AVL property.
+ *
+ * Structures Modified:
+ *  bst_t * T: A node that matches key is being removed from the tree, assuming it exists.
+ *
+ *  The algorithm is based on the implementation here: https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+ */
+bst_node_t *bst_insert_node(bst_node_t *N, bst_key_t key, data_t elem_ptr, int policy) {
+    if ( N == NULL ) {
+        bst_node_t *NewN = malloc(sizeof(bst_node_t)); // Create a new node if one does not exist
+        NewN->data_ptr = elem_ptr;
+        NewN->key = key;
+        NewN->height = 0;
+        NewN->left = NULL;
+        NewN->right = NULL;
+        return NewN; // Return pointer to new node since we didn't have to put it in the right place.
+    } else if (key > N->key) N->right = bst_insert_node(N->right, key, elem_ptr, policy);
+      else N->left = bst_insert_node(N->left, key, elem_ptr, policy); // We need to find out where our new node goes
+
+    N->height = children(N);
+
+    if (policy == AVL) {
+        int balance = rec_height(N);
+        if (balance > 1 && key < N->left->key) return rotate_right(N); // Left-Left
+        if (balance < -1 && key > N->right->key) return rotate_left(N); // Right-Right
+        if (balance > 1 && key > N->left->key) {// Left-Right
+            N->left = rotate_left(N->left);
+            return rotate_right(N);
+        }
+        if (balance < -1 && key < N->right->key) { // Right-Left
+            N->right = rotate_right(N->right);
+            return rotate_left(N);
+        }
+    }
+    return N;
+}
+
+///--------------------------------------------///
+///             Needs to be changed            ///
+///--------------------------------------------///
+/* AVL right rotation function. Takes node, its right child, and that child's
+ * right child, and rotates so that the right child is the root and node is its
+ * left child.
+ *
+ * node - the node that violates the AVL property
+ *
+ * Returns: a pointer to the root node after the rotation.
+ */
+bst_node_t* rotate_right(bst_node_t* A)
+{
+    NumRotations++;
+    // Rotate nodes (B is left child of A, becomes new root)
+    bst_node_t *B = A->left;
+    bst_node_t *temp = B->right;
+    B->right = A;
+    A->left = temp;
+    // Update height of A
+    int left_height, right_height;
+    if (A->left == NULL)
+        left_height = -1;
+    else
+        left_height = A->left->height;
+    if (A->right == NULL)
+        right_height = -1;
+    else
+        right_height = A->right->height;
+    A->height = 1 + MYMAX(left_height, right_height);
+    // Update height of B
+    if (B->left == NULL)
+        left_height = -1;
+    else
+        left_height = B->left->height;
+    if (B->right == NULL)
+        right_height = -1;
+    else
+        right_height = B->right->height;
+    B->height = 1 + MYMAX(left_height, right_height);
+    return B;
+}
+/* AVL left rotation function. Takes node, its left child, and that child's
+ * left child, and rotates so that the left child is the root and node is its
+ * right child.
+ *
+ * node - the node that violates the AVL property
+ *
+ * Returns: a pointer to the root node after the rotation.
+ */
+bst_node_t* rotate_left(bst_node_t* A)
+{
+    NumRotations++;
+    // Rotate nodes (B is right child of A, becomes new root)
+    bst_node_t *B = A->right;
+    bst_node_t *temp = B->left;
+    B->left = A;
+    A->right = temp;
+    // Update height of A
+    int left_height, right_height;
+    if (A->left == NULL)
+        left_height = -1;
+    else
+        left_height = A->left->height;
+    if (A->right == NULL)
+        right_height = -1;
+    else
+        right_height = A->right->height;
+    A->height = 1 + MYMAX(left_height, right_height);
+    // Update height of B
+    if (B->left == NULL)
+        left_height = -1;
+    else
+        left_height = B->left->height;
+    if (B->right == NULL)
+        right_height = -1;
+    else
+        right_height = B->right->height;
+    B->height = 1 + MYMAX(left_height, right_height);
+    return B;
+}
+///-------------------------------------------------///
 
 /* The function bst_remove was designed to remove the item in the tree with the matching key.
  *
@@ -279,8 +421,8 @@ int bst_int_path_len(bst_t *T)
 {
     if (T == NULL) return 0;
 
-    return 1 + (bst_int_path_len(T->left) + bst_int_path_len(T->right));
-    //return recursive_bst_int_path_len(T->root, 0);
+    //return 1 + (bst_int_path_len(T->left) + bst_int_path_len(T->right));
+    return recursive_bst_int_path_len(T->root, 0);
 }
 
 /* The function recursive_bst_int_path_len was designed to calculate the internal path length of our provided tree.
@@ -298,13 +440,13 @@ int bst_int_path_len(bst_t *T)
  * Code was designed based on this algorithm:
  * https://www.geeksforgeeks.org/write-a-c-program-to-calculate-size-of-a-tree/
  */
-/* int recursive_bst_int_path_len(bst_node_t *N, int level) {
+int recursive_bst_int_path_len(bst_node_t *N, int level) {
     if (N == NULL) return 0; // Base case for recursion & safety :)
 
     return recursive_bst_int_path_len(N->left, level+1) + // Find the path length of the left subtree
             recursive_bst_int_path_len(N->right, level+1) + // Find the path length of the right subtree
              level;
-} */
+}
 
 /* The function bst_rotations was designed to determine the number of rotations from the last remove.
  *
@@ -320,7 +462,7 @@ int bst_rotations(bst_t *T)
 {
     if (T == NULL) return 0;
 
-    return T->num-recent_rotations;
+    return T->num_recent_rotations;
 }
 
 /* The function bst_debug_print_tree was designed to print the tree T.
