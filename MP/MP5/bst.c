@@ -163,15 +163,38 @@ int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
     assert(elem_ptr != NULL);
     CompCalls = 0;
     NumRotations = 0;
-    int return_val = bst_avl_insert(T, key, elem_ptr);
-    assert (return_val != -1);
+    bst_node_t *N = T->root;
+    int check = -1;
+    while(N != NULL && check == -1) {
+        CompCalls++;
+        if (key == N->key) {
+            free(N->data_ptr);
+            N->data_ptr = elem_ptr;
+            check = 0;
+        } else {
+            CompCalls++;
+            if (key < N->key) N = N->left;
+            else N = N->right;
+        }
+    }
+    if (check == -1) {
+        if (T->policy == AVL) {
+            check = bst_avl_insert(T, key, elem_ptr);
+        } else if (T->policy == BST) {
+            T->root = bst_insert_node(T->root, key, elem_ptr, T->policy);
+        }
+        check = 1;
+        T->size++;
+    }
+
+    assert (check != -1);
     T->num_recent_rotations = NumRotations;
 
 #ifdef VALIDATE
     bst_debug_validate(T);
 #endif
 
-    return return_val;
+    return check;
 }
 
 /* The function bst_avl_insert was designed to be the gateway function for AVL insertions. We will be inserting data_t
@@ -192,19 +215,8 @@ int bst_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
  */
 int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
 {
-    int temp = -1;
-    bst_node_t *N = bst_access(T, key);
-    if (N != NULL) {
-        temp = 0; // Found the node with matching key
-        //free(N->data_ptr);
-        N->data_ptr = elem_ptr;
-        return 0;
-    } else {
-        temp = 1; // Unable to find so we had to insert
-        T->root = bst_insert_node(T->root, key, elem_ptr, T->policy);
-        T->size++;
-    }
-    return temp;
+    T->root = bst_insert_node(T->root, key, elem_ptr, T->policy);
+    return 1;
 }
 
 /* The function bst_insert_node was designed to insert an item in a specific tree. If the tree already has a node with
