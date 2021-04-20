@@ -10,7 +10,7 @@
  *              program operates and what command line inputs are considered valid. Also we must assume that the
  *              user provides valid input that will not deliberately break the lab5.c file.
  *
- * Bugs: None.
+ * Bugs: There is an issue with adding multiple nodes with the same key which results in a segmentation fault.
  */
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,0 +1,111 @@
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 8 items into tree
+Created tree for testing removes
+       108
+             99
+                  81
+   63
+                  27
+             19
+                  18
+         9
+
+  /----------63-------\ 
+  9----\            /108
+     /-19-\      /-99
+    18    27    81
+Removing 0 items from tree
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 3 items into tree
+Created tree for testing removes
+              3
+         2
+    1
+
+  1-\ 
+     2-\ 
+        3
+Removing 0 items from tree
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 3 items into tree
+Created tree for testing removes
+    3
+         2
+              1
+
+     /--3
+  /--2
+  1
+Removing 0 items from tree
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 3 items into tree
+Created tree for testing removes
+    3
+              2
+         1
+
+  /-----3
+  1-\ 
+     2
+Removing 0 items from tree
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 3 items into tree
+Created tree for testing removes
+         3
+              2
+    1
+
+  1----\ 
+     /--3
+     2
+Removing 0 items from tree
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 14 items into tree
+Created tree for testing removes
+                 900
+                           465
+                       87
+             80
+                  73
+                            46
+                                 35
+                       15
+                            12
+         9
+    8
+              4
+                   3
+         1
+
+  /--------8-\ 
+  1----\      9----------------\ 
+     /--4                    /-80-------\ 
+     3              /-------73     /---900
+                 /-15----\        87-\ 
+                12     /-46         465
+                      35
+Removing 0 items from tree

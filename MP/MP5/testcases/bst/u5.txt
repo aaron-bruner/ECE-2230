@@ -1,0 +1,30 @@
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 14 items into tree
+Created tree for testing removes
+                 900
+                           465
+                       87
+             80
+                  73
+                            46
+                                 35
+                       15
+                            12
+         9
+    8
+              4
+                   3
+         1
+
+  /--------8-\ 
+  1----\      9----------------\ 
+     /--4                    /-80-------\ 
+     3              /-------73     /---900
+                 /-15----\        87-\ 
+                12     /-46         465
+                      35
+Removing 0 items from tree

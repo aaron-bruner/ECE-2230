@@ -80,8 +80,8 @@ int main(int argc, char **argv)
     }
     if (UnitNumber == 1)
     {
-        // Tests repeated inputs
-        const int ins1[] = {1,2,3,6};
+        // Tests Left-Left Rotation
+        const int ins1[] = {1,2,3};
         const int del1[] = {};
         unitDriver(ins1, sizeof ins1 / sizeof(int),
                    del1, sizeof del1 / sizeof(int));
@@ -89,24 +89,32 @@ int main(int argc, char **argv)
     }
     if (UnitNumber == 2)
     {
-        //
-        const int ins[] = {1,2,3,4,5,6,7,16,15};
+        // Tests Right-Right Rotation
+        const int ins[] = {3,2,1};
         const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 3)
     {
-        // check replace for duplicate key
-        const int ins[] = {10, 10};
+        // Tests Left-Right Rotation
+        const int ins[] = {3,1,2};
         const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
     if (UnitNumber == 4)
     {
-        // Demonstrates the Right-Right Rotation
-        const int ins[] = {3,2,1};
+        // Tests Right-Left Rotation
+        const int ins[] = {1,3,2};
+        const int del[] = {};
+        unitDriver(ins, sizeof ins / sizeof(int),
+                   del, sizeof del / sizeof(int));
+    }
+    if (UnitNumber == 5)
+    {
+        // Test the BST & AVL ordering for random order of nodes
+        const int ins[] = {8,9,1,4,3,80,73,15,900,46,12,87,465,35};
         const int del[] = {};
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));

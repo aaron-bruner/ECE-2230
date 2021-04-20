@@ -1,0 +1,15 @@
+Seed: 1246772467
+
+
+ ====== Unit Driver ======
+
+Inserting 3 items into tree
+Created tree for testing removes
+              3
+         2
+    1
+
+  1-\ 
+     2-\ 
+        3
+Removing 0 items from tree

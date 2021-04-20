@@ -1,0 +1,1350 @@
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 0
+  Levels for tree: 5
+  Build optimal tree with size=31
+                       62
+                  60
+                       58
+             56
+                       54
+                  52
+                       50
+        48
+                       46
+                  44
+                       42
+             40
+                       38
+                  36
+                       34
+   32
+                       30
+                  28
+                       26
+             24
+                       22
+                  20
+                       18
+        16
+                       14
+                  12
+                       10
+              8
+                        6
+                   4
+                        2
+
+                       /----------------------32----------------------\ 
+           /----------16----------\                        /----------48----------\ 
+     /-----8----\            /----24----\            /----40----\            /----56----\ 
+  /--4-\      /-12-\      /-20-\      /-28-\      /-36-\      /-44-\      /-52-\      /-60-\ 
+  2     6    10    14    18    22    26    30    34    38    42    46    50    54    58    62
+----- End of access driver -----
+
+Seed: 1
+
+----- Access driver -----
+  Access trials: 0
+  Levels for tree: 5
+  Build random tree with size=31
+                  62
+                            60
+                       58
+                            56
+             54
+                       52
+                                 50
+                                      48
+                            46
+                                      44
+                                 42
+                  40
+                            38
+                       36
+                                 34
+                            32
+        30
+                  28
+             26
+                            24
+                       22
+                            20
+                                      18
+                                 16
+                                      14
+                  12
+                            10
+                        8
+                             6
+    4
+         2
+
+  /--4-------------------------------------\ 
+  2                                   /----30----------------------------------\ 
+                 /-------------------26-\                  /-------------------54----------\ 
+           /----12-------------\        28           /----40----------------\         /----62
+        /--8-\               /-22-\            /----36-\            /-------52     /-58-\ 
+        6    10        /----20    24          32-\     38     /----46----\        56    60
+                    /-16-\                       34          42-\      /-50
+                   14    18                                     44    48
+----- End of access driver -----
+
+Seed: 2
+
+----- Access driver -----
+  Access trials: 0
+  Levels for tree: 5
+  Build poor tree with size=31
+             62
+                       60
+                                 58
+                                           56
+                                      54
+                            52
+                  50
+        48
+                  46
+                            44
+                                      42
+                                           40
+                                 38
+                       36
+             34
+   32
+                                           30
+                                      28
+                                 26
+                            24
+                       22
+                  20
+             18
+        16
+             14
+                       12
+                                 10
+                                            8
+                                       6
+                             4
+                   2
+
+                       /----------------------32----------------------\ 
+                    /-16-\                        /-------------------48-------------------\ 
+  /----------------14    18-\                    34----------------\      /----------------62
+  2-------------\           20-\                     /-------------46    50-------------\ 
+     /----------12             22-\                 36----------\            /----------60
+     4-------\                    24-\                  /-------44          52-------\ 
+        /----10                      26-\              38----\                  /----58
+        6-\                             28-\               /-42                54-\ 
+           8                               30             40                      56
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=0.1, tree size=31
+    Expect successful search=7.32258, measured=6.6087, trials=483
+    Expect unsuccessful search=10, measured=10, trials=517
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=0.156, tree size=31
+    Expect successful search=7.32258, measured=6.6087, trials=483
+    Expect unsuccessful search=10, measured=10, trials=517
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=0.993, tree size=31
+    Expect successful search=7.32258, measured=6.59691, trials=4912
+    Expect unsuccessful search=10, measured=10, trials=5088
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=0.989, tree size=31
+    Expect successful search=7.32258, measured=6.59691, trials=4912
+    Expect unsuccessful search=10, measured=10, trials=5088
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=9.922, tree size=31
+    Expect successful search=7.32258, measured=6.58655, trials=49425
+    Expect unsuccessful search=10, measured=10, trials=50575
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=5.372, tree size=31
+    Expect successful search=7.32258, measured=6.58655, trials=49425
+    Expect unsuccessful search=10, measured=10, trials=50575
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=50.73, tree size=31
+    Expect successful search=7.32258, measured=6.58842, trials=492974
+    Expect unsuccessful search=10, measured=10, trials=507026
+----- End of access driver -----
+
+Output for shape=o, levels=5, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build optimal tree with size=31
+  After access exercise, time=48.51, tree size=31
+    Expect successful search=7.32258, measured=6.58842, trials=492974
+    Expect unsuccessful search=10, measured=10, trials=507026
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=0.104, tree size=1023
+    Expect successful search=17.0196, measured=16.0417, trials=480
+    Expect unsuccessful search=20, measured=20, trials=520
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=0.105, tree size=1023
+    Expect successful search=17.0196, measured=16.0417, trials=480
+    Expect unsuccessful search=20, measured=20, trials=520
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=1.502, tree size=1023
+    Expect successful search=17.0196, measured=16.0359, trials=4959
+    Expect unsuccessful search=20, measured=20, trials=5041
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=1.523, tree size=1023
+    Expect successful search=17.0196, measured=16.0359, trials=4959
+    Expect unsuccessful search=20, measured=20, trials=5041
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=12.551, tree size=1023
+    Expect successful search=17.0196, measured=16.0489, trials=49799
+    Expect unsuccessful search=20, measured=20, trials=50201
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=9.583, tree size=1023
+    Expect successful search=17.0196, measured=16.0489, trials=49799
+    Expect unsuccessful search=20, measured=20, trials=50201
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=91.709, tree size=1023
+    Expect successful search=17.0196, measured=16.0428, trials=499728
+    Expect unsuccessful search=20, measured=20, trials=500272
+----- End of access driver -----
+
+Output for shape=o, levels=10, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build optimal tree with size=1023
+  After access exercise, time=91.902, tree size=1023
+    Expect successful search=17.0196, measured=16.0428, trials=499728
+    Expect unsuccessful search=20, measured=20, trials=500272
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=0.178, tree size=32767
+    Expect successful search=27.0009, measured=25.8282, trials=489
+    Expect unsuccessful search=30, measured=30, trials=511
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=0.177, tree size=32767
+    Expect successful search=27.0009, measured=25.8282, trials=489
+    Expect unsuccessful search=30, measured=30, trials=511
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=2.035, tree size=32767
+    Expect successful search=27.0009, measured=26.0085, trials=4915
+    Expect unsuccessful search=30, measured=30, trials=5085
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=1.739, tree size=32767
+    Expect successful search=27.0009, measured=26.0085, trials=4915
+    Expect unsuccessful search=30, measured=30, trials=5085
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=18.273, tree size=32767
+    Expect successful search=27.0009, measured=25.9921, trials=49789
+    Expect unsuccessful search=30, measured=30, trials=50211
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=17.261, tree size=32767
+    Expect successful search=27.0009, measured=25.9921, trials=49789
+    Expect unsuccessful search=30, measured=30, trials=50211
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=170.677, tree size=32767
+    Expect successful search=27.0009, measured=26.0004, trials=499881
+    Expect unsuccessful search=30, measured=30, trials=500119
+----- End of access driver -----
+
+Output for shape=o, levels=15, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build optimal tree with size=32767
+  After access exercise, time=172.358, tree size=32767
+    Expect successful search=27.0009, measured=26.0004, trials=499881
+    Expect unsuccessful search=30, measured=30, trials=500119
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=1.009, tree size=1048575
+    Expect successful search=37, measured=35.8523, trials=501
+    Expect unsuccessful search=40, measured=40, trials=499
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=1.069, tree size=1048575
+    Expect successful search=37, measured=35.8523, trials=501
+    Expect unsuccessful search=40, measured=40, trials=499
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=7.277, tree size=1048575
+    Expect successful search=37, measured=35.985, trials=4948
+    Expect unsuccessful search=40, measured=40, trials=5052
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=7.646, tree size=1048575
+    Expect successful search=37, measured=35.985, trials=4948
+    Expect unsuccessful search=40, measured=40, trials=5052
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=69.173, tree size=1048575
+    Expect successful search=37, measured=36.0052, trials=50097
+    Expect unsuccessful search=40, measured=40, trials=49903
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=66.321, tree size=1048575
+    Expect successful search=37, measured=36.0052, trials=50097
+    Expect unsuccessful search=40, measured=40, trials=49903
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=592.296, tree size=1048575
+    Expect successful search=37, measured=36.0027, trials=500105
+    Expect unsuccessful search=40, measured=40, trials=499895
+----- End of access driver -----
+
+Output for shape=o, levels=20, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build optimal tree with size=1048575
+  After access exercise, time=627.506, tree size=1048575
+    Expect successful search=37, measured=36.0027, trials=500105
+    Expect unsuccessful search=40, measured=40, trials=499895
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=0.055, tree size=31
+    Expect successful search=9.12903, measured=8.32577, trials=485
+    Expect unsuccessful search=11.75, measured=11.8602, trials=515
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=0.057, tree size=31
+    Expect successful search=7.51613, measured=6.91546, trials=485
+    Expect unsuccessful search=10.1875, measured=10.1981, trials=515
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=0.523, tree size=31
+    Expect successful search=9.12903, measured=8.42131, trials=4918
+    Expect unsuccessful search=11.75, measured=11.7686, trials=5082
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=0.848, tree size=31
+    Expect successful search=7.51613, measured=6.76169, trials=4918
+    Expect unsuccessful search=10.1875, measured=10.1873, trials=5082
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=7.947, tree size=31
+    Expect successful search=9.12903, measured=8.44998, trials=49429
+    Expect unsuccessful search=11.75, measured=11.742, trials=50571
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=5.315, tree size=31
+    Expect successful search=7.51613, measured=6.79059, trials=49429
+    Expect unsuccessful search=10.1875, measured=10.1844, trials=50571
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=49.191, tree size=31
+    Expect successful search=9.12903, measured=8.4618, trials=492979
+    Expect unsuccessful search=11.75, measured=11.751, trials=507021
+----- End of access driver -----
+
+Output for shape=r, levels=5, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build random tree with size=31
+  After access exercise, time=48.994, tree size=31
+    Expect successful search=7.51613, measured=6.79181, trials=492979
+    Expect unsuccessful search=10.1875, measured=10.1884, trials=507021
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=0.11, tree size=1023
+    Expect successful search=22.8397, measured=21.7217, trials=503
+    Expect unsuccessful search=25.8145, measured=25.3602, trials=497
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=0.111, tree size=1023
+    Expect successful search=17.4497, measured=16.4175, trials=503
+    Expect unsuccessful search=20.4297, measured=20.5433, trials=497
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=1.119, tree size=1023
+    Expect successful search=22.8397, measured=21.8269, trials=4958
+    Expect unsuccessful search=25.8145, measured=25.695, trials=5042
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=1.501, tree size=1023
+    Expect successful search=17.4497, measured=16.4933, trials=4958
+    Expect unsuccessful search=20.4297, measured=20.4189, trials=5042
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=12.907, tree size=1023
+    Expect successful search=22.8397, measured=21.8353, trials=49811
+    Expect unsuccessful search=25.8145, measured=25.7788, trials=50189
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=10.695, tree size=1023
+    Expect successful search=17.4497, measured=16.4674, trials=49811
+    Expect unsuccessful search=20.4297, measured=20.4315, trials=50189
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=92.662, tree size=1023
+    Expect successful search=22.8397, measured=21.8643, trials=499701
+    Expect unsuccessful search=25.8145, measured=25.8162, trials=500299
+----- End of access driver -----
+
+Output for shape=r, levels=10, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build random tree with size=1023
+  After access exercise, time=91.76, tree size=1023
+    Expect successful search=17.4497, measured=16.4648, trials=499701
+    Expect unsuccessful search=20.4297, measured=20.4328, trials=500299
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=0.214, tree size=32767
+    Expect successful search=37.2578, measured=36.3548, trials=496
+    Expect unsuccessful search=40.2566, measured=41.119, trials=504
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=0.184, tree size=32767
+    Expect successful search=27.5882, measured=26.5121, trials=496
+    Expect unsuccessful search=30.5872, measured=30.5278, trials=504
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=2.098, tree size=32767
+    Expect successful search=37.2578, measured=36.3098, trials=5036
+    Expect unsuccessful search=40.2566, measured=40.1994, trials=4964
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=1.807, tree size=32767
+    Expect successful search=27.5882, measured=26.6382, trials=5036
+    Expect unsuccessful search=30.5872, measured=30.6197, trials=4964
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=20.776, tree size=32767
+    Expect successful search=37.2578, measured=36.2499, trials=49770
+    Expect unsuccessful search=40.2566, measured=40.1481, trials=50230
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=18.121, tree size=32767
+    Expect successful search=27.5882, measured=26.6004, trials=49770
+    Expect unsuccessful search=30.5872, measured=30.5837, trials=50230
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=208.551, tree size=32767
+    Expect successful search=37.2578, measured=36.2699, trials=500062
+    Expect unsuccessful search=40.2566, measured=40.2486, trials=499938
+----- End of access driver -----
+
+Output for shape=r, levels=15, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build random tree with size=32767
+  After access exercise, time=182.242, tree size=32767
+    Expect successful search=27.5882, measured=26.5895, trials=500062
+    Expect unsuccessful search=30.5872, measured=30.5862, trials=499938
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=0.853, tree size=1048575
+    Expect successful search=51.1835, measured=50.1283, trials=499
+    Expect unsuccessful search=54.1834, measured=54.2994, trials=501
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=0.676, tree size=1048575
+    Expect successful search=37.7351, measured=36.7615, trials=499
+    Expect unsuccessful search=40.735, measured=40.8064, trials=501
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=8.413, tree size=1048575
+    Expect successful search=51.1835, measured=50.0217, trials=4973
+    Expect unsuccessful search=54.1834, measured=54.3354, trials=5027
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=7.096, tree size=1048575
+    Expect successful search=37.7351, measured=36.7669, trials=4973
+    Expect unsuccessful search=40.735, measured=40.6994, trials=5027
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=85.776, tree size=1048575
+    Expect successful search=51.1835, measured=50.2246, trials=49824
+    Expect unsuccessful search=54.1834, measured=54.1698, trials=50176
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=69.035, tree size=1048575
+    Expect successful search=37.7351, measured=36.7484, trials=49824
+    Expect unsuccessful search=40.735, measured=40.738, trials=50176
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=814.824, tree size=1048575
+    Expect successful search=51.1835, measured=50.17, trials=500452
+    Expect unsuccessful search=54.1834, measured=54.186, trials=499548
+----- End of access driver -----
+
+Output for shape=r, levels=20, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build random tree with size=1048575
+  After access exercise, time=683.173, tree size=1048575
+    Expect successful search=37.7351, measured=36.7304, trials=500452
+    Expect unsuccessful search=40.735, measured=40.7371, trials=499548
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=0.088, tree size=31
+    Expect successful search=10.1613, measured=9.71369, trials=482
+    Expect unsuccessful search=12.75, measured=12.6216, trials=518
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=0.088, tree size=31
+    Expect successful search=7.70968, measured=6.9834, trials=482
+    Expect unsuccessful search=10.375, measured=10.2896, trials=518
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=0.845, tree size=31
+    Expect successful search=10.1613, measured=9.62607, trials=4910
+    Expect unsuccessful search=12.75, measured=12.789, trials=5090
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=1.035, tree size=31
+    Expect successful search=7.70968, measured=7.03625, trials=4910
+    Expect unsuccessful search=10.375, measured=10.3862, trials=5090
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=9.114, tree size=31
+    Expect successful search=10.1613, measured=9.53375, trials=49424
+    Expect unsuccessful search=12.75, measured=12.7462, trials=50576
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=5.233, tree size=31
+    Expect successful search=7.70968, measured=7.00316, trials=49424
+    Expect unsuccessful search=10.375, measured=10.385, trials=50576
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=54.548, tree size=31
+    Expect successful search=10.1613, measured=9.52164, trials=492972
+    Expect unsuccessful search=12.75, measured=12.7532, trials=507028
+----- End of access driver -----
+
+Output for shape=p, levels=5, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 5
+  Build poor tree with size=31
+  After access exercise, time=48.633, tree size=31
+    Expect successful search=7.70968, measured=6.9934, trials=492972
+    Expect unsuccessful search=10.375, measured=10.3768, trials=507028
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=0.151, tree size=1023
+    Expect successful search=39.9795, measured=38.3909, trials=481
+    Expect unsuccessful search=42.9375, measured=42.6474, trials=519
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=0.107, tree size=1023
+    Expect successful search=17.4301, measured=16.4657, trials=481
+    Expect unsuccessful search=20.4102, measured=20.3969, trials=519
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=2.007, tree size=1023
+    Expect successful search=39.9795, measured=39.3601, trials=4960
+    Expect unsuccessful search=42.9375, measured=42.6802, trials=5040
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=1.524, tree size=1023
+    Expect successful search=17.4301, measured=16.5375, trials=4960
+    Expect unsuccessful search=20.4102, measured=20.4246, trials=5040
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=16.672, tree size=1023
+    Expect successful search=39.9795, measured=39.1419, trials=49799
+    Expect unsuccessful search=42.9375, measured=42.8178, trials=50201
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=9.648, tree size=1023
+    Expect successful search=17.4301, measured=16.4647, trials=49799
+    Expect unsuccessful search=20.4102, measured=20.4093, trials=50201
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=123.898, tree size=1023
+    Expect successful search=39.9795, measured=39.0002, trials=499726
+    Expect unsuccessful search=42.9375, measured=42.9081, trials=500274
+----- End of access driver -----
+
+Output for shape=p, levels=10, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 10
+  Build poor tree with size=1023
+  After access exercise, time=88.253, tree size=1023
+    Expect successful search=17.4301, measured=16.4544, trials=499726
+    Expect unsuccessful search=20.4102, measured=20.4076, trials=500274
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=0.593, tree size=32767
+    Expect successful search=268, measured=267.626, trials=492
+    Expect unsuccessful search=270.992, measured=277.047, trials=508
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=0.185, tree size=32767
+    Expect successful search=27.7749, measured=26.5976, trials=492
+    Expect unsuccessful search=30.7739, measured=30.7913, trials=508
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=5.913, tree size=32767
+    Expect successful search=268, measured=265.848, trials=4917
+    Expect unsuccessful search=270.992, measured=274.436, trials=5083
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=1.825, tree size=32767
+    Expect successful search=27.7749, measured=26.7151, trials=4917
+    Expect unsuccessful search=30.7739, measured=30.8149, trials=5083
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=59.101, tree size=32767
+    Expect successful search=268, measured=267.513, trials=49791
+    Expect unsuccessful search=270.992, measured=271.985, trials=50209
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=18.175, tree size=32767
+    Expect successful search=27.7749, measured=26.7811, trials=49791
+    Expect unsuccessful search=30.7739, measured=30.7766, trials=50209
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=590.44, tree size=32767
+    Expect successful search=268, measured=266.935, trials=499890
+    Expect unsuccessful search=270.992, measured=270.892, trials=500110
+----- End of access driver -----
+
+Output for shape=p, levels=15, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 15
+  Build poor tree with size=32767
+  After access exercise, time=180.49, tree size=32767
+    Expect successful search=27.7749, measured=26.7814, trials=499890
+    Expect unsuccessful search=30.7739, measured=30.7765, trials=500110
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=1000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=3.547, tree size=1048575
+    Expect successful search=1042, measured=1034.63, trials=473
+    Expect unsuccessful search=1045, measured=1060.44, trials=527
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=1000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=0.992, tree size=1048575
+    Expect successful search=37.9084, measured=36.685, trials=473
+    Expect unsuccessful search=40.9084, measured=40.7818, trials=527
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=10000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=34.449, tree size=1048575
+    Expect successful search=1042, measured=1028.63, trials=4956
+    Expect unsuccessful search=1045, measured=1050.22, trials=5044
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=10000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 10000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=7.885, tree size=1048575
+    Expect successful search=37.9084, measured=36.8923, trials=4956
+    Expect unsuccessful search=40.9084, measured=40.9068, trials=5044
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=100000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=347.672, tree size=1048575
+    Expect successful search=1042, measured=1036.77, trials=50088
+    Expect unsuccessful search=1045, measured=1047.11, trials=49912
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=100000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 100000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=62.682, tree size=1048575
+    Expect successful search=37.9084, measured=36.9099, trials=50088
+    Expect unsuccessful search=40.9084, measured=40.9029, trials=49912
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=1000000, policy=bst
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=3447.62, tree size=1048575
+    Expect successful search=1042, measured=1039.51, trials=500100
+    Expect unsuccessful search=1045, measured=1045.82, trials=499900
+----- End of access driver -----
+
+Output for shape=p, levels=20, trials=1000000, policy=avl
+Seed: 1246772467
+
+----- Access driver -----
+  Access trials: 1000000
+  Levels for tree: 20
+  Build poor tree with size=1048575
+  After access exercise, time=613.355, tree size=1048575
+    Expect successful search=37.9084, measured=36.9052, trials=500100
+    Expect unsuccessful search=40.9084, measured=40.9085, trials=499900
+----- End of access driver -----
+
+Seed: 2
+
+----- Equilibrium test driver -----
+  Trials in equilibrium: 0
+  Levels in initial tree: 5
+  Initial random tree size=31
+  Expect successful search for initial tree=9.32258
+  Expect unsuccessful search for initial tree=11.9375
+        62
+             60
+   58
+                            56
+                       54
+                  52
+                            50
+                       48
+                                 46
+                            44
+                                 42
+                                      40
+             38
+                            36
+                                 34
+                       32
+                                      30
+                                 28
+                            26
+                                 24
+                  22
+                            20
+                       18
+                                 16
+                            14
+        12
+                  10
+                        8
+              6
+                        4
+                   2
+
+                 /-------------------------------------------------------------------58----\ 
+        /-------12-------------------------------------\                                 /-62
+  /-----6----\                  /----------------------38-------------------\           60
+  2-\      /-10           /----22-------------\                        /----52-\ 
+     4     8        /----18-\         /-------32----\            /----48-\     54-\ 
+                   14-\     20     /-26-\         /-36        /-44-\     50       56
+                      16          24    28-\     34        /-42    46
+                                           30             40
+  After exercise, time=0.001, new tree size=31
+  successful searches during exercise=-nan, trials=0
+  unsuccessful searches during exercise=-nan, trials=0
+  Validating tree...passed
+  After access experiment, time=0.001, tree size=31
+  Expect successful search=9.32258, measured=-nan, trials=0
+  Expect unsuccessful search=11.9375, measured=-nan, trials=0
+----- End of equilibrium test -----
