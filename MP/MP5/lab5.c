@@ -119,6 +119,14 @@ int main(int argc, char **argv)
         unitDriver(ins, sizeof ins / sizeof(int),
                    del, sizeof del / sizeof(int));
     }
+    if (UnitNumber == 6)
+    {
+        // check replace for duplicate key
+        const int ins[] = {1,2,3,4,9,8,7,3,2,1};
+        const int del[] = {};
+        unitDriver(ins, sizeof ins / sizeof(int),
+                   del, sizeof del / sizeof(int));
+    }
 
     /* ----- large tree tests  ----- */
     if (OptimalTest)                       /* enable with -o flag */

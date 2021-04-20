@@ -196,8 +196,9 @@ int bst_avl_insert(bst_t *T, bst_key_t key, data_t elem_ptr)
     bst_node_t *N = bst_access(T, key);
     if (N != NULL) {
         temp = 0; // Found the node with matching key
-        free(N->data_ptr);
+        //free(N->data_ptr);
         N->data_ptr = elem_ptr;
+        return 0;
     } else {
         temp = 1; // Unable to find so we had to insert
         T->root = bst_insert_node(T->root, key, elem_ptr, T->policy);
